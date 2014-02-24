@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>{{ page.title }} &ndash; massimo's blog</title>
     <link rel="stylesheet" href="/css/default.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 </head>
 <body class="article">
     <h2 class="title">{{page.title}}</h2>
-    <p class="date">{{ page.date | date: "%B %d, %Y" }}</p>
+    <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
     {{ content }}
 </body>
 </html>
