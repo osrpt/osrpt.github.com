@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="/css/post.css" type="text/css">
+    <meta charset="UTF-8">
+    <title>{{ page.title }} &ndash; massimo's blog</title>
+    <link rel="stylesheet" href="/css/default.css">
 </head>
-<body>
-
+<body class="post">
+    <h2 class="title">{{page.title}}</h2>
+    <p class="date">{{ page.date | date: "%B %d, %Y" }}</p>
+    {{ content }}
 </body>
 </html>
