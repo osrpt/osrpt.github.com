@@ -6,6 +6,6 @@ title: osrpt's blog
 <p>Latest Posts:</p>
 <ul>
   {% for post in site.posts %}
-    <li class="post">{{ post.date | date_to_string }} <a href="{{ post.url }}">{{ post.title }}</a></li>
+    <li class="post">{{ post.date | date: "%B %d, %Y" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ul>
