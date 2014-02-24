@@ -6,6 +6,7 @@ html {
 
 body {
   margin: 0;
+  font-size:62.5%;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary {
@@ -28,10 +29,13 @@ audio:not([controls]) {
 
 a {
   background: transparent;
+  color:#37a;
 }
 
 a:active,a:hover {
   outline: 0;
+  color:#37a;
+  background-color: #000;
 }
 
 abbr[title] {
@@ -278,8 +282,8 @@ td,th {
 }
 
 .home .post{
-  font-size: 1.6em;
-  line-height: 2em;
+  font-size: 1.4em;
+  line-height: 1.6em;
 }
 
 .home .post a:hover{
@@ -297,12 +301,13 @@ td,th {
 }
 
 .article .title{
-  font-size: 1.8em;
+  font-size: 2.2em;
   border-bottom: 1ps solid #ddd;
 }
 
 .article .date{
   font-size:1em;
+  cursor:default;
 }
 
 .article .date:hover{
