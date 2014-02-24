@@ -1,8 +1,7 @@
 ﻿---
 layout: post
-title: hello,github
+title: node webkit程序发布
 ---
-
 1. 将开发的所有相关文件+package.json使用zip压缩为app.zip(要包含node_modules)
 2. 将app.zip改名为app.nw
 3. 打开cmd，在当前目录下执行：```copy /b nw.exe+app.nw app.exe```生成app.exe
