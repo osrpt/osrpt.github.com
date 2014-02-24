@@ -435,21 +435,21 @@ td,th {
   text-decoration: underline;
 }
 
-.post{
+.article{
   margin:1em auto;
   width:960px;
 }
 
-.post .title{
+.article .title{
   font-size: 1.8em;
   border-bottom: 1ps solid #ddd;
 }
 
-.post .date{
+.article .date{
   font-size:1.4em;
 }
 
-.post .date:hover{
+.article .date:hover{
   color:#fff;
   background-color: #000;
 }
