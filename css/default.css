@@ -288,13 +288,10 @@ pre,code
   white-space: pre;
   background-color: #ccf;
   color: #000;
-  border: 1px solid #666;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
   border-radius: 1em; /* just in case */
   padding: 1em;
   margin: 1.2em 1em;
-  width: 50%; /* or whatever you prefer */
+  width: 90%; /* or whatever you prefer */
   float: right;
 }
 
