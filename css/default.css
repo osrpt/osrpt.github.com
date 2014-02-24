@@ -291,13 +291,18 @@ td,th {
   width:960px;
 }
 
+.article .nav{
+  margin:0.5em;
+  font-size: 1.5em;
+}
+
 .article .title{
   font-size: 1.8em;
   border-bottom: 1ps solid #ddd;
 }
 
 .article .date{
-  font-size:1.4em;
+  font-size:1em;
 }
 
 .article .date:hover{
