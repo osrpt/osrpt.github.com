@@ -9,7 +9,7 @@ html {
 
 body {
   max-width:700px;
-  height:100%;
+  min-height:100%;
   color:#444;
   font-size:62.5%;
   background:#fefefe;
