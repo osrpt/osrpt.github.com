@@ -293,6 +293,7 @@ pre , code, kbd, samp {
   border-radius:3px;
   background-color: #F8F8F8;
   word-break: break-word;
+  padding:1px 3px;
 }
 
 .home{
