@@ -8,17 +8,13 @@ html {
 }
 
 body {
+  max-width:700px;
+  height:100%;
   color:#444;
   font-size:62.5%;
   background:#fefefe;
-  max-width:700px;
   padding:2em;
-}
-
-@media screen and (max-device-width: 800px) {
-  body{
-    width:100%;
-  }
+  margin:0 auto;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary {
