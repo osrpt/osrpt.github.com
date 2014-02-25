@@ -8,16 +8,17 @@ title: node.js处理中文编码问题
 node.js code:
 
 		var urlUtil = require('url');
-		
+		var iconv = require('iconv-lite');
+
 		/**
 		 * 下载网页
 		 * @param url
 		 * @param callback
 		 */
 		exports.downloadPage = function (url, callback) {
-		
+
 		    var parser = urlUtil.parse(url);
-		
+
 		    http.get({
 		        hostname: parser.hostname,
 		        port: 80,
@@ -45,14 +46,14 @@ node.js code:
 		            callback(error);
 		        });
 		};
-		
+
 		/**
 		 * 获取编码
 		 * @param  {[type]} headers [description]
 		 * @param  {[type]} body    [description]
 		 * @return {string}         [description]
 		 */
-		
+
 		function getCharset(headers, body) {
 		    var charset;
 		    try {
@@ -64,7 +65,7 @@ node.js code:
 		        }
 		    } catch (e) {
 		    }
-		
+
 		    try {
 		        charset = headers["content-type"].match(/charset=(.*)/gi)[1];
 		        if (charset) {
@@ -74,13 +75,3 @@ node.js code:
 		    }
 		    return '';
 		}
-		
-		/**
-		 * 检测是否为有效的url地址
-		 * @param  {String} input [description]
-		 * @return {boolean}       [description]
-		 */
-		exports.validUrl = function (input) {
-		    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-		    return regexp.test(input);
-		};
