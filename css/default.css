@@ -292,6 +292,7 @@ pre , code, kbd, samp {
   font-size: 0.88em;
   border-radius:3px;
   background-color: #F8F8F8;
+  word-break: break-word;
 }
 
 .home{
