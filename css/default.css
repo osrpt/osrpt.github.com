@@ -36,6 +36,7 @@ a:active,a:hover {
   outline: 0;
   color:#fff;
   background-color: #37a;
+  text-decoration: underline;
 }
 
 abbr[title] {
@@ -296,8 +297,8 @@ blockquote {
   line-height: 1.6em;
 }
 
-.home .post a:hover{
-  text-decoration: underline;
+.home .post{
+  padding:3px;
 }
 
 .article{
