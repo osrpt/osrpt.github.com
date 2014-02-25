@@ -299,6 +299,10 @@ pre , code, kbd, samp {
   padding:1px 3px;
 }
 
+pre{
+  border:1px solid #333;
+}
+
 .home .title{
   font-size: 2em;
   border-bottom: 1px solid #ddd;
