@@ -40,12 +40,12 @@ title: 简单的Windows批处理文件
 	    shift /? >shift.txt  
 	    exit
 
-12. `rmdir` 删除目录，`rmdir /s /q`直接删除目录，不需要确认
+12. `rmdir` 删除目录。`rmdir /s /q`直接删除目录，不需要确认
 13. `mkdir` 创建一个目录
 14. `xcopy` 复制
 
 	常用参数：
-	
+
 	* '/e' 表示复制所有子目录，包括空目录
 	* '/y' 确认覆盖
 
