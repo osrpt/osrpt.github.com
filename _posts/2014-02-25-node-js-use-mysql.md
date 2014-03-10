@@ -38,6 +38,7 @@ title: node.js使用mysql
         });
     }
 
+###测试
 使用NodeUnit进行测试，测试代码(sqlTest.js):
 
         var sqlHelper = require('../helper/sqlHelper');
@@ -61,6 +62,14 @@ update/insert:
 
         connection.query(sql, [var1,var2], function(err, result) {
             numRows = result.affectedRows;
+        });
+
+###获取insert后的自增ID
+
+        connection.query(sql,[var1,var2],function(err,result){
+            if(!err){
+                var id=result.insertId;
+            }
         });
 
 ###简单的事务(transection)
