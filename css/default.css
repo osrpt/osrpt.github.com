@@ -244,6 +244,16 @@ pre, code, kbd, samp {
 pre {
     border:1px solid #333;
 }
+
+.footer{
+    position:absolute;
+    bottom: 0;
+    background: #888;
+    height:40px;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
 .home .title {
     font-size: 2em;
     border-bottom: 1px solid #ddd;
