@@ -14,6 +14,7 @@ body {
     background:#fefefe;
     padding:2em;
     margin:0 auto;
+    position: relative;
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
     display: block;
@@ -244,16 +245,16 @@ pre, code, kbd, samp {
 pre {
     border:1px solid #333;
 }
-
-.footer{
+.footer {
     position:absolute;
     bottom: 0;
     background: #888;
-    height:40px;
+    height:20px;
     text-align: center;
     border-top: 1px solid #333;
+    width: 100%;
+    margin:0 -2em;
 }
-
 .home .title {
     font-size: 2em;
     border-bottom: 1px solid #ddd;
