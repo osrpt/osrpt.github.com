@@ -1,6 +1,6 @@
 ---
 layout: post
-title: python脚本的编写
+title: python发布脚本的编写
 ---
 
 python比bat更加强大，灵活性更高，所以更适合做自动化脚本。
@@ -62,6 +62,7 @@ python比bat更加强大，灵活性更高，所以更适合做自动化脚本�
             outfile.close()
 
 ###常用的文件操作
+
 1. `os.unlink(filePath)` 删除filePath这个文件
 2. `shutil.rmtree(dirPath)` 删除目录
 3. 'path.exists(filePath)' 文件是否存在

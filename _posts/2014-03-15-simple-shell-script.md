@@ -1,6 +1,6 @@
 ---
 layout: post
-title: shell脚本入门
+title: 简单的shell脚本
 ---
 ###任务
 编写一个shell脚本，完成站点发布工作。
