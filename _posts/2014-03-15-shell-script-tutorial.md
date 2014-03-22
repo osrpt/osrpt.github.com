@@ -34,3 +34,5 @@ title: shell脚本入门
 		fi
 		exit 0
 
+
+*[see more&#10548;](http://www.freeos.com/guides/lsst/)*
