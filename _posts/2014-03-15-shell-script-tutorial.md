@@ -15,3 +15,22 @@ title: shell脚本入门
 
 ###Shell Scripts:
 
+		if [ $1 = "-b" ]; then
+			rm -rf /srv/mockup/*
+			echo 'before deploy'
+		else 
+			if [ $1 = "-a" ];	then
+				cd /srv/mockup/
+				unzip mockup-b.zip
+				yes | cp /srv/config.js /srv/mockup/
+				forever restart 0
+				forever restart 1
+				forever restart 2
+				service nginx reload
+				echo 'finish  deploy'
+			else
+				echo '-a:after upload files;-b:before upload files'
+			fi
+		fi
+		exit 0
+
