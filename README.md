@@ -1,4 +1,4 @@
-##My Blog
+##Sibo's Blog
 
 It is automatically transformed by Jekyll.
 
