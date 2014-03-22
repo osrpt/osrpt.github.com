@@ -264,9 +264,10 @@ pre {
 .home .post {
     font-size: 1.4em;
     line-height: 1.6em;
-}
-.home .post {
     padding:3px;
+}
+.home .post .postTime {
+    float:right;
 }
 .article .nav {
     margin-bottom: 1.5em;
