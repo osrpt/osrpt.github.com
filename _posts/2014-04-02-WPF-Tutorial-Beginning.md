@@ -1,6 +1,6 @@
 ---
 layout: post
-title: \[译\]WPF教程：入门
+title: WPF教程：入门[译]
 ---
 
 ###目录
