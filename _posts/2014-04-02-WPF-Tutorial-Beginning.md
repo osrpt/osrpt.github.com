@@ -2,6 +2,7 @@
 layout: post
 title: [译]WPF教程：入门
 ---
+
 ###目录
 * 概要
 * WPF介绍
