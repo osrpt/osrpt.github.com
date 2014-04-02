@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C# Thread.Sleep(0) 和 Thread.Yield(0)的区别
+title: [译]WPF教程：入门
 ---
 
 ###目录
