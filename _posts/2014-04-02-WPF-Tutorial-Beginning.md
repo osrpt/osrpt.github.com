@@ -33,4 +33,4 @@ title: [译]WPF教程：入门
 * [WPF Tutorial - Styles, Triggers & Animation [^]](http://www.codeproject.com/KB/WPF/wpf7.aspx)
 
 ###WPF介绍
-[wpf](/images/post/wpf1/wpf.jpg)
+![wpf](/images/post/wpf1/wpf.jpg)
