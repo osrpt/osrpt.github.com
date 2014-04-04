@@ -72,3 +72,26 @@ WPF程序依赖DirectX环境，一种主要用来支持图形显示和动画能�
 XAML一般用于定义UI界面的布局，包括元素和静态的视觉方面。我们无法直接使用XAML定义程序流。虽然XAML有非常强大的能力，但是它仍然不是一门程序语言而只是用于定义程序的UI界面。XAML使用其他程序语言比如C#,VB.NET等来处理背后的逻辑。
 
 `ExpressionBuilder` 是最好的生成XAML的工具。
+
+###WPF体系结构
+对每种新技术来说，对其体系结构的清楚了解都是至关重要的。在开始创建你的应用前，你至少应该对一些概念有所了解。如果你不想详细了解WPF，请跳过这一小节。前文中已经说过了，WPF实际上就是一组建立架构的类库。这些类库可以分为以下几类：
+
+* 管理层(Managed Layer)
+* 非管理层(UnManaged Layer)
+* 内核API(Core API)
+
+**管理层(Managed Layer)**: WPF的管理层由多个类库构成。这些类库构成了WPF架构，与底层的非管理层的API进行通信来呈现应用的内容。这些组成的类库是：
+
+1. **PresentationFramework.dll**:创建上层的元素：如面板，控件，窗口，风格等
+2. **PresentationCore.dll**:提供基础类型比如`UIElement`，PresentationFramework.dll中的所有形状和控件也从这个程序集中的基类派生
+3. **WindowsBase.dll:**:这里提供更加基础的超出WPF程序环境的元素例如`Dispatcher`类型，`Dependency`类型。我将在稍后讨论这个。
+
+**Unmanaged Layer (milcore.dll)**:WPF的非管理层就是所谓的`milcore`或者是媒体集成类库核心。他将基本的WPF高层的对象如面板，按钮，动画等翻译为Direct3D所需要的纹理。这是WPF的主要呈现引擎。
+
+**WindowsCodecs.dll**:这是另外一个支持WPF应用呈现的底层API。WindowsCodecs.dll包括了大量的编码/解码器来把图片编码和解码为矢量图形。
+
+**Direct3D**:这是呈现WPF图形的底层API
+
+**Username2**：这是每个程序所用的主要核心API。用于管理内核和进程隔离。
+
+**GDI & Device Drivers**：GDI和Device Drivers专用于需要访问底层API的操作系统。
