@@ -210,7 +210,7 @@ WPF控件中有非常多的对象。我们在途中一个一个地讨论。(图�
 这是WPF系列文章的第一部分。包括了对WPF应用的初步讨论。在后面的文章中。我将深入讨论WPF程序的其他方面，你可以怎样使用WPF控件，创建解决方案的指导。希望你会喜欢读这篇文章。
 
 ###版权
-这篇文章和其他包含的源代码和文件，使用[http://www.codeproject.com/info/cpol10.aspx](http://www.codeproject.com/info/cpol10.aspx)进行版权保护。
+这篇文章和其他包含的源代码和文件，使用[The Code Project Open License (CPOL)](http://www.codeproject.com/info/cpol10.aspx)进行版权保护。
 
 ###作者信息
 ![author](/images/post/wpf1/author.jpg)
