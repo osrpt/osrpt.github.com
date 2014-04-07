@@ -135,7 +135,7 @@ XAML转换器将自动把卸载标签里面的内容转换为 `Content` 。
 
 在WPF中另外一个重要的部分是定义屏幕的布局。WPF引入了多个面板，每个都是继承自抽象类 `Panel` 。如果你想的话，你可以可以通过继承 `Panel` 来自定义面板。我们将在后面讨论你怎么自定义面板。现在我们讨论一下WPF支持的基本面板。
 
-![Panels.JPG](/images/post/wpf2/Panels.jpg)
+![Panels.JPG](/images/post/wpf2/Panels.JPG)
 
 ####Panel
 
@@ -167,7 +167,7 @@ Panel是每个面板都要继承的抽象类。所以每个我们将要讨论的
 
 根据我自己的经验来说，如果你像严格的定义布局而不是根据子元素调整的话，你最好是使用 `MinHeight` 和 `MaxWidth` 来代替 `Width` 和 `Height` 。
 
-![grid.jpg](/images/post/wpf2/grid.jpg)
+![grid.jpg](/images/post/wpf2/grid.JPG)
 
 在示例程序中，我创建了一个包含3x3矩阵的表格。你可以使用上面的文本框来动态地改变盒子的位置。
 
@@ -267,3 +267,4 @@ DockPanel是应用布局中使用的最广泛的布局控件。它使用DockPane
 一个叫做`LastChildFill`的属性将让没有dock属性的元素填充剩余的空间。在上面的图中你可以看出来，最后一个元素充满了剩下的整个空间。如果你不想使用的话，你可以把这个属性的值设为false。
 
 如果你想通过编码来实现，你应该使用DockPanel.SetDock。
+
