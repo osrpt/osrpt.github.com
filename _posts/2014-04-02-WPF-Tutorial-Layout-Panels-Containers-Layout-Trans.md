@@ -268,3 +268,146 @@ DockPanel是应用布局中使用的最广泛的布局控件。它使用DockPane
 
 如果你想通过编码来实现，你应该使用DockPanel.SetDock。
 
+####VirtualizingStackPanel
+WPF引入了一种特殊的面板，当内容被绑定到元素时，他会**虚拟化**它的内容。**虚拟化**的意思就是内容只会当元素可见时才会创建。者将极大地提升性能。
+
+    <ListBox x:Name="lstElements" VirtualizingStackPanel.IsVirtualizing="True" 
+        VirtualizingStackPanel.VirtualizationMode="Recycling" ItemsSource="{Binding}"/>
+
+下面是代码：
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+              ObservableCollection<int> obs = new ObservableCollection<int>();
+              Random rnd = new Random(1000);
+              for (int i = 0; i < 100000; i++)
+                  obs.Add(rnd.Next());
+              this.lstElements.DataContext = obs;
+        }
+
+这段代码将会创建 100000 个元素添加到 ListBox 中。如果你使用了 `VirtualizingStackPanel.IsVirtualizing=True` ，内容将会立即呈现，他不会等到所有的 LixtBoxItem 都创建。如果设置 `IsVirtualizing=false` ,由于创建 100000 个 ListboxItem 将耗费很长的时间，整个应用都会被挂起。
+
+`VirtualizationMode` 有两种方式：
+
+1. **Standard**： 表示当 `ScrollViewer` 滚动的时候会创建项。
+2. **Recycling**：表示当 `ScrollViewer` 滚动的时候会替换项。
+
+####Canvas
+
+Canvas 是一种特殊的布局，使用x和y坐标对元素进行绝对定位。在Canvas中使用的元素不受任何的限制。当位置和其他控件交叉时可能被重叠。每个元素根据声明的顺序来确定位置。你可以使用 `Panel.ZIndex` 来去掉声明的影响。
+
+Canvas 对元素不使用任何限制。所以每个元素的宽度和高度都应该特别指定。你可以使用`Canvas.Left`, `Canvas.Right`, `Canvas.Top` 和 `Canvas.Bottom` 来指定坐标。你唯一应该注意的事是 `Canvas.Left` 和 `Canvas.Right` 是相同的，但是它确定了坐标系是从左端还是右端开始的。
+
+![Canvas.JPG](/images/post/wpf2/Canvas.JPG)
+
+        <Canvas>
+             <Border Canvas.Top="20" Canvas.Left="25" Background="Bisque" Width="30" 
+                  Height="25" />
+             <Border Canvas.Top="20" Canvas.Right="25" Background="Green" Width="30" 
+                Height="25" />
+             <Border Canvas.Bottom="20" Canvas.Right="25" 
+                    Background="Black" Width="30" Height="25" />
+             <Border Canvas.Bottom="20" Canvas.Left="25" Background="IndianRed" 
+                    Width="30" Height="25" />
+             <Ellipse Fill="DarkGray" Canvas.Left="100" Canvas.Top="130" Width="100" 
+                  Height="80"></Ellipse>
+             <Ellipse Fill="DarkCyan" Canvas.Left="100" Canvas.Top="80" Width="100"
+                   Height="80"></Ellipse>
+             <Ellipse Fill="DarkSalmon" Canvas.Left="140" Canvas.Top="100" Width="100" 
+                 Height="80" />
+        </Canvas>
+
+在上面的代码中，你可以看出虽然 `Border` 是在同样的区域，但是 `Canvas` 属性改变了他们的相对坐标，所以他们被放在了四个不同的位置。
+
+椭圆形按照他们的声明顺序重叠在了一起。
+
+####UniformGrid
+
+UniformGrid 是一个特殊的控件，他均匀地调整他的元素。如果你想让你的表格中的行和列均匀，你可以使用 UniformGrid 替代普通的 Grid。
+
+![uniformgrid.JPG](/images/post/wpf2/uniformgrid.JPG)
+
+        <UniformGrid Columns="2" Rows="3">
+            <Border Background="Red" />
+            <Border Background="Green" />
+            <Border Background="Blue" />
+            <Border Background="Yellow" />
+            <Border Background="DarkGoldenrod" />
+            <Border Background="DarkKhaki" />
+        </UniformGrid>
+
+上面是一个3x2的网格，所有的元素都按照声明的顺序均匀地放置。
+
+####ScrollViewer
+
+我们经常会发现元素跑到了显示区域的外面。在这种情况下，`ScrollViewer` 自动放置一个滚动条，这样我们就可以看到边缘外面的区域。`ScrollViewer` 封装了滚动条（`Scrollbar`），只要需要的时候他将自动显示它。由于 `ScrollViewer` 在滚动区域内实现了 `IScrollInfo` 接口，所以 `ScrollViewer` 可以响应鼠标和键盘事件。
+
+![scrollviewer.JPG](/images/post/wpf2/scrollviewer.JPG)
+
+        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock TextWrapping="Wrap" Margin="0,0,0,20">Scrolling is 
+                    enabled when it is necessary. Resize the window, making it larger 
+                      and smaller.</TextBlock>
+                <Rectangle Fill="Honeydew" Width="500" Height="500"></Rectangle>
+            </StackPanel>
+        </ScrollViewer>
+
+`ScrollViewer` 的属性 `CanContentScroll` 用来确定元素是否可以滚动。`HorizontallScrollBarVisibility` 和 `VerticalScrollBarVisibility` 显示或隐藏相应的滚动条。它们的默认值是 `Auto` ，只有当需要显示的时候才显示。
+
+####GroupBox
+
+GroupBox 允许把一组内容放到一起，并且提供一个自定义的头。这跟windows中的 GroupBox 一样。属性 `Header` 使用文本元素，放到GroupBox的头部。因为 GroupBox 是一个 ContentControl，所以他只能包含一个元素在里面。因此你必须要使用 Panel 来把子元素放进去。
+
+![groupbox.JPG](/images/post/wpf2/groupbox.JPG)
+
+         <GroupBox Header="This goes to Header" Margin="50">
+            <StackPanel>
+                <Button Content="First Element"/>
+                <Button Content="Second Element" />
+            </StackPanel>
+        </GroupBox>
+
+####Expander
+
+Expander 和 Groupbox相似，不过它多出来一个可以展开内容的功能。它也是继承自 HeaderedContentControl 所以他只能包含一个子元素。`IsExpanded` 属性用来确定面板是否展开。
+
+![expander.JPG](/images/post/wpf2/expander.JPG)
+
+ExpandDirection 决定内容展开的行为。他又四个方向：向下（Down)，向上（Up），向左（Left）和向右（Right）。你可以使用它们来控制内容展开的方向。
+
+        <Expander Header="This goes to Header" Margin="50" IsExpanded="True" 
+                    ExpandDirection="Down">
+            <StackPanel>
+                <Button Content="First Element"/>
+                <Button Content="Second Element" />
+            </StackPanel>
+        </Expander>
+
+
+####ViewBox
+
+ViewBox 是WPF中一个特殊的空间，可以用来拉伸或者压缩元素的内容。这样就可以非常方便地控制元素的位置，在 ViewBox中，内容永远不会改变位置，只是整个内容可能拉伸或者缩小。
+
+ViewBox 的 Stretch 属性可以有四个值：
+
+1. **Fill**：填充内容并保持切面比例。
+2. **None**：不会设置拉伸行为
+3. **UniformToFill**：整体填充元素，可以改变比例。
+4. **Uniform**：整体放大内容。
+
+属性 stretchDirection 可以使用 `Both`，`DownOnly` 和 `UpOnly` 这几个取值。
+
+![viewBox.JPG](/images/post/wpf2/viewBox.JPG)
+
+        <Viewbox Stretch="None" StretchDirection="Both" >
+            <Grid>
+                <TextBox Text="This is a content" FontWeight="Bold" FontSize="30" />
+            </Grid>
+        </Viewbox>
+
+####弹出窗口（Popup）
+
+弹出窗口是一个用来在实际窗口上创建浮动窗口的特殊控件。弹出窗口控件总是呈现在窗口的最顶层。Popup 用在不需要改变原来窗口并快速显示元素的情况。
+
+一个弹出窗口控件可以使用 `PlacementTarget`，`PlacementRectangle`，`Placement`，`HorizontalOffset`，`VerticalOffset` 等来确定位置。弹出窗口是可以脱离当前WPF窗口的区域的窗口，所以它可以被移动到XAML整个内容区域的外面。WPF弹出窗口窗口支持多种动画，例如：`Fade`，`Scroll`，`Slide` 等。你可以用在 `PopupAnimation` 属性上。当 `AllowsTransparency` 属性被设置为 `True` 时，弹出窗口支持透明。
