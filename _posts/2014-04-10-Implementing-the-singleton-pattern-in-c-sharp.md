@@ -3,8 +3,6 @@ layout: post
 title: 使用C#实现单例模式[译]
 ---
 
-原文地址：[Implementing the Singleton Pattern in C#](http://csharpindepth.com/Articles/General/Singleton.aspx)
-
 ###目录
 * 介绍
 * 非线程安全版
@@ -88,3 +86,138 @@ title: 使用C#实现单例模式[译]
 
 请注意，这种实现的有些版本采用锁定 `typeof(Singleton)` 的方式，但是我是给类的私有静态变量加了锁。如果把锁加在其他类可以访问的对象上并且锁定（比如 `type`）将可能导致性能问题甚至死锁。我有一个通常的编码风格，如果可能的话，只锁定在我为了锁定而特别创建的对象上，或者那些为了特殊目的（比如为了等待或脉冲队列）被锁定的文档上。通常这些对象在类中的私有的。这使得创建线程安全的应用很轻松。
 
+###第三个版本——使用双重锁尝试线程安全
+
+        // 糟糕的代码！不要使用！
+        public sealed class Singleton
+        {
+            private static Singleton instance = null;
+            private static readonly object padlock = new object();
+
+            Singleton()
+            {
+            }
+
+            public static Singleton Instance
+            {
+                get
+                {
+                    if (instance == null)
+                    {
+                        lock (padlock)
+                        {
+                            if (instance == null)
+                            {
+                                instance = new Singleton();
+                            }
+                        }
+                    }
+                    return instance;
+                }
+            }
+        }
+
+这种实现企图不每次使用锁来实现线程安全。不幸的是，这样有四个缺点：
+
+* 这个实现不能在Java中使用。这似乎是在评论一个奇怪的事情，但是了解到你在Java中也会需要单例模式这就是值得的，一个C#程序员很可能也是一个Java程序员。Java的内存模型不保证构造函数在新的对象引用分配给实例之前完成了。Java的内存模型在1.5版本中重写了，但是double-check锁如果不适用 `volatile` 关键字的话仍然会出失败。（像C#中那样）
+* 如果没有任何内存屏障，按照ECMA CLI的规范它也会失败。它可能在.NET 2.0内存模型（比ECMA规范更强大）中是安全的，但是我宁可不依赖这些强大的语法，尤其是对安全有疑问的时候。把 `instance` 设置为 `volatile` 可以正常工作，这样将显式地进行内存屏障调用，尽管在后面的例子中连专家都不知道到底需要什么样的内存屏障。我倾向于避免使用专家都不能分辨对错的东西。
+* 它很容易出错。这个模式需要恰好跟上面一样——任何改变都可能会影响到性能或者正确性。
+* 她还是没有后面的实现方法高效。
+
+###第四个版本——不是那么地延时，但是在不适用锁的情况下保证了线程安全
+
+        public sealed class Singleton
+        {
+            private static readonly Singleton instance = new Singleton();
+
+            // Explicit static constructor to tell C# compiler
+            // not to mark type as beforefieldinit
+            static Singleton()
+            {
+            }
+
+            private Singleton()
+            {
+            }
+
+            public static Singleton Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+        }
+
+像你看到的那样，这种实现非常的简单——但是它为什么是线程安全的并且他的延时是怎样的呢？其实是这样的，C#中的静态构造函数规定了只有在类被实例化时或者一个静态成员被调用时才会执行，并且每个 `AppDomain` 只会执行一次。鉴于这个对新的构造出来的类型的检查将会比其他任何操作都会先进行，所以它比上面那些添加额外检查的例子都更快。但是这里还是有一点小的问题：
+
+* 他不像其他的实现那样延时创建。尤其是，如果你除了 `Instance` 还有其他的静态成员，对这些静态成员的第一次引用将包含创建实例。在下面的实现中将纠正这个问题。
+* 如果一个静态构造函数调用了另外一个调用了静态函数的成员将可能导致并发问题。查看 .NET 规范（现在是在第二部分的 9.5.3 节）获得关于类型初始化确切性质的详细信息——他们不会刺痛你，但是注意互相循环引用的静态构造函数可能引起的后果是值得的。
+* 由于类型没有被标志一个特殊的叫做 `beforefieldinit` 标识，所以类型的初始化是只有.NET来保证的。不幸的是，C# 编译器（至少 .NET 1.1 运行时提供的那个）把所有没有静态构造函数（例如：一个看起来像静态函数但是被标记为 `static` 的语句块）的类型标记为 `beforefieldinit` 。我写了一篇关于这个问题的详情的[文章](http://csharpindepth.com/Articles/General/BeforeFieldInit.aspx)。同时要注意，这个也会影响性能，将在后面讨论。
+
+一种你可以快速使用这种实现（也只有这种情况下）的是仅仅使用 `public static readonly` 变量来创建一个实例，并且完全抛弃属性。这样基本的主要代码将非常的整洁！但是很多人都喜欢使用属性以防以后需要，并且 JIT 内联似乎将做同样的优化。（注意如果你需要延时初始化，静态的构造函数还是需要的。）
+
+###第五个版本——完全的延时初始化
+
+        public sealed class Singleton
+        {
+            private Singleton()
+            {
+            }
+
+            public static Singleton Instance { get { return Nested.instance; } }
+                
+            private class Nested
+            {
+                // 显示的静态构造函数用来告诉C#编译器不要把类型标记为 beforefieldinit
+                static Nested()
+                {
+                }
+
+                internal static readonly Singleton instance = new Singleton();
+            }
+        }
+
+这里，当第一次引用 `nested` 类的静态成员的时候将进行初始化，这只可能发生在使用 `Instance` 的时候。这就意味着这个实现是完全的延时初始化，并且还有着上一个实现的所有优化。注意通过 `nested` 类访问封闭类的私有成员，反过来是不行的，因此 这里的 `instance` 需要是 `internal` 的。这不会导致任何问题，因为类本身是私有的。但是为了确保延时初始化，代码稍微有点复杂了。
+
+###第六个版本——使用 .NET 4 的 Lazy<T> 类型
+
+如果你使用 .NET 4 及以上，你可以使用 [System.Lazy<T>](http://msdn.microsoft.com/en-us/library/dd642331.aspx) 类型非常简单的实现延时初始化。所有你需要做的是传递一个委托给构造函数，它会调用 `Singleton` 的构造函数——使用lambda表达式将非常容易。
+
+        public sealed class Singleton
+        {
+            private static readonly Lazy<Singleton> lazy =
+                new Lazy<Singleton>(() => new Singleton());
+            
+            public static Singleton Instance { get { return lazy.Value; } }
+
+            private Singleton()
+            {
+            }
+        }
+
+这个实现非常简单并且高效。如果有需要的话，他也可以让你通过使用 [IsValueCreated](http://msdn.microsoft.com/en-us/library/dd642334.aspx) 属性检查实例是否已经创建了。
+
+###性能 vs 延时
+
+在大多数情况下，你不会真的需要完全的延时——除非你的类初始化时做了一些非常消耗时间的事情，或可能在其他地方有一些副作用，它可能刚好遗漏了上面显示的静态构造函数。这让 JIT 编译器可以通过进行一次检查（在开始一个方法前对实例检查）来确保类型已经初始化了，然后假定继续(?)，这样可以提高性能。如果你的实例将在一个相对紧密的循环中使用，这将导致一个（相对）重要的性能差异。你应该确实是否需要完全的延时初始化，并在类中适当地通过文档注明。
+
+这篇文章存在的大部分原因是人们试着变得聪明，导致了使用 double-checked 锁的算法。有一种普遍的并且是误导人的态度认为锁是昂贵的。我使用不同的变体方式，写了一个循环数10亿次的循环来做基准测试。这不是科学研究，因为在实际工作中，你可能想知道在每个迭代中调用单例中的方法到底有多快等问题。不过，它确实表明了一个重要的观点。在我的笔记本上，最慢的解决方案（大约5倍）是使用了锁的那个（解决方案2）。那很重要吗？如果你能够承受在40秒内进行数10亿次的访问单例，这当然不是一个问题。（注意：这篇文章是很久以前写的了——现在我期望有更好的性能。）意思就是如果你仅仅只是以每秒几百次来调用单例模式，那个花费大概是性能的1%——所以提高它并不能带来很多。现在，如果你非常频繁地访问单例——难道不就像是你在一个循环中使用他吗？如果你非常介意提高一点点性能，你为什么不直接在循环外面声明一个变量呢，先访问一次单例，然后再做循环。Bingo! 即使是最慢的实现方式也是够用的了。我非常有兴趣看到真实的应用在使用简单的锁和使用最快的解决方案确实造成了很重要的性能差异。
+
+###异常
+有事，你需要在单例的构造函数中做一些可能引发一场的事情，但是可能对整个应用来说不是致命的。有可能你的应用可以解决那个问题并且再尝试一次。在这种情况下使用类型初始化来构造单例可能带来一些问题。不同的情况时可能有不同的问题，我的却不知道任何一种解决方式（再次运行类型初始化），即使做了，你的代码也可能在其他情况下出问题。为了避免这些问题，我建议你使用本文中的第二种方式——仅仅使用一个简单的锁，每次都进行检查，如果没有成功创建实例，就在方法或属性中创建。
+
+谢谢 Andriy Tereshchenko 提出的这个问题。
+
+###结论（2006-1-7略有修改；2011-2-12修改）
+在C#中有许多种不同的实现单例模式的方式。以为读者给我详细写了一种封装同步方面的实现方式，我也承认在一些特定的情况下是有用的（特别是当你需要高性能，并且能够检测实例是否已经创建，并且不管其他的任何静态成员是否调用的完全延时加载）。我个人没有看到那种解决方案比本文中提供的方式有更大的进步，如果你也有同样的情况，请[发邮件给我](mailto:skeet@pobox.com)。
+
+我个人更喜欢解决方案4：唯一我会使用其他方式的是如果我在调用静态方法的时候不能触发初始化，或者我需要知道实例是否已经创建了。假定我遇到过，不过我真的不记得上一次我遇到这个情况的时候了。在那种情况下，我将使用解决方案2，他很漂亮并且容易正确使用。
+
+解决方案5也是优雅的，不过像我上文中说的那样它比2和4更 trickier，它带来的好处很少有用。如果你使用 .NET 4，解决方案6是一种更简单的实现延时初始化的方式。它也有很明显的延时好处。我现在倾向于使用解决方案4只是因为习惯——但是如果我和缺乏经验的开发者一起工作我会使用解决方案6这个一个简单并且普遍的应用级的设计模式作为开始。
+
+（我不会使用解决方案1，因为他会出问题，我也不会使用解决方案3因为他没有5那种好处。）
+
+[打印版](http://csharpindepth.com/Articles/General/Singleton.aspx?printable=true)
+
+原文地址：[Implementing the Singleton Pattern in C#](http://csharpindepth.com/Articles/General/Singleton.aspx)
