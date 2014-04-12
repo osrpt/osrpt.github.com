@@ -1,5 +1,5 @@
 html {
-    font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB",sans-serif;
+    font-family:"Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     background:#333;
@@ -278,7 +278,7 @@ pre {
     font-size: 3em;
     margin:0.5em 0;
     border-bottom: 1ps solid #ddd;
-    font-family: Georgia,"Times New Roman",Times,"Kai","Kaiti SC","KaiTi","BiauKai","楷体","楷体_GB2312",serif;
+    font-family: Georgia, "Times New Roman", Times, "Kai", "Kaiti SC", "KaiTi", "BiauKai", "楷体", "楷体_GB2312", serif;
 }
 .article .date {
     font-size:1em;
@@ -290,8 +290,12 @@ pre {
 }
 .article .content {
     line-height: 2.2em;
-    font-family: Georgia,"Times New Roman",Times,"Songti SC","SimSun",serif;
+    font-family: Georgia, "Times New Roman", Times, "Songti SC", "SimSun", serif;
 }
 .article .content p {
     margin:1em auto;
+}
+.article .content img {
+    display: block;
+    margin: auto;
 }
