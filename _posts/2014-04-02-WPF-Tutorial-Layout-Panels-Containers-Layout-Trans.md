@@ -30,8 +30,8 @@ tags:
     + Popup
     + InkCanvas
 * 变换
-* 结语
-* 文章更改历史
+* 总结
+* 历史
 
 ###概要
 在上一篇文章中，我讨论了一些WPF应用的基础知识，它们是使用WPF的基本架构和内部结构。在本文中，我将讨论编写你的第一个WPF程序的基本的东西和怎么在你的窗口中布局控件。这是每一个想使用WPF的人应该知道的最基础的知识。我将讨论最常用的一些。
@@ -411,3 +411,82 @@ ViewBox 的 Stretch 属性可以有四个值：
 弹出窗口是一个用来在实际窗口上创建浮动窗口的特殊控件。弹出窗口控件总是呈现在窗口的最顶层。Popup 用在不需要改变原来窗口并快速显示元素的情况。
 
 一个弹出窗口控件可以使用 `PlacementTarget`，`PlacementRectangle`，`Placement`，`HorizontalOffset`，`VerticalOffset` 等来确定位置。弹出窗口是可以脱离当前WPF窗口的区域的窗口，所以它可以被移动到XAML整个内容区域的外面。WPF弹出窗口窗口支持多种动画，例如：`Fade`，`Scroll`，`Slide` 等。你可以用在 `PopupAnimation` 属性上。当 `AllowsTransparency` 属性被设置为 `True` 时，弹出窗口支持透明。
+
+![pup.JPG](/images/post/wpf2/pup.JPG)
+
+        <ToggleButton IsChecked="{Binding ElementName=pup, Path=IsOpen}" 
+                     Content="Open Popup" Margin="100" />
+        <Popup Placement="Bottom" AllowsTransparency="True" 
+                   PopupAnimation="Fade" x:Name="pup" VerticalOffset="-100">
+            <StackPanel>
+                <TextBlock Name="McTextBlock" Background="Black" Foreground="White" >
+                    This is popup text
+                </TextBlock>
+                <Button Content="This is button on a Popup" />
+            </StackPanel>
+        </Popup>
+
+以上的代码中，当 `ToggleButton` 的选中的值被绑定到了弹出窗口的 `IsOpen` 属性上。所以当 `IsOpen` 是 `true` 的时候，弹出窗口将显示。
+
+####InkCanvas
+
+WPF中我们将介绍的另一个强大的控件是 `InkCanvas` 。这个控件允许你在画布上拖动并且最终获得保存的图形。它非常的强大，你可以轻松地获得获得画笔画出来的对象。
+
+在WPF中放置一个 `InkCanvas` ,你会发现你已经可以在屏幕上画图了。
+
+![inkcanvas.JPG](/images/post/wpf2/inkcanvas.JPG)
+
+        <StackPanel>
+            <InkCanvas Height="200" x:Name="icBox">
+            </InkCanvas>
+            <RadioButton GroupName="mode" Checked="Pen_Checked" Content="Pen"/>
+            <RadioButton GroupName="mode" Checked="Erase_Checked"  
+                  Content="Eraser By Point" />
+            <RadioButton GroupName="mode" Checked="EraseByStroke_Checked"  
+                    Content="Eraser By Stroke" />
+        </StackPanel>
+
+####Transformation
+
+变换是WPF引入的一种重要的特性。变换允许将一个元素从一个坐标控件映射到另一个坐标控件。变换映射采用变换举证在二维空间进行映射。通过操纵矩阵值，你可以变换元素的：`Rotate(角度)`,`Scale(规模)`,`Skew(倾斜)`,`Translate(位移)`。
+
+![Transformation.JPG](/images/post/wpf2/Transformation.JPG)
+
+变换有四种基本类型：
+
+1. **RotateTranform（旋转变换）**：使用一个特殊的角度旋转元素。你可以声明选择的角度，元素将在二维空间内旋转。
+2. **ScaleTransform（比例变换）**：比例变换允许在2维控件内增大或者减小元素的尺寸。
+3. **SkewTransform（倾斜变换）**：通过一个角度来倾斜元素。倾斜将使元素按照 `NonUniform` 的风格延伸，这样元素看起来就像变换到了3D空间中。
+4. **TranslateTransform（位移变换）**：位移变换将移动元素的X,Y坐标。
+
+这里同样提供了使用 `TransformGroup` 或者 `MatrixTransform` 来应用多个变换。`TransformGroup` 允许在单个元素上声明并应用多种变换，从而为你的控件提供混合的变换效果。
+
+![transform.JPG](/images/post/wpf2/transform.JPG)
+
+        <TextBlock FontWeight="Bold" FontSize="20" Text="This is Text" Margin="20">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                        <RotateTransform Angle="20" />
+                        <SkewTransform AngleX="10" AngleY="10" />
+                        <TranslateTransform X="15" Y="19"/>
+                        <ScaleTransform ScaleX="2" ScaleY="1" />
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+
+###总结
+这是整个系列的第二篇文章。我希望你喜欢。不要忘了写下你的反馈。为了不让文章过长，我故意省略了一些东西（例如 `InkCanvas`）的详细介绍。我将在单独的文章中讨论。
+
+感谢阅读。
+
+###历史
+
+* 2010-11-28:初次发表
+
+###版权
+
+这篇文章，包括其中的源代码和文件，受 [CPOL](http://www.codeproject.com/info/cpol10.aspx) 版权保护。
+
+###作者介绍
+
+*译注：和上篇文章一样，所以省略。*
