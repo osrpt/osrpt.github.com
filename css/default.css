@@ -246,37 +246,33 @@ pre, code, kbd, samp {
 pre {
     border:1px solid #333;
 }
-
-.home .title{
+.clear {
+    clear:both;
+}
+.home .title {
     font-size: 3em;
 }
-
-.home .blog{
+.home .blog {
     margin-bottom: 100px;
 }
-
-.home .post{
+.home .post {
     padding-bottom: 1em;
     border-bottom: 1px dashed #888;
 }
-
 .home .post h3 {
     font-size:2em;
     margin:1em 0 0.2em;
 }
-
 .home .post h3 a {
     text-decoration: none;
 }
-
-.home .post .postTime{
+.home .post .postTime {
     margin-bottom: 1em;
 }
-
-.home .post .read_more{
+.home .post .read_more {
     margin:1em 0 0;
+    float:right;
 }
-
 .home .footer {
     position:absolute;
     bottom: 0;
@@ -288,7 +284,6 @@ pre {
     width: 100%;
     margin:30px -2em 0;
 }
-
 .article .nav {
     margin-bottom: 1.5em;
     font-size: 1.5em;
