@@ -251,6 +251,27 @@ pre {
     font-size: 3em;
 }
 
+.home .blog{
+    margin-bottom: 100px;
+}
+
+.home .blog .post{
+    border-bottom: 1px dashed #ddd;
+}
+
+.home .blog .posts h3 {
+    font-size:2em;
+    margin:1em 0 0.2em;
+}
+
+.home .blog .posts h3 a {
+    text-decoration: none;
+}
+
+.home .blog .posts .postTime{
+    margin-bottom: 1em;
+}
+
 .home .footer {
     position:absolute;
     bottom: 0;
@@ -261,17 +282,6 @@ pre {
     border-top: 1px solid #333;
     width: 100%;
     margin:30px -2em 0;
-}
-.home .blog .posts h3 {
-    font-size:2em;
-    margin:1em 0 0.2em;
-}
-.home .blog .posts h3 a {
-    text-decoration: none;
-}
-
-.home .blog .posts .postTime{
-    margin-bottom: 1em;
 }
 
 .article .nav {
