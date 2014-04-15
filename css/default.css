@@ -246,6 +246,11 @@ pre, code, kbd, samp {
 pre {
     border:1px solid #333;
 }
+
+.home .title{
+    font-size: 3em;
+}
+
 .home .footer {
     position:absolute;
     bottom: 0;
@@ -266,7 +271,7 @@ pre {
 }
 
 .home .blog .posts .postTime{
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 .article .nav {
