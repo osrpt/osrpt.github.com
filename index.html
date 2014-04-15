@@ -5,22 +5,11 @@ title: sibo's blog
 <h2 class="title">{{ page.title }}</h2>
 <p>Latest Posts:</p>
 <ul>
-  {% for post in site.posts %}
-    <li class="post"><a href="{{ post.url }}">{{ post.title }}</a> <span class="postTime">{{ post.date | date: "%B %d, %Y" }}</span></li>
-  {% endfor %}
+	{% for post in paginator.posts %}
+		<li class="post"><a href="{{ post.url }}">{{ post.title }}</a><span class="postTime">{{ post.date | date: "%B %d, %Y" }}</span> </li>
+	{% endfor %}
+
 </ul>
-
-<!-- This loops through the paginated posts -->
-{% for post in paginator.posts %}
-  <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-  <p class="author">
-    <span class="date">{{ post.date }}</span>
-  </p>
-  <div class="content">
-    {{ post.content }}
-  </div>
-{% endfor %}
-
 <!-- Pagination links -->
 <div class="pagination">
   {% if paginator.previous_page %}
@@ -35,3 +24,13 @@ title: sibo's blog
     <span class="next ">Next</span>
   {% endif %}
 </div>
+
+{% for post in paginator.posts %}
+  <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+  <p class="author">
+    <span class="date">{{ post.date }}</span>
+  </p>
+  <div class="content">
+    {{ post.excerpt  }}
+  </div>
+{% endfor %}
