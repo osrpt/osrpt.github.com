@@ -255,22 +255,26 @@ pre {
     margin-bottom: 100px;
 }
 
-.home .blog .post{
+.home .post{
     padding-bottom: 1em;
     border-bottom: 1px dashed #888;
 }
 
-.home .blog .posts h3 {
+.home .post h3 {
     font-size:2em;
     margin:1em 0 0.2em;
 }
 
-.home .blog .posts h3 a {
+.home .post h3 a {
     text-decoration: none;
 }
 
-.home .blog .posts .postTime{
+.home .post .postTime{
     margin-bottom: 1em;
+}
+
+.home .post .read_more{
+    margin:1em 0 0;
 }
 
 .home .footer {
