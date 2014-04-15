@@ -246,7 +246,7 @@ pre, code, kbd, samp {
 pre {
     border:1px solid #333;
 }
-.footer {
+.home .footer {
     position:absolute;
     bottom: 0;
     color:#fff;
@@ -255,21 +255,20 @@ pre {
     text-align: center;
     border-top: 1px solid #333;
     width: 100%;
-    margin:0 -2em;
+    margin:30px -2em 0;
 }
-.home .title {
-    font-size: 2em;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 1em;
+.home .blog .posts h3 {
+    font-size:2em;
+    margin:1em 0 0.2em;
 }
-.home .post {
-    font-size: 1.4em;
-    line-height: 1.6em;
-    padding:3px;
+.home .blog .posts h3 a {
+    text-decoration: none;
 }
-.home .post .postTime {
-    float:right;
+
+.home .blog .posts .postTime{
+    margin-bottom: 2em;
 }
+
 .article .nav {
     margin-bottom: 1.5em;
     font-size: 1.5em;
