@@ -7,7 +7,7 @@ title: sibo's blog
 <div class="blog">
 	<div class="posts">
 		{% for post in paginator.posts %}
-			<h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+			<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
 			<p class="postTime">
 				<span class="date">{{ post.date | date: "%B %d, %Y" }}</span>
 			</p>
