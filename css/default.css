@@ -274,7 +274,7 @@ pre {
     float:right;
 }
 .home .pagination {
-    margin:2em;
+    margin:2em 0;
 }
 .home .footer {
     position:absolute;
