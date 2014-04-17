@@ -67,56 +67,56 @@ XAML转换器在转换任何属性的值时需要两个信息：
 
 像我上面说的那样，为了创建一个类型转换器，你需要创建一个一个应用了 `TypeConverter` 的类。在我的例子中，我创建了一个有两个属性 `Latitude（纬度）` 和 `Longitude（经度）` 的类，并且创建了一个地理位置的实现。让我们看一下以下的类：
 
-        [global::System.ComponentModel.TypeConverter(typeof(GeoPointConverter))]
-        public class GeoPointItem
+    [global::System.ComponentModel.TypeConverter(typeof(GeoPointConverter))]
+    public class GeoPointItem
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
+        public GeoPointItem()
         {
-            public double Latitude { get; set; }
-            public double Longitude { get; set; }
-
-            public GeoPointItem()
-            {
-            }
-
-            public GeoPointItem(double lat, double lon)
-            {
-                this.Latitude = lat;
-                this.Longitude = lon;
-            }
-
-            public static GeoPointItem Parse(string data)
-            {
-                if (string.IsNullOrEmpty(data)) return new GeoPointItem();
-
-                string[] items = data.Split(',');
-                if (items.Count() != 2)
-                    throw new FormatException("GeoPoint should have both latitude 
-                    and longitude");
-
-                double lat, lon;
-                try
-                {
-                    lat = Convert.ToDouble(items[0]);
-                }
-                catch (Exception ex) { 
-                    throw new FormatException("Latitude value cannot be converted", ex); 
-                }
-
-                try
-                {
-                    lon = Convert.ToDouble(items[1]);
-                }
-                catch (Exception ex) { 
-                    throw new FormatException("Longitude value cannot be converted", ex); 
-                }
-
-                return new GeoPointItem(lat, lon);
-            }
-
-            public override string ToString()
-            {
-                return string.Format("{0},{1}", this.Latitude, this.Longitude);
-            }
         }
+
+        public GeoPointItem(double lat, double lon)
+        {
+            this.Latitude = lat;
+            this.Longitude = lon;
+        }
+
+        public static GeoPointItem Parse(string data)
+        {
+            if (string.IsNullOrEmpty(data)) return new GeoPointItem();
+
+            string[] items = data.Split(',');
+            if (items.Count() != 2)
+                throw new FormatException("GeoPoint should have both latitude 
+                and longitude");
+
+            double lat, lon;
+            try
+            {
+                lat = Convert.ToDouble(items[0]);
+            }
+            catch (Exception ex) { 
+                throw new FormatException("Latitude value cannot be converted", ex); 
+            }
+
+            try
+            {
+                lon = Convert.ToDouble(items[1]);
+            }
+            catch (Exception ex) { 
+                throw new FormatException("Longitude value cannot be converted", ex); 
+            }
+
+            return new GeoPointItem(lat, lon);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1}", this.Latitude, this.Longitude);
+        }
+    }
 
 在上面的代码中，你可以看到我创建了一个很普通的类，它定义了地球上的一个地理位置。这个类型有两个参数，经度和纬度，而且他们都是 `Double` 类型的。我已经重写了 `ToString()` 方法，在这个例子中获得对象的字符串值非常重要。 `Parse` 方法用来把一个字符串的值转换为 `GeoPointItem` 。
 
@@ -124,66 +124,66 @@ XAML转换器在转换任何属性的值时需要两个信息：
 
 当昨晚这些之后，我们需要来创建真正的转换器。看下面的代码：
 
-        public class GeoPointConverter : global::System.ComponentModel.TypeConverter
+    public class GeoPointConverter : global::System.ComponentModel.TypeConverter
+    {
+
+        //如果源类型是字符串，返回 true
+        public override bool CanConvertFrom(
+         System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
         {
-
-            //如果源类型是字符串，返回 true
-            public override bool CanConvertFrom(
-             System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
-            {
-                if (sourceType is string)
-                    return true;
-                return base.CanConvertFrom(context, sourceType);
-            }
-
-            //如果目标类型是 GeopointItem ，返回 true
-            public override bool CanConvertTo(
-                 System.ComponentModel.ITypeDescriptorContext context, Type destinationType)
-            {
-                if (destinationType is string)
-                    return true;
-
-                return base.CanConvertTo(context, destinationType);
-            }
-
-            //把字符串转换为 GeopointItem
-            public override object ConvertFrom(
-         System.ComponentModel.ITypeDescriptorContext context, 
-             System.Globalization.CultureInfo culture, object value)
-            {
-                if (value is string)
-                {
-                    try
-                    {
-                        return GeoPointItem.Parse(value as string);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception(string.Format(
-          "Cannot convert '{0}' ({1}) because {2}", value, value.GetType(), ex.Message), ex);
-                    }
-                }
-
-                return base.ConvertFrom(context, culture, value);
-            }
-
-            //把 GeopointItem 转换为字符串
-            public override object ConvertTo(
-             System.ComponentModel.ITypeDescriptorContext context, 
-              System.Globalization.CultureInfo culture, object value, Type destinationType)
-            {
-                if(destinationType == null)
-                    throw new ArgumentNullException("destinationType");
-
-                 GeoPointItem gpoint = value as GeoPointItem;
-
-                if(gpoint != null)
-                if (this.CanConvertTo(context, destinationType))
-                    return gpoint.ToString();
-                
-                return base.ConvertTo(context, culture, value, destinationType);
-            }
+            if (sourceType is string)
+                return true;
+            return base.CanConvertFrom(context, sourceType);
         }
+
+        //如果目标类型是 GeopointItem ，返回 true
+        public override bool CanConvertTo(
+             System.ComponentModel.ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType is string)
+                return true;
+
+            return base.CanConvertTo(context, destinationType);
+        }
+
+        //把字符串转换为 GeopointItem
+        public override object ConvertFrom(
+     System.ComponentModel.ITypeDescriptorContext context, 
+         System.Globalization.CultureInfo culture, object value)
+        {
+            if (value is string)
+            {
+                try
+                {
+                    return GeoPointItem.Parse(value as string);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(string.Format(
+      "Cannot convert '{0}' ({1}) because {2}", value, value.GetType(), ex.Message), ex);
+                }
+            }
+
+            return base.ConvertFrom(context, culture, value);
+        }
+
+        //把 GeopointItem 转换为字符串
+        public override object ConvertTo(
+         System.ComponentModel.ITypeDescriptorContext context, 
+          System.Globalization.CultureInfo culture, object value, Type destinationType)
+        {
+            if(destinationType == null)
+                throw new ArgumentNullException("destinationType");
+
+             GeoPointItem gpoint = value as GeoPointItem;
+
+            if(gpoint != null)
+            if (this.CanConvertTo(context, destinationType))
+                return gpoint.ToString();
+            
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+    }
 
 在上面的代码中，我们通过继承 `TypeConverter` 实现了转换类。实现接口 `TypeConverter` 我们需要重写一些方法让 XAML 转换器可以调用或者做合适的修改这样 XAML 转换器能在需要的时候得到合适的值。
 
@@ -198,20 +198,75 @@ XAML转换器在转换任何属性的值时需要两个信息：
 
 到了该使用它的时候了。我创建了一个自定义的 UserControl 并且把有一个 GeoPoint 的属性放入。XAML看起来非常简单：
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Latitude" Grid.Row="0" Grid.Column="0"></TextBlock>
-            <TextBox x:Name="txtlat" MinWidth="40" Grid.Row="0" Grid.Column="1" 
-                  TextChanged="txtlat_TextChanged"/>
-            <TextBlock Text="Longitude" Grid.Row="1" Grid.Column="0"></TextBlock>
-            <TextBox x:Name="txtlon" MinWidth="40" Grid.Row="1" Grid.Column="1" 
-                 TextChanged="txtlon_TextChanged"/>
-        </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Latitude" Grid.Row="0" Grid.Column="0"></TextBlock>
+        <TextBox x:Name="txtlat" MinWidth="40" Grid.Row="0" Grid.Column="1" 
+              TextChanged="txtlat_TextChanged"/>
+        <TextBlock Text="Longitude" Grid.Row="1" Grid.Column="0"></TextBlock>
+        <TextBox x:Name="txtlon" MinWidth="40" Grid.Row="1" Grid.Column="1" 
+             TextChanged="txtlon_TextChanged"/>
+    </Grid>
+
+它有两个 TextBox 单独显示经度和纬度。如果这些值改变， GeoPointItem 的实际值也改变。
+
+    public partial class GeoPoint : UserControl
+    {
+        public static readonly DependencyProperty GeoPointValueProperty = 
+       DependencyProperty.Register("GeoPointValue", typeof(GeoPointItem), 
+             typeof(GeoPoint), new PropertyMetadata(new GeoPointItem(0.0, 0.0)));
+        public GeoPoint()
+        {
+            InitializeComponent();
+        }
+       
+        public GeoPointItem GeoPointValue
+        {
+            get
+            {
+                return this.GetValue(GeoPointValueProperty) as GeoPointItem;
+            }
+            set
+            {
+                this.SetValue(GeoPointValueProperty, value);
+            }
+        }
+        
+        private void txtlat_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GeoPointItem item = this.GeoPointValue;
+        
+            item.Latitude = Convert.ToDouble(txtlat.Text);
+            this.GeoPointValue = item;
+        }
+        
+        private void txtlon_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GeoPointItem item = this.GeoPointValue;
+        
+            item.Longitude = Convert.ToDouble(txtlon.Text);
+            this.GeoPointValue = item;
+        }
+    
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            GeoPointItem item = this.GeoPointValue;
+            this.txtlat.Text = item.Latitude.ToString();
+            this.txtlon.Text = item.Longitude.ToString();
+    
+        }
+    }
+
+这里当 UserControl 载入的时候，它首先加载 TextBox 中的值。 `TextChanged` 方法用来处理确保当 TextBox 的值改变时对象的值也改变。在 Window 中，我们需要创建一个 UserControl 的实例并且把下面的值传入：
+
+    <converter:GeoPoint x:Name="cGeoPoint" GeoPointValue="60.5,20.5" />
+
+转换器指明了命名空间。因此你可以看到 TextBox 中的值正确显示。
 
