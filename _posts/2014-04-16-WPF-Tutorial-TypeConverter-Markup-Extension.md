@@ -43,3 +43,9 @@ XAML或者说可扩展应用程序标记语言实际上是一种定义了特殊�
 * [WPF Tutorial - Styles, Triggers & Animation [^]](http://www.codeproject.com/KB/WPF/wpf7.aspx)
 
 由于XAML把任何东西都当成字符串，有事我们需要把这些字符串转换为有效的值。举个例子：当我们使用 `Margin` 的时候，我们需要声明 margin 元素的每个值。在这种情况下，转换非常的简单和直接，我们可以使用类型转换器而不是使用标记扩展。在我们讨论标记扩展前，首先我们来讨论一下类型转换器。
+
+###类型转换器
+
+在上文中我已经说过了，XML的标记扩展不能对元素的数据施加限制。意思就是你在XAML中只能声明对象的属性为字符串数据。但是XAML提供了一个灵活的方式来创建类型转换器，这样就可以对数据施加限制了。甚至像 Single 和 Double这样的原语你都不能在XAML中描述。类型转换器扮演了一个重要的角色来把这种限制加到XAML转换器上。
+
+![TYPECONVERTERMAIN.JPG](/images/post/wpf4/TYPECONVERTERMAIN.JPG)
