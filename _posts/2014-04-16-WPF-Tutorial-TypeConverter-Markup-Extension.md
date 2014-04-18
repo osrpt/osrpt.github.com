@@ -270,3 +270,93 @@ XAML转换器在转换任何属性的值时需要两个信息：
 
 转换器指明了命名空间。因此你可以看到 TextBox 中的值正确显示。
 
+###标记扩展
+现在你已经了解了类型转换器，让我们来解释一下标记扩展。标记扩展提供了在XAML属性中创建自定义对象的灵活性。每个标记扩展都包含在一对{}中。任何写在花括号中的内容都被认为是标记扩展。这样XAML转换器把在花括号中的任何内容不视为字符串，而是尝试通过花括号中声明的名字来找到对应的标记扩展。
+
+**例外**
+
+如果你想把包含花括号的字符串放入，你应该在开始的地方放置一个 `{}` ，这样使得它作为一个例外。你可以通过查看 [怎样在XAML中对 {} 转义](http://www.abhisheksur.com/2010/05/how-to-escape-in-xaml.html) 了解更多。
+
+使用标记扩展的例子：
+
+    <TextBox Text={x:Null} />
+
+可能这是一个最简单的例子，它实际上是一个返回 null 给 Text 字符串的标记扩展。
+
+![markupExtension.gif](/images/post/wpf4/markupExtension.gif)
+
+在 `System.Windows.Markup` 命名空间中已经有了很多的给 XAML 定义的标记扩展，这样在 XAML 中你可以做一些功能性的特性。让我们来讨论其中的一些：
+
+####NullExtension
+
+这是最简单的标记扩展。当放入的时候，它实际上返回一个 null 。
+
+    Content = "{x:Null}"
+
+####ArrayExtension
+
+这个用来创建一系列项的数组列表。`x:Array` 返回根据声明的类型的一组对象。
+
+    Values = {x:Array Type=sys:String}
+
+####StaticExtension
+
+另一个简单的扩展，用来返回静态属性或者属性引用。
+
+    Text="{x:Static Member=local:MyClass.StaticProperty}"
+
+这样当你为 `MyClass` 定义了一个静态的属性 `StaticProperty` ，你可以通过这样来自动地把值赋给 Text 属性。
+
+####TypeExtension
+
+类型扩展用来获取对象的类型。当一个控件的属性使用 Type 对象的时候，你可以使用它。
+
+    TargetType="{x:Type Button}" 
+
+所以 TargetType 得到一个 Button 的类型对象。
+
+####StaticResourceExtension
+
+资源是定义在 XAML 中的对象。 StaticResource 替代分配给对象的 key 并且替换引用的声明的资源元素。
+
+    <Grid.Resources>
+        <Color x:Key="rKeyBlack">Black</Color>
+        <SolidColorBrush Color="{StaticResource rKeyBlack}" x:Key="rKeyBlackBrush"/>
+    </Grid.Resources>
+    
+    <TextBlock Background="{StaticResource ResourceKey=rKeyBlackBrush}" />
+
+如果编译的时候没有 key ，将产生静态资源错误。
+
+####DynamicResourceExtension
+
+这个跟静态资源扩展相似，但是它推迟了赋值，成为运行时的引用。这样你可以定义一个 动态资源的 key 并且他将在当实际的对象创建的运行时才使用。
+
+    <TextBlock Background="{DynamicResource ResourceKey=rKeyBlackBrush}" />
+
+现在， `rKeyBlackBrush` 如果没有在 `Grid.Resources`中声明也不会产生错误。你可以在窗口加载的时候，动态地添加。
+
+###什么是资源？
+
+资源是创建被 XAML 转换器呈现的对象的对象。每一个 `FrameworkElement` 对象包含一个 `ResourceDictionary` 对象。你可以在资源字典中添加资源并且在作用域中重用。
+
+资源是可以重用的组件，可以使用多次来产生输出。如果在你的应用中你需要一个使用超过一次的对象，并且你不希望它在作用域中被修改，资源是最好的选择。
+
+![ResourceSample.JPG](/images/post/wpf4/ResourceSample.JPG)
+
+    <Grid.Resources>
+        <Color x:Key="rKeyRed">Red</Color>
+        <Color x:Key="rKeyCyan">Cyan</Color>
+        <LinearGradientBrush x:Key="rKeyforegroundGradient">
+            <GradientStop Color="{StaticResource rKeyRed}" Offset="0"></GradientStop>
+            <GradientStop Color="{StaticResource rKeyCyan}" Offset="1"></GradientStop>
+        </LinearGradientBrush>
+    </Grid.Resources>
+    
+    <TextBlock Text="{Binding ElementName=cGeoPoint, Path=GeoPointValue}" 
+    FontSize="30" Margin="50" Grid.Row="1" Grid.ColumnSpan="2" 
+    Foreground="{StaticResource rKeyforegroundGradient}" />
+
+这里你可以看到我们定义了一个 `LinearGradientBrush` 并且用来作为 TextBlock 的前景色。如果需要的话这个对象可以使用任意多次。
+
+每个 `FrameworkElement` 都包含了一个叫做 `Resource` 的属性，它有一个 `ResourceDictionary` 对象。你可以在这个集合中分配多个你在不同对象上需要用到的资源。在 XAML 中，资源使用 `x:Key` 属性来声明，稍候这个 key 可以通过 `StaticResource` 和 `DynamicResource` 用来引用 `ResourceDictionary` 中的资源。
