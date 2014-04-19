@@ -360,3 +360,155 @@ XAML转换器在转换任何属性的值时需要两个信息：
 这里你可以看到我们定义了一个 `LinearGradientBrush` 并且用来作为 TextBlock 的前景色。如果需要的话这个对象可以使用任意多次。
 
 每个 `FrameworkElement` 都包含了一个叫做 `Resource` 的属性，它有一个 `ResourceDictionary` 对象。你可以在这个集合中分配多个你在不同对象上需要用到的资源。在 XAML 中，资源使用 `x:Key` 属性来声明，稍候这个 key 可以通过 `StaticResource` 和 `DynamicResource` 用来引用 `ResourceDictionary` 中的资源。
+
+####动态资源和静态资源的区别
+
+静态资源在程序载入期间在作用域内通过定义在资源字典中的key来找到。因此如果在编译的时候没有找到，编译器将报错。相对地，动态资源标记扩展延迟了资源的分配，在运行时动态地进行。所以知道对象被创建之前表达式都没有被计算。
+
+注意：如果资源是派生自冻结的(不可变的)，任何对对象的改变都可能会改变UI，而不考虑资源是静态的还是动态的。例如：画刷(Brush)，动画(Animation)和几何对象都是冻结的。
+
+####选择静态资源还是动态资源
+
+* 静态资源在运行的时候使用更少的CPU资源，所以更快。
+* 因为静态资源是在程序载入的时候创建的。所以如果把所有资源都设置为静态资源将降低程序的载入进度。
+* 如果资源在编译的时候是未知的，你可以使用动态资源。动态资源被用于用户交互改变它们的外观。
+* 如果你希望你的资源是可拔插的，动态资源是最好的选择。你可以阅读下面的文章了解如何创建可拔插的资源：[WPF中使用语言转换工具创建可拔插的风格和资源](http://www.codeproject.com/KB/WPF/PluggableThemes.aspx)
+
+###绑定
+
+绑定是可以用来绑定一个对象的最重要也是最复杂的标记扩展。当数据对象呗分配给对象的 DataContext 时它提供了绑定对象。
+
+意思就是加入你有一个对象 `Obj` ，它有很多的属性比如 `Name` ，`Age` 等。你可以这样写：
+
+    Text = "{Binding Name}"
+
+意思就是在运行的时候 DataContext 对象将自动地计算然后 Name 属性真是的值将显示到 Text 属性上。
+
+绑定有非常多的灵活性，这样你可以在绑定对象上声明表达式，这也就使得它是标记扩展中的一个最复杂的。
+
+![binding.JPG](/images/post/wpf4/binding.JPG)
+
+    <StackPanel Orientation="Vertical">
+        <TextBox x:Name="txtObj"></TextBox>
+        <TextBox x:Name="txtCustom" Text="{Binding FallbackValue=10, 
+        ElementName=txtObj, Path=Text,StringFormat='Text Entered : {0:N2}'}, Mode=TwoWay">
+        </TextBox>
+    </StackPanel>
+
+因为他们都绑定到属性的任何改动将自动改变另外一个 textbox 。有多种绑定的模式： **OnteTime** ， **OneWayToSource** ， **OneWay** 和 **TwoWay** 。`StringFOrmat` 创建了对字符串的格式化。我们可以在绑定中关联转换器，这样让我们可以根据传入的值返回合适的值。
+
+你可以阅读如何为绑定创建转换器：[怎样在绑定中处理转换](http://www.abhisheksur.com/2010/03/how-to-use-ivalueconverter-in-binding.html)
+
+考虑到绑定，你必须确定绑定的对象实现了 `INotifyPropertyChanged` 接口。否则每一个绑定都将以像 OneTime 那样工作。
+
+你可以阅读更多关于怎样实现 `INotifyPropertyChanged` 接口：[对象和集合的改变通知](http://www.abhisheksur.com/2010/05/object-notifiers-using.html)
+
+我们将在后面的文章中详细讨论绑定。
+
+###相对资源（RelativeSource）
+
+相对资源是一种你在绑定中不得不使用的标记扩展。绑定有一个叫做 `RelativeSource` 的属性，在这里你可以声明一个相对资源标记扩展。这个标记扩展让你可以给元素相对位置的引用而不是使用值的绝对声明。当绝对引用不好用的时候相对资源非常的顺手。
+
+相对资源有以下一些属性：
+
+1. **AncestorType（祖先类型）**：它定义了找到属性的祖先元素的类型。如果你在 Grid 中定义了一个按钮，并且你想参照 Grid，你可以使用相对资源。
+2. **Mode（模式）**：决定了相对资源怎么被找到。这个枚举有以下一些值：
+    
+    * **Self（自己）**：意思就是绑定将在对象自己内部发生。所以你如果想让对象的前景色和背景色一样，相对资源的 `Mode=Self` 将非常方便。
+    * **FindAncestor（找到祖先）**：找到元素的父元素。这样将在可视化树上找到所有的可视元素并且尝试找到 `AncestorType` 提供的类型的控件，它将一直找到祖先元素为止。
+    * **TemplatedParent（模板父元素）**：模板父元素让你在模板被定义的对象中找到值。模板被定义在控件自己中，用来帮助完全重新定义数据和控件元素。模板父元素允许你直接找到模板对象。
+    * **PreviousData（上一个数据）**：允许你在对象绑定到一个集合视图时追踪上一个数据元素。这样实际上相对资源就是之前的数据元素。
+
+3. **AncestorLevel（祖先层数）**：一个数值的值用来确定相对资源在确定结果前应该搜索的层数。如果你把 AncestorLevel 声明为 1 ，它将只查找一层。
+
+你可以在任何绑定中使用相对资源：
+
+        <Grid Name="grd">     
+           <TextBox x:Name="txtCustom" Text="{Binding Name,
+    RelativeSource={RelativeSource AncestorType={x:Type Grid},
+    Mode=FindAncestor,AncestorLevel=2}}" />
+        </Grid>
+
+这样允许你找到 Grid 。实际上来说，在这个例子中你可以很容易地获得 Grid 的引用，所以没有给你一个什么时候该使用相对资源的直观感受。相对资源在如果 Grid 是一些不可达的元素时将非常有用，例如 TextBox 在 Grid 的 DataTemplate 中。
+
+###TemplateBinding（模板绑定）
+
+模板绑定允许你在控件的模板中把模板父元素的值绑定进来。
+
+        <RadioButton Foreground="Red">
+            <RadioButton.Template>
+                <ControlTemplate>
+                    <ToggleButton Content="{TemplateBinding Foreground}" />
+                </ControlTemplate>
+            </RadioButton.Template>
+        </RadioButton>
+
+在这个例子中， ToggleButton 的标题将显示为 `#FFFF00000` ，和 RadiButton 的颜色等效。
+
+###MUltiBinding（多重绑定）
+
+多重绑定允许你基于多个绑定来创建绑定。你可以通过创建一个实现了 `IMultiValueConverter` 接口的类来把多个绑定声明转换为一个输出。不同的转换器和 `MultiValueConverter` 之间的唯一区别就是普通的 `IValueConverter`  只使用一个值作为参数而 `MultiValueConverter` 可以使用来自所有绑定元素的一个数组的值。我们将在这个系列的后面讨论更多关于多重绑定的内容。
+
+    <Button x:Name="NextImageButton" >
+        <Button.IsEnabled>
+            <MultiBinding Converter="{StaticResource SelectedItemIndexIsNotLastToBoolean}">
+                <Binding Mode="OneWay" ElementName="ImageListBox" Path="SelectedIndex" />
+                <Binding Mode="OneWay" ElementName="ImageListBox" Path="Items.Count" />
+            </MultiBinding>
+        </Button.IsEnabled>
+        <Image Source="Icons/navigate_right.png"/>
+    </Button>
+
+###自定义标记扩展
+在最后一小节，我将创建我的自定义标记扩展并且使用它。为了简单我们使用反射来获取字段，方法和属性并且把他们绑定到一个 ListBox 中。为了创建一个自定义的标记扩展，你需要创建一个继承了 `MarkupExtension` 的类。这个类有一个你需要重写的抽象方法叫做 `ProvideValue` 用来让标记扩展工作。所以实际上 XAML 转换器将调用 `ProvideValue` 方法来得到标记扩展的输出。实现代码如下：
+
+    public class ReflectionExtension : global::System.Windows.Markup.MarkupExtension
+        {
+            public Type CurrentType { get; set; }
+            public bool IncludeMethods { get; set; }
+            public bool IncludeFields { get; set; }
+            public bool IncludeEvents { get; set; }
+    
+            public ReflectionExtension(Type currentType)
+            {
+                this.CurrentType = currentType;
+            }
+            
+            public override object ProvideValue(IServiceProvider serviceProvider)
+            {
+                if (this.CurrentType == null)
+                    throw new ArgumentException("Type argument is not specified");
+    
+                ObservableCollection<string> collection = new ObservableCollection<string>();
+                foreach(PropertyInfo p in this.CurrentType.GetProperties())
+                    collection.Add(string.Format("Property : {0}", p.Name));
+     
+                if(this.IncludeMethods)
+                    foreach(MethodInfo m in this.CurrentType.GetMethods())
+                        collection.Add(string.Format("Method : {0} with {1} 
+                          argument(s)", m.Name, m.GetParameters().Count()));
+                if(this.IncludeFields)
+                    foreach(FieldInfo f in this.CurrentType.GetFields())
+                        collection.Add(string.Format("Field : {0}", f.Name));
+                if(this.IncludeEvents)
+                    foreach(EventInfo e in this.CurrentType.GetEvents())
+                        collection.Add(string.Format("Events : {0}", e.Name));
+    
+                return collection;
+            }
+    
+        }
+
+你可以看到这个类的构造函数使用了一个 Type 类型的参数。现在在 XAML 中使用它就跟我们之前使用的其他的标记扩展一样：
+
+    <ListBox ItemsSource="{local:Reflection {x:Type Grid}, 
+           IncludeMethods=true, IncludeFields=true, IncludeEvents=true}" 
+             MaxHeight="200" Grid.Row="3" Grid.ColumnSpan="2" />
+
+ 所以这里构造函数从 `{x:Type Grid}` 中获得参数。任何标记扩展的第一个参数都会作为构造函数的参数。其他的属性使用逗号隔开来定义。
+
+ ###总结
+ 这篇文章中我们处理了基础 XAML 应用的基本的标记扩展和类型转换器。我们把绑定标记扩展留到了后面，我们将在下一篇文章中讨论。我希望这篇文章对你有用。谢谢阅读。
+
+###版权
+这篇文章，包括所有的源代码和文件，受 [CPOL](http://www.codeproject.com/info/cpol10.aspx) 版权保护。
