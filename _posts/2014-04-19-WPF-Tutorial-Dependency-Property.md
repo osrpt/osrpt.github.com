@@ -1,6 +1,6 @@
 ---
 layout: post
-title: WPF教程：依赖属性
+title: WPF教程（五）：依赖属性
 ---
 
 [源代码下载](/images/post/wpf5/BindingDP.zip)
@@ -239,3 +239,47 @@ CLR 属性仅仅只是一个私有变量的包装器。它使用 `Get/Set` 方�
 
 **更新：**
 
+虽然所有的依赖属性都可以使用属性值继承，但实际上只有附加属性 `AttachedProperties` 是有效的。我现在才知道属性值继承只有当属性作为附加属性时才有效。如果你同时给附加的属性设置了默认值和 `FrameworkMetaData.Inherits` ，子元素将自动继承父元素的属性值并且子元素可以修改值。查看 [MSDN](http://msdn.microsoft.com/en-us/library/ms753197.aspx) 获得详情。所以我上面的例子其实并不太合适，但是你看完下一节之后应该可以很容易自己创建一个。
+
+####附加属性
+
+附加属性是另外一个有趣的概念。附加属性允许你在对象外面给对象附加一个属性，并且用这个对象来定义属性的值。有点迷惑？好的，让我们来看一个例子：
+
+假设你有一个 `DockPanel` ,其中包含一些你想显示的控件。现在 `DockPanel` 注册了一个附加属性：
+
+    public static readonly DependencyProperty DockProperty = DependencyProperty.RegisterAttached("Dock", typeof(Dock), typeof(DockPanel),new FrameworkPropertyMetadata(Dock.Left, new PropertyChangedCallback(DockPanel.OnDockChanged)),new ValidateValueCallback(DockPanel.IsValidDock));
+
+可以看出，上面的代码中 `DockProperty` 作为附加属性 `Attached` 定义在 `DockPanel` 中。我们使用 `RegisterAttached` 方法来注册附加的依赖属性。这样任何 `DockPanel` 的子 UI 元素将获的附加的 `Dock` 属性从而可以自定义其值并能自动传播到 `DockPanel` 上。
+
+下面让我们来声明一个附加依赖属性：
+
+    public static readonly DependencyProperty IsValuePassedProperty = DependencyProperty.RegisterAttached("IsValuePassed", typeof(bool), typeof(Window1),new FrameworkPropertyMetadata(new PropertyChangedCallback(IsValuePassed_Changed)));
+
+    public static void SetIsValuePassed(DependencyObject obj, bool value)
+    {
+        obj.SetValue(IsValuePassedProperty, value);
+    }
+
+    public static bool GetIsValuePassed(DependencyObject obj)
+    {
+        return (bool)obj.GetValue(IsValuePassedProperty);
+    }
+
+这里我定义了一个值为 `IsValuePassed` 的依赖属性。对象被绑定到 `Window1` 上，所以你可以从任何 UI 元素上传递值给 `Window1` 。
+
+所以在我的代码中， `UserControl` 可以传递值给窗口：
+
+    <local:MyCustomUC x:Name="ucust" Grid.Row="0" local:Window1.IsValuePassed="true"/>
+
+在上面的代码中你可以看到 `IsValuePassed` 的值可以在外部 UserControl 被设置，同时值会传递给窗口。如你所见，我在对象中添加了两个静态方法 `get` 和 `set` 。这可以用来确保值是从适当的对象传递过来的。例如，你想从一个 `Button` 上传递这个值，你可以这样写：
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+         Window1.SetIsValuePassed(this, !(bool)this.GetValue(IsValuePassedProperty));
+    }
+
+同样的方式，`DockPanel` 定义了 `SetDock` 方法。
+
+###总结
+
+总的来说，依赖属性是一个你应该在编写 WPF 应用之前就了解的最重要也是最有意思的概念。有很多场景下你需要定义依赖属性。在这篇文章中，我已经带你基本了解了依赖属性每个方面。我希望这篇文章对你有帮助。感谢阅读。期待得到你的反馈。
