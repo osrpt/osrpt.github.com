@@ -86,15 +86,15 @@ XAML 一般用于定义 UI 界面的布局，包括元素和静态的视觉方�
 2. **PresentationCore.dll**：提供基础类型比如 `UIElement` ，PresentationFramework.dll中的所有形状和控件也从这个程序集中的基类派生
 3. **WindowsBase.dll**：这里提供更加基础的超出WPF程序环境的元素例如 `Dispatcher` 类型， `Dependency` 类型。我将在稍后讨论这个。
 
-**Unmanaged Layer (milcore.dll)**：WPF 的非管理层就是所谓的 **milcore** 或者是媒体集成类库核心。他将基本的 WPF 高层的对象如面板，按钮，动画等翻译为 Direct3D 所需要的纹理。这是 WPF 的主要呈现引擎。
+4. **Unmanaged Layer (milcore.dll)**：WPF 的非管理层就是所谓的 **milcore** 或者是媒体集成类库核心。他将基本的 WPF 高层的对象如面板，按钮，动画等翻译为 Direct3D 所需要的纹理。这是 WPF 的主要呈现引擎。
 
-**WindowsCodecs.dll**：这是另外一个支持 WPF 应用呈现的底层 API 。 **WindowsCodecs.dll** 包括了大量的编码/解码器来把图片编码和解码为矢量图形。
+5. **WindowsCodecs.dll**：这是另外一个支持 WPF 应用呈现的底层 API 。 **WindowsCodecs.dll** 包括了大量的编码/解码器来把图片编码和解码为矢量图形。
 
-**Direct3D**：这是呈现 WPF 图形的底层 API。
+6. **Direct3D**：这是呈现 WPF 图形的底层 API。
 
-**Username2**：这是每个程序所用的主要核心 API 。用于管理内核和进程隔离。
+7. **Username2**：这是每个程序所用的主要核心 API 。用于管理内核和进程隔离。
 
-**GDI & Device Drivers**： GDI 和 Device Drivers 专用于需要访问底层API的操作系统。
+8. **GDI & Device Drivers**： GDI 和 Device Drivers 专用于需要访问底层API的操作系统。
 
 ![wpf2](/images/post/wpf1/WPF2.jpg)
 
@@ -102,37 +102,40 @@ XAML 一般用于定义 UI 界面的布局，包括元素和静态的视觉方�
 
 ###在继续前你应该了解的事
 
-下面是一些在你开始编写WPF程序前必须了解的一些事。
+下面是一些在你开始编写 WPF 程序前必须了解的一些事。
 
 ####什么是调度员和线程关联？
 
-当WPF程序启动时，它实际上自动创建了两个线程。一个是呈现线程，对程序员来说是不可见的，所以你不能直接在程序中操作呈现线程。另外一个是调度线程，始终持有所有的UI元素。换句话说，你可以认为`Dispatcher`实际上就是把所有UI元素绑定到WPF程序中的UI线程。相反的，WPF要求所有的UI元素应该绑定到`Dispatcher`线程，这就叫做线程关联。所以，你不能改变其他线程在`Dispatcher`线程上创建的元素，因此它遵循同样的基于Win32的API。这样它允许你能够把任何WPF组件转换为基础API的窗口句柄来进行内部操作。[了解更多](http：//www.abhisheksur.com/2010/12/win32-handle-hwnd-wpf-objects-note.html)
+当 WPF 程序启动时，它实际上自动创建了两个线程。一个是呈现线程，对程序员来说是不可见的，所以你不能直接在程序中操作呈现线程。另外一个是调度线程，始终持有所有的 UI 元素。换句话说，你可以认为 `Dispatcher` 实际上就是把所有UI元素绑定到WPF程序中的UI线程。相反的，WPF要求所有的UI元素应该绑定到 `Dispatcher` 线程，这就叫做线程关联。所以，你不能改变其他线程在 `Dispatcher` 线程上创建的元素，因此它遵循同样的基于 Win32 的 API 。这样它允许你能够把任何 WPF 组件转换为基础 API 的窗口句柄来进行内部操作。[了解更多](http：//www.abhisheksur.com/2010/12/win32-handle-hwnd-wpf-objects-note.html)
 
-`Dispatcher`是一个持有线程管理的类。它实际上是一个所有元素都关连的有限消息循环。每一个`UIElement`都是派生自`DispatcherObject`——定义了一个指向UI线程的`Dispatcher`属性。这样从其他的任何线程，如果你想调用或访问UI组件，你应该调用`Dispatcher`线程。`DispatcherObject`用两个主要的指责，检查和验证线程是否调用了这个对象。
+`Dispatcher` 是一个持有线程管理的类。它实际上是一个所有元素都关连的有限消息循环。每一个 `UIElement` 都是派生自 `DispatcherObject` —— 定义了一个指向 UI 线程的 `Dispatcher` 属性。这样从其他的任何线程，如果你想调用或访问UI组件，你应该调用 `Dispatcher` 线程。 `DispatcherObject` 有两个主要的指责，检查和验证线程是否调用了这个对象。
 
 ####什么是可视化树和逻辑树？
-每个编程风格都包含了一些包含整个程序的逻辑树。逻辑树包含了XAML中列出的所有元素。他们只是包含你在XAML中声明的组件。
 
-可视化树是另外一个方面，包含你装扮每个独立元素的部分。你一般不需要直接处理虚拟书，但是你应该知道每个控件是怎么组成的，这样就能更容易地创建自定义模板。
+每个编程风格都包含了一些包含整个程序的逻辑树。逻辑树包含了 XAML 中列出的所有元素。他们只是包含你在 XAML 中声明的组件。
+
+可视化树是另外一个方面，包含你装扮每个独立元素的部分。你一般不需要直接处理虚拟树，但是你应该知道每个控件是怎么组成的，这样就能更容易地创建自定义模板。
 
 ![wpf1.jpg](/images/post/wpf1/WPF1.jpg)
 
-我个人通常喜欢在使用可视化树前先看一遍。`ExpressionBuilder`是一个让你生成实际控件的工具。
+我个人通常喜欢在使用可视化树前先看一遍。 `ExpressionBuilder` 是一个让你生成实际控件的工具。
 
-####为什么使用路由事件(RoutedEvent)？
-路由事件对C#语言来说是一个新东西，但是对有Javascript或者web技术背景的人来说，可能已经在浏览器中见过了。事实上，这里有两种路由事件。一个是从可视化树上的元素上冒泡，另外一个是贯穿可视化树元素中的隧道。。还有另外一个直接的路由事件，既不是冒泡，也不是隧道。
+####为什么使用路由事件（RoutedEvent）？
+
+路由事件对 C# 语言来说是一个新东西，但是对有 Javascript 或者 web 技术背景的人来说，可能已经在浏览器中见过了。事实上，这里有两种路由事件。一个是从可视化树上的元素上冒泡，另外一个是通过可视化树元素中的隧道传播。另外还有一种直接的路由事件，既不是冒泡，也不是隧道。
 
 当一个被注册的路由事件被触发，它会在可视化树上通过冒泡或隧道一个接一个地通知所有注册了路由事件的方法。
 
-为了区分它们，WPF使用`Preview***`命名隧道事件，只有`***`来命名冒泡事件。举个例子：`IsPreviewMouseDown`事件通过隧道传播整个可视化树，而`MouseDown`事件使用冒泡的方式。意思就是：Mounse Down事件，监听`IsPreviewMouseDown`事件的，最外层的元素最先被调用，监听`MouseDown`事件的，最里面的元素最先被调用。
+为了区分它们， WPF 使用 `Preview***` 这样的风格命名隧道事件，使用只有 `***` 来命名冒泡事件。举个例子： `IsPreviewMouseDown` 事件通过隧道传播整个可视化树，而 `MouseDown` 事件使用冒泡的方式。意思就是： 发生 Mounse Down 事件时，监听 `IsPreviewMouseDown` 事件的，最外层的元素最先被调用，监听 `MouseDown` 事件的，最里面的元素最先被调用。
 
 ####为什么使用依赖对象？
-每个WPF空间都派生自`DependencyObject`。`DependencyObject`是一个支持`DependencyProperty`，这是WPF新引入的一个属性系统。每个对象都是从`DependecyObject`继承的，这样每个对象都可以使用WPF内置的很多特性：比如`EventTriggers`,`PropertyBindings`和`Animations`等。
+每个 WPF 控件都派生自 `DependencyObject` 。依赖对象是 WPF 新引入的支持依赖属性的属性系统。每个对象都是从 `DependecyObject` 继承的，这样每个对象都可以使用 WPF 内置的很多特性：比如 `EventTriggers` , `PropertyBindings` 和 `Animations` 等。
 
-每个`DependencyObject`都有一个观察者`Observer`或者列表`List`并且声明了3个方法：`ClearValue`，`SetValue`和`GetValue` 用来添加，编辑或移除这些属性。这样`DependencyProperty`将至在你使用`SetValue`存储东西的时候创建自己。这样就节约了资源。我们将在这个系列的其他文章中详细讨论`DenpendencyProperty`。
+每个 `DependencyObject` 都有一个观察者 `Observer` 或者列表 `List` 并且声明了3个方法： `ClearValue` ， `SetValue` 和 `GetValue` 用来添加，编辑或移除这些属性。这样依赖属性只在你使用 `SetValue` 设置值的时候才创建，从而节约了资源。我们将在这个系列的其他文章中详细讨论依赖属性。
 
 ####WPF中的硬件加速和图形呈现
-另外一件你需要知道的事是WPF中图形是如何呈现的。事实上WPF呈现通过判断系统支持多少硬件加速来自动调整。图形渲染检测合适的层级输出相应的渲染。对硬件呈现，下面是一些非常有影响的方面：
+
+另外一件你需要知道的事是 WPF 中图形是如何呈现的。事实上 WPF 的渲染会通过判断系统支持多少硬件加速来自动调整。图形渲染检测合适的层级输出相应的渲染。对硬件渲染，下面是一些非常有影响的方面：
 
 1. **Video RAM**：这个决定了程序用来呈现输出可以使用的缓冲区大小。
 2. **Pixel Shader**：这是一个用来计算每个像素影响的图形工具。
@@ -141,80 +144,85 @@ XAML 一般用于定义 UI 界面的布局，包括元素和静态的视觉方�
 
 现在WPF呈现引擎确定了对当前应用适合使用的呈现层级，并且自动使用。
 
-1. **TIER 0**：没有硬件加速，所有的都是通过软件来实现。任何版本的DirectX 9及更低的版本支持这种输出方式。
-2. **TIER 1**：部分硬件支持，部分软件支持。如果你使用Directx9或更高的版本，你可能使用这一层级。
-3. **TIER 2**：全硬件加速。Directx9及以上可以渲染这种输出。
+1. **TIER 0**：没有硬件加速，所有的都是通过软件来实现。任何版本的 DirectX 9 及更低的版本支持这种输出方式。
+2. **TIER 1**：部分硬件支持，部分软件支持。如果你使用 Directx9 或更高的版本，你可能使用这一层级。
+3. **TIER 2**：全硬件加速。 Directx9 及以上可以渲染这种输出。
 
 [了解更多](http：//msdn.microsoft.com/en-us/library/ms742196.aspx)
 
 ###对象层次
-WPF控件中有非常多的对象。我们在途中一个一个地讨论。(图中抽象类使用椭圆形而具体类使用矩形)
+
+WPF 控件中有非常多的对象。我们在图中一个一个地讨论。（图中抽象类使用椭圆形而具体类使用矩形）
 
 ![WPFClassHierarchy.JPG](/images/post/wpf1/WPFClassHierarchy.JPG)
 
-* **DispatcherObject**：所有可以利用UI线程的WPF控件的母亲
-* **DependencyObject**：创建对`Dependency`属性的观察者
-* **Visual**：连接管理库和媒体集成核心库
-* **UIElement**：给WPF特性如布局，输入，事件等添加支持
-* **FrameworkElement**：`UiElement`的实现
-* **Shape**：所有基本图形的基类
-* **Control**：和用户交互的UI元素。他们可以使用模板化来改变外观。
-* **ContentControl**：所有只有单独内容的控件的基类
-* **ItemsControl**：所有内容是集合的类的基类
-* **Panel**：所有可以容难一个或多个控件的面板的基类。
++ **DispatcherObject**：所有可以利用UI线程的 WPF 控件的母亲
++ **DependencyObject**：创建对 `Dependency` 属性的观察者
++ **Visual**：连接管理库和媒体集成核心库
++ **UIElement**：给 WPF 特性如布局，输入，事件等添加支持
++ **FrameworkElement**： `UIElement` 的实现
++ **Shape**：所有基本图形的基类
++ **Control**：和用户交互的 UI 元素。他们可以使用模板化来改变外观。
++ **ContentControl**：所有只有单独内容的控件的基类
++ **ItemsControl**：所有内容是集合的类的基类
++ **Panel**：所有可以容难一个或多个控件的面板的基类。
 
-###创建你的第一个WPF应用
+###创建你的第一个 WPF 应用
+
 ![WPFSimpleApp.JPG](/images/post/wpf1/WPFSimpleApp.JPG)
 
-现在终于可以创建你的一个WPF应用了。首先，让我们打开Visual Studio 2008或2010。下面这个例子，我使用的是Visual Studio 2008.创建一个新的项目。你将能看到一个新的窗口。它的XAML像下面这样：
+现在终于可以创建你的一个WPF应用了。首先，让我们打开 Visual Studio 2008 或 2010 。下面这个例子，我使用的是 Visual Studio 2008 。创建一个新的项目。你将能看到一个新的窗口。它的 XAML 像下面这样：
 
-        <Window x：Class="FirstWindowsApplication.Window1"
-          xmlns="http：//schemas.microsoft.com/winfx/2006/xaml/presentation"
-          xmlns：x="http：//schemas.microsoft.com/winfx/2006/xaml"
-          x：Name="Window1"
-          Title="Window1" Height="300" Width="300">
-           <Grid>
-           </Grid>
-        </Window>
+    <Window x：Class="FirstWindowsApplication.Window1"
+      xmlns="http：//schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns：x="http：//schemas.microsoft.com/winfx/2006/xaml"
+      x：Name="Window1"
+      Title="Window1" Height="300" Width="300">
+       <Grid>
+       </Grid>
+    </Window>
 
-这样空白的窗口就创建了。*Height*/*Width*代表了窗口的宽高。*Title*表示窗口的标题栏显示的文字。每个XAML中的元素可以使用`x：Name`属性来命名。这将用于在你的XAML中引用窗口对象。`x：Class`属性代表了当前窗口应该跟哪个类关联。就像我之前说的那样，光有XAML是不够的，所以你还应该使用C#或者VB.NET来定义程序逻辑。
+这段代码创建了一个空白的窗口。 *Height*/*Width* 分别代表了窗口的高宽。 *Title* 表示窗口的标题栏显示的文字。每个 XAML 中的元素可以使用 `x：Name` 属性来命名。这将用于在你的 XAML 中引用窗口对象。 `x：Class` 属性代表了当前窗口应该跟哪个类关联。就像我之前说的那样，光有 XAML 是不够的，所以你还应该使用 C# 或者 VB.NET 来定义程序逻辑。
 
-*Grid*是程序的主要程序。*Grid*可以有多个子元素。所以我们来放入一些控件吧。
+*Grid* 是程序的主要布局。 *Grid* 可以有多个子元素。所以我们来放入一些控件吧。
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition MinWidth="50" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Enter Name ：" Grid.Row="0" Grid.Column="0" />
-            <TextBox x：Name="txtName" Grid.Row="0" Grid.Column="1" MinWidth="50"/>
-            <Button Content="Click Me" Grid.Row="0" Grid.Column="2" Click="Button_Click"/>
-        </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="50" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Enter Name ：" Grid.Row="0" Grid.Column="0" />
+        <TextBox x：Name="txtName" Grid.Row="0" Grid.Column="1" MinWidth="50"/>
+        <Button Content="Click Me" Grid.Row="0" Grid.Column="2" Click="Button_Click"/>
+    </Grid>
 
-如你看到的那样，我使用了*RowDefination*和*ColumnDefination*.这样你就可以把*Grid*切割为多个区域并把你的控件放入你想放的区域。每一个*RowDefinition*和*ColumnDefination*你都可以单独定义*Height*和*Width*。你看到了，我使用了`50`，`Auto`和`*`作为宽度。`Auto`表示在定义控件的时候自动调整大小。`*`表示他可以占用剩下的空间。这样，你将发现按钮拉伸占用了它发现的所有空间。现在在后面，我方了一个`MessageBox`来显示`TextBox`的内容。
+在上面的代码中，我使用了 *RowDefination* 和 *ColumnDefination* ，这样就可以把 *Grid* 切割为多个区域并把你的控件放入你想放的区域。每一个 *RowDefinition* 和 *ColumnDefination* 你都可以单独定义 *Height* 和 *Width* 。在这里，我使用了 `50` ， `Auto` 和 `*` 作为宽度。 `Auto` 表示在定义控件的时候自动调整大小。 `*` 表示他可以占用剩下的空间。这样，你将发现按钮拉伸占用了它找到的所有空间。在后台代码中，我放了一个 `MessageBox` 来显示 `TextBox` 中的内容：
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(string.Format("Hi {0}", this.txtName.Text));
-        }
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(string.Format("Hi {0}", this.txtName.Text));
+    }
 
-这样，你就可以看到你的名字被显示出来了。非常有趣。：)
+这样，你就可以看到你的名字被显示出来了。很有趣吧。：)
 
-如果你花了一点时间注意XAML，你可能想知道我怎么可以在其他控件中定义`Grid`的属性。比如我在每一个控件中定义了`Grid.Row=0`。这是由于使用了`Dependency`属性。这是WPF引入的一个新的特性。我们将在后面详细讨论。
+如果你花了一点时间注意观察 XAML ，你可能想知道我怎么可以在其他控件中定义 `Grid` 的属性。比如我在每一个控件中定义了 `Grid.Row = 0` 。这是由于使用了依赖属性。这是WPF引入的一个新的特性。我们将在后面详细讨论。
 
 ###结语
-这是WPF系列文章的第一部分。包括了对WPF应用的初步讨论。在后面的文章中。我将深入讨论WPF程序的其他方面，你可以怎样使用WPF控件，创建解决方案的指导。希望你会喜欢读这篇文章。
+
+这是 WPF 系列文章的第一部分。包括了对 WPF 应用的初步讨论。在后面的文章中。我将深入讨论 WPF 程序的其他方面，你可以怎样使用 WPF 控件，创建解决方案的指导。希望你会喜欢读这篇文章。
 
 ###版权
-这篇文章和其他包含的源代码和文件，使用[The Code Project Open License (CPOL)](http：//www.codeproject.com/info/cpol10.aspx)进行版权保护。
+
+这篇文章包括源代码和文件，受到 [The Code Project Open License (CPOL)](http：//www.codeproject.com/info/cpol10.aspx) 版权协议的保护。
 
 ###作者信息
+
 ![author](/images/post/wpf1/author.jpg)
 
-**Abhishek Sur**(架构师·印度)
+**Abhishek Sur**(架构师 · 印度)
 
 原文：<http：//www.codeproject.com/KB/WPF/wpf1.aspx>
