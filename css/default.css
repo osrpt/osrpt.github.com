@@ -308,6 +308,7 @@ pre {
 .article .content {
     line-height: 2.2em;
     font-family: Georgia, "Times New Roman", Times, "Songti SC", "SimSun", serif;
+    margin:2em 0;
 }
 .article .content p {
     margin:1em auto;
