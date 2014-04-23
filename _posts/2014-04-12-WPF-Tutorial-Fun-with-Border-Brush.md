@@ -17,11 +17,11 @@ title: WPF教程（三）：有趣的边框和画刷[译]
 
 边框是每个WPF程序的主要构成块。在我现在的程序中，我使用了很多的边框来装饰界面。从把边框直接放到窗口中到把边框放到控件模板和列表项中，边框在创建一个好的应用界面上扮演了一个非常重要的角色。在这个程序中，你将轻松了解到怎么使用边框和它大部分的属性。
 
-* [WPF Tutorial : Beginning [^]](http://www.codeproject.com/KB/WPF/wpf1.aspx)
-* [WPF Tutorial : Layout-Panels-Containers & Layout Transformation [^]](http://www.codeproject.com/KB/WPF/wpf2.aspx)
-* [WPF Tutorial : Fun with Border & Brush [^]](http://www.codeproject.com/KB/WPF/wpf3.aspx)
-* [WPF Tutorial - TypeConverter & Markup Extension [^]](http://www.codeproject.com/KB/WPF/wpf4.aspx)
-* [WPF Tutorial - Dependency Property [^]](http://www.codeproject.com/KB/WPF/wpf5.aspx)
+* [WPF Tutorial : Beginning [^]](http://sibo.me/2014/04/02/WPF-Tutorial-Beginning.html)
+* [WPF Tutorial : Layout-Panels-Containers & Layout Transformation [^]](http://sibo.me/2014/04/08/WPF-Tutorial-Layout-Panels-Containers-Layout-Trans.html)
+* [WPF Tutorial : Fun with Border & Brush [^]](http://sibo.me/2014/04/12/WPF-Tutorial-Fun-with-Border-Brush.html)
+* [WPF Tutorial - TypeConverter & Markup Extension [^]](http://sibo.me/2014/04/16/WPF-Tutorial-TypeConverter-Markup-Extension.html)
+* [WPF Tutorial - Dependency Property [^]](http://sibo.me/2014/04/19/WPF-Tutorial-Dependency-Property.html)
 * [WPF Tutorial - Concept Binding [^]](http://www.codeproject.com/KB/WPF/wpf6.aspx)
 * [WPF Tutorial - Styles, Triggers & Animation [^]](http://www.codeproject.com/KB/WPF/wpf7.aspx)
 
@@ -246,3 +246,5 @@ title: WPF教程（三）：有趣的边框和画刷[译]
 ###作者介绍
 
 *译注：和第一篇文章一样，所以省略。*
+
+原文：<http://www.codeproject.com/KB/WPF/wpf3.aspx>

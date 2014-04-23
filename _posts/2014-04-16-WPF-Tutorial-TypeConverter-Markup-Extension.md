@@ -34,11 +34,11 @@ XAML或者说可扩展应用程序标记语言实际上是一种定义了特殊�
 
 大家都知道XAML实际上是文本格式。它的标签和XML非常相似，每个属性的值都是字符串。尽管你想把一个对象赋给一个字符串，但是因为对象只能有一个字符串，所以你不能这样做。标记扩展将允许你处理这些情况。所以你可以说一个标记扩展实际上是一种把普通的XML扩展成为一个完成的可扩展的标记的方式——即是XAML。
 
-* [WPF Tutorial : Beginning [^]](http://www.codeproject.com/KB/WPF/wpf1.aspx)
-* [WPF Tutorial : Layout-Panels-Containers & Layout Transformation [^]](http://www.codeproject.com/KB/WPF/wpf2.aspx)
-* [WPF Tutorial : Fun with Border & Brush [^]](http://www.codeproject.com/KB/WPF/wpf3.aspx)
-* [WPF Tutorial - TypeConverter & Markup Extension [^]](http://www.codeproject.com/KB/WPF/wpf4.aspx)
-* [WPF Tutorial - Dependency Property [^]](http://www.codeproject.com/KB/WPF/wpf5.aspx)
+* [WPF Tutorial : Beginning [^]](http://sibo.me/2014/04/02/WPF-Tutorial-Beginning.html)
+* [WPF Tutorial : Layout-Panels-Containers & Layout Transformation [^]](http://sibo.me/2014/04/08/WPF-Tutorial-Layout-Panels-Containers-Layout-Trans.html)
+* [WPF Tutorial : Fun with Border & Brush [^]](http://sibo.me/2014/04/12/WPF-Tutorial-Fun-with-Border-Brush.html)
+* [WPF Tutorial - TypeConverter & Markup Extension [^]](http://sibo.me/2014/04/16/WPF-Tutorial-TypeConverter-Markup-Extension.html)
+* [WPF Tutorial - Dependency Property [^]](http://sibo.me/2014/04/19/WPF-Tutorial-Dependency-Property.html)
 * [WPF Tutorial - Concept Binding [^]](http://www.codeproject.com/KB/WPF/wpf6.aspx)
 * [WPF Tutorial - Styles, Triggers & Animation [^]](http://www.codeproject.com/KB/WPF/wpf7.aspx)
 
@@ -513,3 +513,5 @@ XAML转换器在转换任何属性的值时需要两个信息：
 
 ###版权
 这篇文章，包括所有的源代码和文件，受 [CPOL](http://www.codeproject.com/info/cpol10.aspx) 版权保护。
+
+原文：<http://www.codeproject.com/KB/WPF/wpf4.aspx>

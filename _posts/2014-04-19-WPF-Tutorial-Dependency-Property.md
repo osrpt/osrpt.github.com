@@ -21,11 +21,11 @@ title: WPF教程（五）：依赖属性
 
 WPF带来了很多传统 Windows 应用程序没有的新特性和选择。我们已经讨论了一些 WPF 的特性，是时候更进一步介绍其他特性了。当你读完这个系列之前的文章，我希望你已经或多或少地了解了 WPF 的体系结构，边框，效果，转换，标记扩展等。如果还没有，你可以下面的链接查看以前的文章：
 
-* [WPF Tutorial : Beginning [^]](http://www.codeproject.com/KB/WPF/wpf1.aspx)
-* [WPF Tutorial : Layout-Panels-Containers & Layout Transformation [^]](http://www.codeproject.com/KB/WPF/wpf2.aspx)
-* [WPF Tutorial : Fun with Border & Brush [^]](http://www.codeproject.com/KB/WPF/wpf3.aspx)
-* [WPF Tutorial - TypeConverter & Markup Extension [^]](http://www.codeproject.com/KB/WPF/wpf4.aspx)
-* [WPF Tutorial - Dependency Property [^]](http://www.codeproject.com/KB/WPF/wpf5.aspx)
+* [WPF Tutorial : Beginning [^]](http://sibo.me/2014/04/02/WPF-Tutorial-Beginning.html)
+* [WPF Tutorial : Layout-Panels-Containers & Layout Transformation [^]](http://sibo.me/2014/04/08/WPF-Tutorial-Layout-Panels-Containers-Layout-Trans.html)
+* [WPF Tutorial : Fun with Border & Brush [^]](http://sibo.me/2014/04/12/WPF-Tutorial-Fun-with-Border-Brush.html)
+* [WPF Tutorial - TypeConverter & Markup Extension [^]](http://sibo.me/2014/04/16/WPF-Tutorial-TypeConverter-Markup-Extension.html)
+* [WPF Tutorial - Dependency Property [^]](http://sibo.me/2014/04/19/WPF-Tutorial-Dependency-Property.html)
 * [WPF Tutorial - Concept Binding [^]](http://www.codeproject.com/KB/WPF/wpf6.aspx)
 * [WPF Tutorial - Styles, Triggers & Animation [^]](http://www.codeproject.com/KB/WPF/wpf7.aspx)
 
@@ -283,3 +283,5 @@ CLR 属性仅仅只是一个私有变量的包装器。它使用 `Get/Set` 方�
 ###总结
 
 总的来说，依赖属性是一个你应该在编写 WPF 应用之前就了解的最重要也是最有意思的概念。有很多场景下你需要定义依赖属性。在这篇文章中，我已经带你基本了解了依赖属性每个方面。我希望这篇文章对你有帮助。感谢阅读。期待得到你的反馈。
+
+原文：<http://www.codeproject.com/KB/WPF/wpf5.aspx>

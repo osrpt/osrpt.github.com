@@ -20,15 +20,15 @@ title: WPF教程（一）：入门[译]
 * 结语
 
 ###概要
-在我使用了半年多WPF后，是时候写点关于WPF基础方面的东西了。我已经发表了一系列针对具体问题的文章。现在是到了让大家明白为什么说WPF是一款在界面开发上带来革命的产品了。
+在我使用了半年多WPF后，是时候写点关于WPF基础方面的东西了。我发表了一系列针对具体问题的文章。现在是到了让大家明白为什么说WPF是一款在界面开发上带来革命的产品了。
 
 本文针对初级-中级程序员，所以我尽量给出一些基础的示例。下面是该系列其他的文章的链接，方便大家查看：
 
-* [WPF Tutorial : Beginning [^]](http://www.codeproject.com/KB/WPF/wpf1.aspx)
-* [WPF Tutorial : Layout-Panels-Containers & Layout Transformation [^]](http://www.codeproject.com/KB/WPF/wpf2.aspx)
-* [WPF Tutorial : Fun with Border & Brush [^]](http://www.codeproject.com/KB/WPF/wpf3.aspx)
-* [WPF Tutorial - TypeConverter & Markup Extension [^]](http://www.codeproject.com/KB/WPF/wpf4.aspx)
-* [WPF Tutorial - Dependency Property [^]](http://www.codeproject.com/KB/WPF/wpf5.aspx)
+* [WPF Tutorial : Beginning [^]](http://sibo.me/2014/04/02/WPF-Tutorial-Beginning.html)
+* [WPF Tutorial : Layout-Panels-Containers & Layout Transformation [^]](http://sibo.me/2014/04/08/WPF-Tutorial-Layout-Panels-Containers-Layout-Trans.html)
+* [WPF Tutorial : Fun with Border & Brush [^]](http://sibo.me/2014/04/12/WPF-Tutorial-Fun-with-Border-Brush.html)
+* [WPF Tutorial - TypeConverter & Markup Extension [^]](http://sibo.me/2014/04/16/WPF-Tutorial-TypeConverter-Markup-Extension.html)
+* [WPF Tutorial - Dependency Property [^]](http://sibo.me/2014/04/19/WPF-Tutorial-Dependency-Property.html)
 * [WPF Tutorial - Concept Binding [^]](http://www.codeproject.com/KB/WPF/wpf6.aspx)
 * [WPF Tutorial - Styles, Triggers & Animation [^]](http://www.codeproject.com/KB/WPF/wpf7.aspx)
 
@@ -216,3 +216,5 @@ WPF控件中有非常多的对象。我们在途中一个一个地讨论。(图�
 ![author](/images/post/wpf1/author.jpg)
 
 **Abhishek Sur**(架构师·印度)
+
+原文：<http://www.codeproject.com/KB/WPF/wpf1.aspx>
