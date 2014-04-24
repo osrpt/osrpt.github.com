@@ -1,6 +1,6 @@
 ---
-layout： post
-title： WPF教程（一）：入门[译]
+layout: post
+title: WPF教程（一）：入门[译]
 ---
 
 ###目录
