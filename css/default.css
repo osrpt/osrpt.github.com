@@ -243,15 +243,18 @@ pre, code, kbd, samp {
     word-break: break-word;
     padding:1px 3px;
 }
-
 code {
     margin: 0 5px;
+    padding:5px;
     box-shadow: 1px 1px 1px #aaa;
 }
-
 pre {
     border:1px solid #707070;
     box-shadow:1px 1px 1px #006414;
+}
+
+pre code{
+    box-shadow: none;
 }
 .clear {
     clear:both;
