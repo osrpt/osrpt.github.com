@@ -10,7 +10,7 @@ title: WPF教程（六）：概念绑定
     + 数据绑定/对象绑定
         - 为什么使用 ObservableCollection
     + XML 绑定
-* DataContext 的重点
+* DataContext 的重要性
 * 绑定成员
 * 后台代码中的绑定
 * 命令绑定
@@ -83,3 +83,43 @@ WPF 推广了数据绑定的概念并引进了很多新特性，这样我们可�
 
 在上面的代码中，我使用了 ObservableCollection 。这很重要。ObservableCollection 在新的列表项插入时将自动发送通知。这里即是通知 ListBox 更新列表。加入你放一个按钮用来给 ObservableCollection 插入数据，绑定将自动被通知从而更新集合。你不需要手动地在列表中插入同样的值。WPF 绑定通常需要当值修改的时候被通知。接口 `INotifyPropertyChanged` 和 `INotifyCollectionChanged` 被用来更新绑定了数据的 UI 元素。 如果创建了一个值改变时需要更新 UI 的属性，你只需要实现接口 INotifyPropertyChanged ，如果是集合（就像 ItemsSource），需要实现 INotifyCollectionChanged 。ObservableCollection 本身已经实现了 INotifyCollectionChanged ，所以他本身就支持当新的项被添加或者旧的项被移除的时候更新控件。我在另外一篇文章中已经详细讨论过了这两个： [修改对象或者集合的通知](http://www.abhisheksur.com/2010/05/object-notifiers-using.html)
 
+相反地， Sacha 有一个非常好的关于抛弃 INotifyPropertyChanged 接口而使用 [切面](http://www.codeproject.com/KB/miscctrl/Aspects.aspx) （INotifyPropertyChanged 就是通过切面来实现的） 的观点。
+
+####XML 绑定
+
+跟对象绑定相似， XAML 也支持绑定。你可以使用 Binding 类内置的属性 XPath 很容易地绑定 XMLDataProvider 提供的数据。让我们看看下面的代码：
+
+    <TextBlock Text="{Binding XPath=@description}"/>
+    <TextBlock Text="{Binding XPath=text()}"/>
+
+所以，如果你在节点 XYZ 中，InnerText 可以通过属性 text() 来获取到。 `@` 标记用于属性。这样，使用 XPath 可以很好地处理 XAML 。如果你想阅读更多关于 XAML 绑定的内容，请查看 [WPF 中的 XML 绑定](http://www.abhisheksur.com/2010/07/xml-binding-in-wpf-with-sample-rss.html)
+
+###DataContext 的重要性
+
+你可能觉得有点奇怪为什么我在讨论 WPF 绑定的时候讲到 DataContext 。DataContext 实际上是一个依赖属性。它指向原始数据，我们传递给 DataContext 的对象可以传递给所有的子控件。意思即使如果为 Grid 定义了 DataContext ，然后 Grid 中的所有元素都将得到同样的 DataContext 。
+
+    <Grid DataContext="{StaticResource dtItem}">
+        <TextBox Text="{Binding MyProperty}" />
+    </Grid>
+
+上面的代码中我为 Grid 定义了一个 DataContext ， Grid 中的 TextBox 可以引用 MyProperty 属性，因为 dtItem 将会自动继承给所有的子元素。当使用绑定的时候， DataContext 是你必须使用的最重要的部分。
+
+###绑定成员
+
+大家已经了解过标记扩展了，实际上绑定也是一种标记扩展。它是一个有着多个属性的 Binding 类。让我们讨论一下绑定类中的一些成员：
+
+1. **Source**：Source 属性持有 DataSource 。默认地，它引用控件的 DataContext 。如果你为绑定放入了 Source 属性，他将替换原来的 DataContext 。
+2. **ElementName**：如果想要引用定义在 XAML 中的另外的元素，可以使用 ElementName 。ElementName 是作为 Source 的替代。如果绑定的 Path 没有定义，它将使用作为 Source 传递对象的 ToString 来获得数据。
+3. **Path**：Path 定义了获得字符串数据的真实属性路径。如果最后发现不是一个字符串，他将调用 ToString 来获得数据。
+4. **Mode**：它定义了数据如何传递。 OneWay 意味着对象只会在 source 更新时才更新，OneWayToSource 则相反。TwoWay 意味着数据双向传递。
+5. **UpdateSourceTrigger**：这是绑定中另外一个重要的部分。它定义了 source 合适更新。它的值可以是：
+    + **PropertyChanged**：这是默认值。当控件中发生任何更新，另外绑定的元素将反射到同样的更改。
+    + **LostFocus**：意思是在属性失去焦点的时候才会得到更新。
+    + **Explicit**：如果使用这个值，你必须显示地设置何时更新 Source 。你可以使用绑定表达式的 UpdateSource 来更新控件：
+
+            BindingExpression bexp = mytextbox.GetBindingExpression(TextBox.TextProperty);
+            bexp.UpdateSource();
+
+    通过这样的方式，source 将得到更新。
+
+6. **Converter**：
