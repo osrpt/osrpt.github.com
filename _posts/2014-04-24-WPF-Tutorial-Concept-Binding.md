@@ -81,4 +81,5 @@ WPF 推广了数据绑定的概念并引进了很多新特性，这样我们可�
 
 **为什么是 ObservableCollection ? 什么又是 INotifyPropertyChanged ， INotifyCollectionChanged ? **
 
-在上面的代码中，我使用了 ObservableCollection 。这很重要。ObservableCollection 在新的列表项插入时将自动发送通知。这里即是通知 ListBox 更新列表。加入你放一个按钮用来给 ObservableCollection 插入数据，绑定将自动被通知从而更新集合。你不需要手动地在列表中插入同样的值。WPF 绑定通常需要当值修改的时候被通知。接口 `INotifyPropertyChanged` 和 `INotifyCollectionChanged` 被用来更新绑定了数据的 UI 元素。 
+在上面的代码中，我使用了 ObservableCollection 。这很重要。ObservableCollection 在新的列表项插入时将自动发送通知。这里即是通知 ListBox 更新列表。加入你放一个按钮用来给 ObservableCollection 插入数据，绑定将自动被通知从而更新集合。你不需要手动地在列表中插入同样的值。WPF 绑定通常需要当值修改的时候被通知。接口 `INotifyPropertyChanged` 和 `INotifyCollectionChanged` 被用来更新绑定了数据的 UI 元素。 如果创建了一个值改变时需要更新 UI 的属性，你只需要实现接口 INotifyPropertyChanged ，如果是集合（就像 ItemsSource），需要实现 INotifyCollectionChanged 。ObservableCollection 本身已经实现了 INotifyCollectionChanged ，所以他本身就支持当新的项被添加或者旧的项被移除的时候更新控件。我在另外一篇文章中已经详细讨论过了这两个： [修改对象或者集合的通知](http://www.abhisheksur.com/2010/05/object-notifiers-using.html)
+
