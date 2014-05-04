@@ -121,4 +121,158 @@ WPF 推广了数据绑定的概念并引进了很多新特性，这样我们可�
 
     通过这样的方式，source 将得到更新。
 
-6. **Converter**：
+6. **Converter**：转换器提供了一个当绑定对象更新时调用的对象。继承了接口 IValueConverter 可以作为转换器。可以从以下链接了解更多： [绑定中的转换器](http://www.abhisheksur.com/2010/03/how-to-use-ivalueconverter-in-binding.html)
+7. **ConverterParameter**：用来给转换器发送参数。
+8. **FallbackValue**：定义当绑定无法返回值时的替代值。默认为空白。
+9. **StringFormat**：一个表明了数据如何格式化的字符串。
+10. **ValidatesOnDataErrors**：定义后，将会验证 DataErrors 。你可以通过实现接口 IDataErrorInfo 来为数据更新定义自定义的验证代码块。可以从以下链接阅读更多：[使用 IDataErrorInfo 验证应用](http://www.abhisheksur.com/2010/06/validate-your-application-using.html)
+
+###后台代码的绑定
+跟在 XAML 中定义的相似，你也可以在后台代码中定义绑定。可以这样做：
+
+    Binding myBinding = new Binding("DataObject");
+    myBinding.Source = myDataObject;
+    myTextBlock.SetBinding(TextBlock.TextProperty, myBinding);
+
+你可以通过这种方式声明绑定的属性。
+
+###命令绑定
+WPF 支持命令绑定。每个像 Button 这样的普通对象都暴露了一个继承 ICommand 接口的属性 Command，当命令对象执行的该方法会被调用。
+
+例如，你希望你的命令在窗口输入被触发的时候执行：
+
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding CreateNewStudent}" Key="N" Modifiers="Ctrl" />
+        <MouseBinding Command="{Binding CreateNewStudent}"
+        MouseAction="LeftDoubleClick" />
+    </Window.InputBindings>
+
+在上面的代码中， CreateNewStudent 是暴露了一个实现 ICommand 接口的对象，当按下 Ctrl+N 或者双击左键时将会执行 Excute 方法。
+
+**注意**：在 VS2008 中，InputBindings 只接收静态的 Command 对象。这里是一个 [bug report](http://connect.microsoft.com/VisualStudio/feedback/details/431001/the-keybinding-command-property-should-be-a-dependencyproperty)，在以后发布的版本中将修复这个问题。
+
+可以使用 CommandParameter 给实现 ICommand 接口的方法传递参数。
+
+    <Button Content="CreateNew" Command="{Binding CreateNewStudent}" />
+
+和 InputBindings 相似，你也可以在按钮中使用命令。你需要创建一个实现接口 ICommand 的对象来执行：
+
+    public class CommandBase : ICommand
+    {
+        private Func<object, bool> _canExecute;
+        private Action<object> _executeAction;
+        private bool canExecuteCache;
+        
+        public CommandBase(Action<object>executeAction, Func<object, bool> canExecute)
+        {
+            this._executeAction = executeAction;
+            this._canExecute = canExecute;
+        }
+        
+        #region ICommand Members
+        
+        public bool CanExecute(object parameter)
+        {
+            bool tempCanExecute = _canExecute(parameter);
+            canExecuteCache = tempCanExecute;
+            return canExecuteCache;
+        }
+        private event EventHandler _canExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { this._canExecuteChanged += value; }
+            remove { this._canExecuteChanged -= value; }
+        }
+        protected virtual void OnCanExecuteChanged()
+        {
+            if (this._canExecuteChanged != null)
+            this._canExecuteChanged(this, EventArgs.Empty);
+        }
+        public void Execute(object parameter)
+        {
+            _executeAction(parameter);
+        }
+        
+        #endregion
+    }
+
+我使用了 CommandBase 类来让代码不要看起来那么笨拙。真正的对象看起来是这样的：
+
+    private CommandBase createNewstudent;
+    public CommandBase CreateNewStudent
+    {
+        get
+        {        
+            this.createNewstudent = this.createNewstudent ?? new CommandBase(param => this.CreateStudent(), param => this.CanCreateStudent);
+            return this.createNewstudent;
+        }
+    }
+        
+    private object CreateStudent()
+    {
+        this.CurrentStudent = new StudentItem();
+        return this.CurrentStudent;
+    }
+    
+    public bool CanCreateStudent
+    {
+        get { return true; }
+    }
+
+这样，你就会发现 createNewCommand 命令传递了 CreateStudent 这个在对象被更新时会调用的 lamda 表达式。CanCreateStudent 属性同样会被调用，它返回 true 或者 false。 WPF 将允许执行命令。
+
+![unittesting.jpg](/images/post/wpf6/unittesting.jpg)
+
+PropertyBinding 和 CommandBinding  提供了一种把展示逻辑和展示层完全分开的方法。这样就可以让整个架构中分离所有逻辑代码。微软使用 MVVM 模式创建了整个 Expression blend 这样就可以把 View 从 ViewModel 中分离出来，从而可以对呈现层进行单元测试。我们将在本系列的后面文章中讨论更多。
+
+###多重绑定
+
+和单个绑定相似，WPF 同样引入了多重绑定（ MultiBinding）的概念。在使用多重绑定时，数据将基于多个源进行绑定。你可以声明多个绑定表达式并且每一个的输出都将独立依赖。
+
+    <TextBlock DockPanel.Dock="Top" >
+       <TextBlock.Text>
+          <MultiBinding Converter="{StaticResource mbindingconv}">
+            <Binding ElementName="lst" Path="Items.Count" />
+            <Binding ElementName="txtName" Path="Text" />
+            <Binding ElementName="txtAge" Path="Text" />
+          </MultiBinding>
+       </TextBlock.Text>
+     </TextBlock>
+
+在这里， TextBlock 的值由三个元素决定，第一个是 ListBox 的数量，然后是 txtName 和 txtAge 。我在 IMultiValueConverter 代码块中已经使用了 Converter 来确保找到所有的独立元素并且分开获取每个值。IMultiValueConverter 和 IValueConverter 相似，可以根据值返回绑定到 Text 属性的对象。
+
+    public class MyMultiBindingConverter : IMultiValueConverter
+    {
+        #region IMultiValueConverter Members
+        
+        public object Convert(object[] values, Type targetType,
+        object parameter, System.Globalization.CultureInfo culture)
+        {
+            string returnval = "Total no of Data {0}, NewData : ";
+            
+            if (values.Count() <= 0) return string.Empty;
+        
+            returnval = string.Format(returnval, values[0]);
+        
+            for (int i = 1; i < values.Count(); i++)
+            returnval += "- " + values[i];
+        
+            return returnval;
+        }
+    
+        public object[] ConvertBack(object value, Type[]
+        targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    
+        #endregion
+    }
+
+简单地来说，我只是连接了传入的每一个值然后返回输出。在示例程序中，我实现了最简单的绑定并且确保了值来自 Model。你可以在本文的顶部找到示例程序源代码的下载。
+
+###总结
+
+我想你一定会喜欢这个系列的。欢迎你提交评论。感谢阅读。
+
+原文： <http://www.codeproject.com/Articles/140621/WPF-Tutorial-Concept-Binding>
