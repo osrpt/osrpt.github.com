@@ -198,4 +198,22 @@ salt 不必是秘密的。仅仅通过让 hash 随机，这样就可以让查表
 |          C/C++ (Windows API)      |       [CryptGenRandom](http://en.wikipedia.org/wiki/CryptGenRandom)       |
 | Any language on GNU/Linux or Unix |       Read from [/dev/random](http://en.wikipedia.org/wiki//dev/random) or /dev/urandom        |
 
+每个用户每个密码的盐豆必须要是唯一的。每次用户创建账户或者修改密码，密码都必须使用新的盐来计算 hash 。绝不要重用盐。并且盐的长度要足够的长，这样才有足够多的可能性。首要的规则是，至少让你的盐和 hash 函数输出长度一样长。盐应该和  hash 值一起存放在用户账户表中。
+
+**存储密码：**
+
+1. 使用 CSPRNG 产生一个足够长的随机盐。
+2. 把盐附加到密码后面然后使用 **标准** 的hash加密函数比如 SHA256 计算 hash 值。
+3. 在用户的数据库中同时保存盐和 hash 值。
+
+**验证密码：**
+
+1. 从数据库中取出用户的盐和 hash 值。
+2. 附加盐到提供的密码后面然后使用同样的 hash 算法计算 hash 值。
+3. 比较给定密码的 hash 和数据库的 hash 。如果匹配，密码就是正确的。否则，密码是错误的。
+
+在本文的底部，有加盐密码 hash 的多种语言实现版本：PHP,C#,Java 和 Ruby 。
+
+**在 web 应用中，永远在服务器计算 hash 。**
+
 <https://crackstation.net/hashing-security.htm>
