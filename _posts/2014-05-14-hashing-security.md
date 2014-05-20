@@ -179,4 +179,23 @@ salt 不必是秘密的。仅仅通过让 hash 随机，这样就可以让查表
 
 这一节介绍了密码应该怎样被 hash 的正确方式。第一小节杭盖了最基本的——也是实际上需要的所有东西。接下来的一小节解释了这些基本的方式可以怎样被增强让其更加难以攻击。
 
+###最基本的：加盐散列
+
+**警告：不要仅仅只读这一节。你绝对应该实现下一节的东西：“让攻击密码更加困难：减慢 hash 速度”。**
+
+我们已经看到了恶意攻击者可以怎样快速地通过查询表和彩虹表来攻击文本密码。我们也了解到了通过加盐来让 hash 值变得随机可以解决这个问题。但是怎样产生盐呢？怎样应用到密码中呢？
+
+产生盐应该使用 **加密安全伪随机产生器**(Cryptographically Secure Pseudo-Random Number Generator——CSRPNG)。CSPRNG 和普通的伪随机产生器有非常大的差异，例如 C 语言的 rand() 函数。如其名一样，CSRPNG是设计为加密安全的，意味着他们是一个高度的随机并且不能完全预测到。我们不希望我们的盐被预测到，所以我们必须使用 CSPRNG 。下面的表格中列举了一些流行的编程语言的 CSPRNG 方法：
+
+|          Platform                |      CSPRNG      |
+|----------------------------------|:-----------------:|
+|              PHP                 |  [mcrypt_create_iv](http://php.net/manual/en/function.mcrypt-create-iv.php), [openssl_random_pseudo_bytes](http://php.net/manual/en/function.openssl-random-pseudo-bytes.php) |
+|              Java                 |    [centered](http://docs.oracle.com/javase/6/docs/api/java/security/SecureRandom.html)   |
+|          Dot NET (C#, VB)         | [System.Security.Cryptography.RNGCryptoServiceProvider](http://msdn.microsoft.com/en-us/library/system.security.cryptography.rngcryptoserviceprovider.aspx) |
+|                 Ruby              |      [SecureRandom](http://rubydoc.info/stdlib/securerandom/1.9.3/SecureRandom)         |
+|                Python             |      [os.urandom](http://docs.python.org/library/os.html)        |
+|                  Perl             |       [Math::Random::Secure](http://search.cpan.org/~mkanat/Math-Random-Secure-0.06/lib/Math/Random/Secure.pm)        |
+|          C/C++ (Windows API)      |       [CryptGenRandom](http://en.wikipedia.org/wiki/CryptGenRandom)       |
+| Any language on GNU/Linux or Unix |       Read from [/dev/random](http://en.wikipedia.org/wiki//dev/random) or /dev/urandom        |
+
 <https://crackstation.net/hashing-security.htm>
