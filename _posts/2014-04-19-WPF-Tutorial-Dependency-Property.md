@@ -3,8 +3,6 @@ layout: post
 title: WPF教程（五）：依赖属性
 ---
 
-[源代码下载](/images/post/wpf5/BindingDP.zip)
-
 ###目录
 
 + 介绍
@@ -283,5 +281,7 @@ CLR 属性仅仅只是一个私有变量的包装器。它使用 `Get/Set` 方�
 ###总结
 
 总的来说，依赖属性是一个你应该在编写 WPF 应用之前就了解的最重要也是最有意思的概念。有很多场景下你需要定义依赖属性。在这篇文章中，我已经带你基本了解了依赖属性每个方面。我希望这篇文章对你有帮助。感谢阅读。期待得到你的反馈。
+
+[源代码下载](/images/post/wpf5/BindingDP.zip)
 
 原文：<http://www.codeproject.com/KB/WPF/wpf5.aspx>
