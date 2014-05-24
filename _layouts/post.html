@@ -1,12 +1,15 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.title }} &ndash; sibo's blog</title>
     <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/javascripts/google-code-prettify/prettify.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 </head>
+
 <body class="article">
     <div class="nav">
         <a href="/">&larr;</a>
@@ -17,14 +20,29 @@
         {{ content }}
     </div>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-48397673-1', 'sibo.me');
-      ga('send', 'pageview');
+    ga('create', 'UA-48397673-1', 'sibo.me');
+    ga('send', 'pageview');
     </script>
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+    });
+    </script>
 </body>
+
 </html>
