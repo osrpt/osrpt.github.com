@@ -371,8 +371,418 @@ key 拉伸是通过使用特殊的 CPU 密集的 hash 算法来实现。不要�
         done:
         AND [VALID], 0
 
+这种分支使得代码的执行会根据整数是否相同还有 CPU 的内部分支预测状态而不同。
+
+C 语言的 `diff |= a ^ b` 应该会编译成类似下面这样，这样执行时间就不依赖数字是否相等了：
+
+        MOV EAX, [A]
+        XOR EAX, [B]
+        OR [DIFF], EAX 
+
+####为什么要这么麻烦地使用 hash ？
+
+你的用户在你的网站上输入了密码。他们相信你的安全措施。如果你的数据库被黑掉了，并且你的用户的密码没有任何保护，然后恶意的黑客就会使用这些密码危害你的用户在其他站点或服务商的账号（大多数人都到处使用同样的密码）。这不仅是一你的安全风险，而也是用户的。你应该对你的用户的安全负责。
+
+###PHP PBKDF2 密码 hash 代码
+
+下面的代码是在 PHP 中安全地实现 PBKDF2 。你可以在 [Defuse Security's PBKDF2 for PHP](https://defuse.ca/php-pbkdf2.htm) 找到配套测试和基准测试。
+
+[下载 PasswordHash.php](https://crackstation.net/source/password-hashing/PasswordHash.php)
+
+如果你想兼容 PHP 和 C# 的实现，看[这里](https://github.com/defuse/password-hashing/tree/master/compatible)。
+
+        <?php
+        /*
+         * Password Hashing With PBKDF2 (http://crackstation.net/hashing-security.htm).
+         * Copyright (c) 2013, Taylor Hornby
+         * All rights reserved.
+         *
+         * Redistribution and use in source and binary forms, with or without 
+         * modification, are permitted provided that the following conditions are met:
+         *
+         * 1. Redistributions of source code must retain the above copyright notice, 
+         * this list of conditions and the following disclaimer.
+         *
+         * 2. Redistributions in binary form must reproduce the above copyright notice,
+         * this list of conditions and the following disclaimer in the documentation 
+         * and/or other materials provided with the distribution.
+         *
+         * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+         * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+         * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+         * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE 
+         * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+         * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+         * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+         * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+         * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+         * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+         * POSSIBILITY OF SUCH DAMAGE.
+         */
+        
+        // These constants may be changed without breaking existing hashes.
+        define("PBKDF2_HASH_ALGORITHM", "sha256");
+        define("PBKDF2_ITERATIONS", 1000);
+        define("PBKDF2_SALT_BYTE_SIZE", 24);
+        define("PBKDF2_HASH_BYTE_SIZE", 24);
+        
+        define("HASH_SECTIONS", 4);
+        define("HASH_ALGORITHM_INDEX", 0);
+        define("HASH_ITERATION_INDEX", 1);
+        define("HASH_SALT_INDEX", 2);
+        define("HASH_PBKDF2_INDEX", 3);
+        
+        function create_hash($password)
+        {
+            // format: algorithm:iterations:salt:hash
+            $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTE_SIZE, MCRYPT_DEV_URANDOM));
+            return PBKDF2_HASH_ALGORITHM . ":" . PBKDF2_ITERATIONS . ":" .  $salt . ":" .
+                base64_encode(pbkdf2(
+                    PBKDF2_HASH_ALGORITHM,
+                    $password,
+                    $salt,
+                    PBKDF2_ITERATIONS,
+                    PBKDF2_HASH_BYTE_SIZE,
+                    true
+                ));
+        }
+        
+        function validate_password($password, $correct_hash)
+        {
+            $params = explode(":", $correct_hash);
+            if(count($params) < HASH_SECTIONS)
+               return false;
+            $pbkdf2 = base64_decode($params[HASH_PBKDF2_INDEX]);
+            return slow_equals(
+                $pbkdf2,
+                pbkdf2(
+                    $params[HASH_ALGORITHM_INDEX],
+                    $password,
+                    $params[HASH_SALT_INDEX],
+                    (int)$params[HASH_ITERATION_INDEX],
+                    strlen($pbkdf2),
+                    true
+                )
+            );
+        }
+        
+        // Compares two strings $a and $b in length-constant time.
+        function slow_equals($a, $b)
+        {
+            $diff = strlen($a) ^ strlen($b);
+            for($i = 0; $i < strlen($a) && $i < strlen($b); $i++)
+            {
+                $diff |= ord($a[$i]) ^ ord($b[$i]);
+            }
+            return $diff === 0;
+        }
+        
+        /*
+         * PBKDF2 key derivation function as defined by RSA's PKCS #5: https://www.ietf.org/rfc/rfc2898.txt
+         * $algorithm - The hash algorithm to use. Recommended: SHA256
+         * $password - The password.
+         * $salt - A salt that is unique to the password.
+         * $count - Iteration count. Higher is better, but slower. Recommended: At least 1000.
+         * $key_length - The length of the derived key in bytes.
+         * $raw_output - If true, the key is returned in raw binary format. Hex encoded otherwise.
+         * Returns: A $key_length-byte key derived from the password and salt.
+         *
+         * Test vectors can be found here: https://www.ietf.org/rfc/rfc6070.txt
+         *
+         * This implementation of PBKDF2 was originally created by https://defuse.ca
+         * With improvements by http://www.variations-of-shadow.com
+         */
+        function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false)
+        {
+            $algorithm = strtolower($algorithm);
+            if(!in_array($algorithm, hash_algos(), true))
+                trigger_error('PBKDF2 ERROR: Invalid hash algorithm.', E_USER_ERROR);
+            if($count <= 0 || $key_length <= 0)
+                trigger_error('PBKDF2 ERROR: Invalid parameters.', E_USER_ERROR);
+        
+            if (function_exists("hash_pbkdf2")) {
+                // The output length is in NIBBLES (4-bits) if $raw_output is false!
+                if (!$raw_output) {
+                    $key_length = $key_length * 2;
+                }
+                return hash_pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output);
+            }
+        
+            $hash_length = strlen(hash($algorithm, "", true));
+            $block_count = ceil($key_length / $hash_length);
+        
+            $output = "";
+            for($i = 1; $i <= $block_count; $i++) {
+                // $i encoded as 4 bytes, big endian.
+                $last = $salt . pack("N", $i);
+                // first iteration
+                $last = $xorsum = hash_hmac($algorithm, $last, $password, true);
+                // perform the other $count - 1 iterations
+                for ($j = 1; $j < $count; $j++) {
+                    $xorsum ^= ($last = hash_hmac($algorithm, $last, $password, true));
+                }
+                $output .= $xorsum;
+            }
+        
+            if($raw_output)
+                return substr($output, 0, $key_length);
+            else
+                return bin2hex(substr($output, 0, $key_length));
+        }
+        ?>
+
+###ASP.NET(C#) hash 密码源代码
+
+下面的代码是在 ASP.NET 中使用 C# 安全实现 hash 加盐密码。可以从这里下载：[Download PasswordHash.cs](https://crackstation.net/source/password-hashing/PasswordHash.cs)
+
+如果你需要兼容 PHP 和 C# 的实现，查看[这里](https://crackstation.net/source/password-hashing/PasswordHash.cs)。
+
+/* 
+ * Password Hashing With PBKDF2 (http://crackstation.net/hashing-security.htm).
+ * Copyright (c) 2013, Taylor Hornby
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, 
+ * this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation 
+ * and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE 
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+        using System;
+        using System.Text;
+        using System.Security.Cryptography;
+        
+        namespace PasswordHash
+        {
+            /// <summary>
+            /// Salted password hashing with PBKDF2-SHA1.
+            /// Author: havoc AT defuse.ca
+            /// www: http://crackstation.net/hashing-security.htm
+            /// Compatibility: .NET 3.0 and later.
+            /// </summary>
+            public class PasswordHash
+            {
+                // The following constants may be changed without breaking existing hashes.
+                public const int SALT_BYTE_SIZE = 24;
+                public const int HASH_BYTE_SIZE = 24;
+                public const int PBKDF2_ITERATIONS = 1000;
+        
+                public const int ITERATION_INDEX = 0;
+                public const int SALT_INDEX = 1;
+                public const int PBKDF2_INDEX = 2;
+        
+                /// <summary>
+                /// Creates a salted PBKDF2 hash of the password.
+                /// </summary>
+                /// <param name="password">The password to hash.</param>
+                /// <returns>The hash of the password.</returns>
+                public static string CreateHash(string password)
+                {
+                    // Generate a random salt
+                    RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
+                    byte[] salt = new byte[SALT_BYTE_SIZE];
+                    csprng.GetBytes(salt);
+        
+                    // Hash the password and encode the parameters
+                    byte[] hash = PBKDF2(password, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
+                    return PBKDF2_ITERATIONS + ":" +
+                        Convert.ToBase64String(salt) + ":" +
+                        Convert.ToBase64String(hash);
+                }
+        
+                /// <summary>
+                /// Validates a password given a hash of the correct one.
+                /// </summary>
+                /// <param name="password">The password to check.</param>
+                /// <param name="correctHash">A hash of the correct password.</param>
+                /// <returns>True if the password is correct. False otherwise.</returns>
+                public static bool ValidatePassword(string password, string correctHash)
+                {
+                    // Extract the parameters from the hash
+                    char[] delimiter = { ':' };
+                    string[] split = correctHash.Split(delimiter);
+                    int iterations = Int32.Parse(split[ITERATION_INDEX]);
+                    byte[] salt = Convert.FromBase64String(split[SALT_INDEX]);
+                    byte[] hash = Convert.FromBase64String(split[PBKDF2_INDEX]);
+        
+                    byte[] testHash = PBKDF2(password, salt, iterations, hash.Length);
+                    return SlowEquals(hash, testHash);
+                }
+        
+                /// <summary>
+                /// Compares two byte arrays in length-constant time. This comparison
+                /// method is used so that password hashes cannot be extracted from
+                /// on-line systems using a timing attack and then attacked off-line.
+                /// </summary>
+                /// <param name="a">The first byte array.</param>
+                /// <param name="b">The second byte array.</param>
+                /// <returns>True if both byte arrays are equal. False otherwise.</returns>
+                private static bool SlowEquals(byte[] a, byte[] b)
+                {
+                    uint diff = (uint)a.Length ^ (uint)b.Length;
+                    for (int i = 0; i < a.Length && i < b.Length; i++)
+                        diff |= (uint)(a[i] ^ b[i]);
+                    return diff == 0;
+                }
+        
+                /// <summary>
+                /// Computes the PBKDF2-SHA1 hash of a password.
+                /// </summary>
+                /// <param name="password">The password to hash.</param>
+                /// <param name="salt">The salt.</param>
+                /// <param name="iterations">The PBKDF2 iteration count.</param>
+                /// <param name="outputBytes">The length of the hash to generate, in bytes.</param>
+                /// <returns>A hash of the password.</returns>
+                private static byte[] PBKDF2(string password, byte[] salt, int iterations, int outputBytes)
+                {
+                    Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt);
+                    pbkdf2.IterationCount = iterations;
+                    return pbkdf2.GetBytes(outputBytes);
+                }
+            }
+        }
 
 
+###Ruby (on Rails) 密码 hash 源代码
+
+下面是 Ruby 中使用加盐 PBKDF2 密码 hash 的实现代码。可以从这里下载：[Download PasswordHash.rb](https://crackstation.net/source/password-hashing/PasswordHash.rb)
+
+        # Password Hashing With PBKDF2 (http://crackstation.net/hashing-security.htm).
+        # Copyright (c) 2013, Taylor Hornby
+        # All rights reserved.
+        # 
+        # Redistribution and use in source and binary forms, with or without 
+        # modification, are permitted provided that the following conditions are met:
+        # 
+        # 1. Redistributions of source code must retain the above copyright notice, 
+        # this list of conditions and the following disclaimer.
+        # 
+        # 2. Redistributions in binary form must reproduce the above copyright notice,
+        # this list of conditions and the following disclaimer in the documentation 
+        # and/or other materials provided with the distribution.
+        # 
+        # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+        # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+        # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+        # ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE 
+        # LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+        # CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+        # SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+        # INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+        # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+        # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+        # POSSIBILITY OF SUCH DAMAGE.
+        
+        require 'securerandom'
+        require 'openssl'
+        require 'base64'
+        
+        # Salted password hashing with PBKDF2-SHA1.
+        # Authors: @RedragonX (dicesoft.net), havoc AT defuse.ca 
+        # www: http://crackstation.net/hashing-security.htm
+        module PasswordHash
+        
+          # The following constants can be changed without breaking existing hashes.
+          PBKDF2_ITERATIONS = 1000
+          SALT_BYTE_SIZE = 24
+         HASH_BYTE_SIZE = 24
+        
+          HASH_SECTIONS = 4
+          SECTION_DELIMITER = ':'
+          ITERATIONS_INDEX = 1
+          SALT_INDEX = 2
+          HASH_INDEX = 3
+        
+          # Returns a salted PBKDF2 hash of the password.
+          def self.createHash( password )
+            salt = SecureRandom.base64( SALT_BYTE_SIZE )
+            pbkdf2 = OpenSSL::PKCS5::pbkdf2_hmac_sha1(
+              password,
+              salt,
+              PBKDF2_ITERATIONS,
+              HASH_BYTE_SIZE
+            )
+            return ["sha1", PBKDF2_ITERATIONS, salt, Base64.encode64( pbkdf2 )].join( SECTION_DELIMITER )
+          end
+        
+          # Checks if a password is correct given a hash of the correct one.
+          # correctHash must be a hash string generated with createHash.
+          def self.validatePassword( password, correctHash )
+            params = correctHash.split( SECTION_DELIMITER )
+            return false if params.length != HASH_SECTIONS
+        
+            pbkdf2 = Base64.decode64( params[HASH_INDEX] )
+            testHash = OpenSSL::PKCS5::pbkdf2_hmac_sha1(
+              password,
+              params[SALT_INDEX],
+              params[ITERATIONS_INDEX].to_i,
+              pbkdf2.length
+            )
+        
+            return pbkdf2 == testHash
+          end
+        
+          # Run tests to ensure the module is functioning properly.
+          # Returns true if all tests succeed, false if not.
+          def self.runSelfTests
+            puts "Sample hashes:"
+            3.times { puts createHash("password") }
+        
+            puts "\nRunning self tests..."
+            @@allPass = true
+        
+            correctPassword = 'aaaaaaaaaa'
+            wrongPassword = 'aaaaaaaaab'
+            hash = createHash(correctPassword)
+        
+            assert( validatePassword( correctPassword, hash ) == true, "correct password" )
+            assert( validatePassword( wrongPassword, hash ) == false, "wrong password" )
+        
+            h1 = hash.split( SECTION_DELIMITER )
+            h2 = createHash( correctPassword ).split( SECTION_DELIMITER )
+            assert( h1[HASH_INDEX] != h2[HASH_INDEX], "different hashes" )
+            assert( h1[SALT_INDEX] != h2[SALT_INDEX], "different salt" )
+        
+            if @@allPass
+              puts "*** ALL TESTS PASS ***"
+            else
+              puts "*** FAILURES ***"
+            end
+        
+            return @@allPass
+          end
+        
+          def self.assert( truth, msg )
+            if truth
+              puts "PASS [#{msg}]"
+            else
+              puts "FAIL [#{msg}]"
+              @@allPass = false
+            end
+          end
+        
+        end
+        
+        PasswordHash.runSelfTests
+
+文章和代码都是 [Defuse Security](https://defuse.ca/) 所著。
 
 
-<https://crackstation.net/hashing-security.htm>
+原文： [Salted Password Hashing - Doing it Right](https://crackstation.net/hashing-security.htm)
