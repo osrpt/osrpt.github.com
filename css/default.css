@@ -256,7 +256,7 @@ pre {
 pre code{
     box-shadow: none;
 }*/
-.clear {
+ .clear {
     clear:both;
 }
 .home .title {
@@ -317,7 +317,8 @@ pre code{
 }
 .article .content {
     line-height: 2.2em;
-    font-family: Georgia, "Times New Roman", Times, "Songti SC", "SimSun", serif;
+    font-family:"lucida grande", "lucida sans unicode", lucida, "Helvetica Neue", helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif !important;
+    font-size: 1.4em;
     margin:2em 0;
 }
 .article .content p {
