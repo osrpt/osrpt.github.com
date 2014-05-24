@@ -234,7 +234,7 @@ blockquote {
     padding-left: 15px;
     border-left: 3px solid #ccc;
 }
-pre, code, kbd, samp {
+/*pre, code, kbd, samp {
     color: #000;
     font-family: monospace;
     font-size: 0.88em;
@@ -255,7 +255,7 @@ pre {
 
 pre code{
     box-shadow: none;
-}
+}*/
 .clear {
     clear:both;
 }
