@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://sibo.me/</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/06/05/how-browser-works.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/06/05/difference-between-struct-and-class.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/05/24/ten-articles-every-programmer-must-read.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/05/16/performing-asynchronous-work-or-tasks-in-asp-net-applications.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/05/14/hashing-security.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/24/WPF-Tutorial-Concept-Binding.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/19/WPF-Tutorial-Dependency-Property.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/16/WPF-Tutorial-TypeConverter-Markup-Extension.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/12/WPF-Tutorial-Fun-with-Border-Brush.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/11/node-js-mvc-framework-like-c-sharp.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/page2/</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/page3/</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/02/WPF-Tutorial-Beginning.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/08/WPF-Tutorial-Layout-Panels-Containers-Layout-Trans.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/10/Implementing-the-singleton-pattern-in-c-sharp.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/08/javascript-dot-notation-vs-brackets.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/04/03/node-js-dropbox-api.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/03/15/simple-shell-script.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/03/05/python-publish-scripts.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/03/02/windows-batch-file.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/02/25/node-js-use-mysql.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/02/25/mysql-date-datetime-timestamp.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/index.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/02/24/node-js-encoding.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/01/26/javascript-function-and-scope.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2014/01/05/node-webkit-publish.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2013/12/24/c-sharp-invalid-0x00.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://sibo.me/2013/11/19/c-charp-yield-and-sleep.html</loc>
+  <lastmod>2014-06-12T09:07:21+00:00</lastmod>
+  <changefreq>always</changefreq>
+</url>
+</urlset>
