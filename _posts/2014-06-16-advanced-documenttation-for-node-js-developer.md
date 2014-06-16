@@ -3,8 +3,6 @@ layout: post
 title: Advanced documentation for node.js developer[转]
 ---
 
-from:<http://stackoverflow.com/questions/5400533/advanced-documentation-for-node-js-developer/5401560#5401561>
-
 ###Q:Advanced documentation for node.js developer
 
 Recently our team is working on a new project with node.js. It is not difficult to start working with node.js. But now we're all just start to use this new technique and have little experience in such event-based development.
@@ -40,3 +38,5 @@ And last but not least, i recommend [GitHub][9] as a source of learning. By digg
   [10]: https://github.com/visionmedia/express
   [11]: https://github.com/LearnBoost/mongoose
   [12]: https://github.com/LearnBoost/Socket.IO-node
+
+from:<http://stackoverflow.com/questions/5400533/advanced-documentation-for-node-js-developer/5401560#5401561>
