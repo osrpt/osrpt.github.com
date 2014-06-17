@@ -3,8 +3,8 @@ layout: post
 title: 10 步学会 CSS 定位[译]
 ---
 
-####1. postion:static
-所有元素默认的 postion 值为：`position:static` ,意味着元素没有被定位，仅仅只是在文档中按照普通的位置放置。
+####1. position:static
+所有元素默认的 position 值为：`position:static` ,意味着元素没有被定位，仅仅只是在文档中按照普通的位置放置。
 
 通常你不需要设置这个值除非你想覆盖之前设置的值。
 
@@ -14,7 +14,7 @@ title: 10 步学会 CSS 定位[译]
 
 ![static.png](/images/post/position/static.png)
 
-###2. postion:relative
+###2. position:relative
 
 如果你设置了 `position:relative`，你就可以使用 `top` 或者 `bottom` 和 `left` 或者 `right` 来相对移动元素本来应该在文档中的位置。
 
@@ -26,13 +26,13 @@ title: 10 步学会 CSS 定位[译]
      left:-40px;
     }
 
-![relative.png](/images/post/postion/relative.png)
+![relative.png](/images/post/position/relative.png)
 
 注意如果我们没有移动 div-1 的话它应该在的空间：现在变成空的了。下一个元素 (div-after) 在我们移动 div-1 的时候没有移动。这是因为即使我们移动了 div-1 ,它在文档中仍然占据着原来的位置。
 
-这样看起来似乎 `postion:relative` 没有什么用处，但是在本文的后面我们将看到它有着非常重要的功能。
+这样看起来似乎 `position:relative` 没有什么用处，但是在本文的后面我们将看到它有着非常重要的功能。
 
-###3. postion:absolute
+###3. position:absolute
 
 当你声明了 `position:absolute` ，元素将会从文档中移除掉然后放置到你声明的位置。
 
@@ -45,7 +45,7 @@ title: 10 步学会 CSS 定位[译]
         width:200px;
     }
 
-![absolute.png](/images/post/postion/absolute.png)
+![absolute.png](/images/post/position/absolute.png)
 
 这次请注意，由于 div-1a 已经被从文档中移除掉了，页面上的其他的元素将以不同的方式定位：div-1b,div-1c，并且div-after 因为 div-1a 已经不再占据原来的位置了将会自动上移。
 
@@ -57,7 +57,7 @@ title: 10 步学会 CSS 定位[译]
 
 + 在 Windows IE 浏览器中有一个 bug：当你声明了一个相对的宽度（例如："width:50%"）然后宽度将会给予父元素而不是定位的元素。
 
-###4. postion:relative + postion:absolute
+###4. position:relative + position:absolute
 
 如果我们给 div-1 设置 `relative`，那么任何在 div-1 中的元素都将相对 div-1 定位。然后如果我们设置 `absolute` 给 div-1a，那样我们就能把它移动到 div-1 的右上角了。
 
@@ -72,7 +72,7 @@ title: 10 步学会 CSS 定位[译]
      width:200px;
     }
 
-![relative_absolute.png](/images/post/postion/relative_absolute.png)
+![relative_absolute.png](/images/post/position/relative_absolute.png)
 
 ###5. 双列绝对定位
 
@@ -96,7 +96,7 @@ title: 10 步学会 CSS 定位[译]
         width:200px;
     }
 
-![two-column.png](/images/post/postion/two-column.png)
+![two-column.png](/images/post/position/two-column.png)
 
 使用 absolute 的一个好处是我们可以不考虑元素在 HTML 中的顺序而直接把元素定位到页面上的任意位置。这里我就把 div-1b 放在了 div-1a 的前面。
 
@@ -125,7 +125,7 @@ title: 10 步学会 CSS 定位[译]
         width:200px;
     }
 
-![two-column-height.png](/images/post/postion/two-column-height.png)
+![two-column-height.png](/images/post/position/two-column-height.png)
 
 ###7. float
 
@@ -138,7 +138,7 @@ title: 10 步学会 CSS 定位[译]
         width:200px;
     }
 
-![float.png](/images/post/postion/float.png)
+![float.png](/images/post/position/float.png)
 
 ###8. 多列浮动
 
@@ -171,7 +171,7 @@ title: 10 步学会 CSS 定位[译]
         clear:both;
     }
 
-![float-with-clear.png](/images/post/postion/float-with-clear.png)
+![float-with-clear.png](/images/post/position/float-with-clear.png)
 
 ###10. 免责声明和资源
 
