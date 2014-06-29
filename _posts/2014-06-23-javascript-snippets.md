@@ -1,6 +1,6 @@
 ---
 layout: post
-title: fuck javascript
+title: Javascript snippets
 ---
 
 下面是我收集的一些 js 代码片段
