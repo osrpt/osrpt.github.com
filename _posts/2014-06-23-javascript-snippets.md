@@ -3,7 +3,7 @@ layout: post
 title: Javascript snippets
 ---
 
-下面是我收集的一些 js 代码片段
+下面是我收集的一些 js 代码片段：
 
 ###1. 取消和恢复右键菜单
 
