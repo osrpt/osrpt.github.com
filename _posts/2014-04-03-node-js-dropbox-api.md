@@ -1,6 +1,9 @@
 ---
 layout: post
 title: node.js调用dropbox的api
+tags:
+- node.js
+- dropbox
 ---
 
 ###方法一、直接调用HTTP方法

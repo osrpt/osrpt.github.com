@@ -1,6 +1,8 @@
 ---
 layout: post
 title: node.js使用mysql
+- node.js
+- mysql
 ---
 
 安装mysql模块，命令：`npm install mysql`

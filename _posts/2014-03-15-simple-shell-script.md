@@ -1,6 +1,9 @@
 ---
 layout: post
 title: 简单的shell脚本
+tags:
+- shell
+- publish
 ---
 ###任务
 编写一个shell脚本，完成站点发布工作。

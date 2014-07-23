@@ -1,6 +1,10 @@
 ---
 layout: post
 title: MySQL数据类型：DATE,DATETIME,TIMESTAMP
+tags:
+- mysql
+- time
+- date
 ---
 
 ###DATE

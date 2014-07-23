@@ -1,6 +1,9 @@
 ---
 layout: post
 title: C# Thread.Sleep(0) 和 Thread.Yield(0)的区别
+tags:
+- c#
+- thread
 ---
 
 >Thread.Sleep(0) relinquishes the thread’s current time slice immediately, voluntarily handing over the CPU to other threads. Framework 4.0’s new Thread.Yield() method does the same thing — except that it relinquishes only to threads running on the same processor.

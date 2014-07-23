@@ -1,6 +1,9 @@
 ---
 layout: post
 title: node webkit程序发布
+tags:
+- node-webkit
+- publish
 ---
 
 1. 将开发的所有相关文件+package.json使用zip压缩为app.zip(要包含node_modules)

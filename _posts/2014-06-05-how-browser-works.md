@@ -1,6 +1,8 @@
 ---
 layout: post
 title: 浏览器的工作原理：新式网络浏览器幕后揭秘[转]
+tags:
+- browser
 ---
 
 ##序言

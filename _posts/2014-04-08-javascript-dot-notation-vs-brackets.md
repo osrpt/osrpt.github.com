@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Javascript中点号和方括号的比较
+tags:
+- javascript
+- compare
 ---
 
 今天使用jshint检查代码的时候发现提示建议把所有的`foo['bar']`改成`foo.bar`。不明白这样写有什么好处，难道只是一种风格？于是搜索了一下，找到以下答案：

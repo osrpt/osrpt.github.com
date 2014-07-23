@@ -1,6 +1,10 @@
 ---
 layout: post
 title: WPF教程（三）：有趣的边框和画刷[译]
+tags:
+- wpf
+- c#
+- tutorial
 ---
 
 [下载本文的源代码](/images/post/wpf3/PlayWithBorrder.zip)。

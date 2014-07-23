@@ -1,6 +1,9 @@
 ---
 layout: post
 title: node.js处理中文编码问题
+tags:
+- node.js
+- encoding
 ---
 
 由于js处理中文编码较弱，所以node.js处理中文编码同样存在很多问题。

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: 简单的Windows批处理文件
+tags:
+- windows
+- bat
 ---
 ###常用的命令：
 

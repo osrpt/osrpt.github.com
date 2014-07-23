@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Javascript snippets
+tags:
+- javascript
+- snippets
 ---
 
 下面是我收集的一些 js 代码片段：

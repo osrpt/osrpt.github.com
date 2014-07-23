@@ -1,6 +1,10 @@
 ---
 layout: post
 title: WPF教程（四）：类型转换器和标记扩展[译]
+tags:
+- wpf
+- c#
+- tutorial
 ---
 ###目录
 + 介绍

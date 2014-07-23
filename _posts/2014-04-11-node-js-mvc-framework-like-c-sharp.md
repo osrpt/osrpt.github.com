@@ -1,6 +1,10 @@
 ---
 layout: post
 title: 在express中实现Asp.NET MVC风格的框架
+tags:
+- node.js
+- mvc
+- framework
 ---
 
 node.js 的 express 框架本身非常灵活，可以用来自由实现各种风格的框架，由于我之前一直使用的是 Asp.NET 的MVC框架，所以决定在node.js中实现一套相似的框架。

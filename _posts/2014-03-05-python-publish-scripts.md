@@ -1,6 +1,10 @@
 ---
 layout: post
 title: python发布脚本的编写
+tags:
+- python
+- scripts
+- publish
 ---
 
 python比bat更加强大，灵活性更高，所以更适合做自动化脚本。

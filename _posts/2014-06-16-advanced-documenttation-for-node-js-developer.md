@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Advanced documentation for node.js developer[转]
+tags:
+- node.js
+- documentation
 ---
 
 ###Q:Advanced documentation for node.js developer

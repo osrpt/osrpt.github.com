@@ -1,6 +1,10 @@
 ---
 layout: post
 title: WPF教程（一）:入门[译]
+tags:
+- wpf
+- c#
+- tutorial
 ---
 
 ###目录

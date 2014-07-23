@@ -1,6 +1,9 @@
 ---
 layout: post
 title: c# ERROR:“.”(十六进制值 0x00)是无效的字符
+tags:
+- c#
+- exception
 ---
 
 “.”(十六进制值 0x00)是无效的字符。

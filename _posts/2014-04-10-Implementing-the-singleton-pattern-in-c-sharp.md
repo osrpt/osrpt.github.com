@@ -1,6 +1,9 @@
 ---
 layout: post
 title: 使用C#实现单例模式[译]
+tags:
+- c#
+- singleton
 ---
 
 ###目录

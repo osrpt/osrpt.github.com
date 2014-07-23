@@ -1,6 +1,10 @@
 ---
 layout: post
 title: WPF教程（六）：概念绑定
+tags:
+- wpf
+- c#
+- tutorial
 ---
 
 ###目录

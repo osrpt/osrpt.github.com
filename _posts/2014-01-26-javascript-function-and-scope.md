@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Javascript中函数和作用域的介绍
+tags:
+- javascript
+- scope
 ---
 
 Function本质上是Object，不同的是函数可以使用`return`关键字来返回一个值，没有返回值的默认返回`undefined`。

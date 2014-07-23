@@ -1,6 +1,10 @@
 ---
 layout: post
 title: WPF教程（五）：依赖属性
+tags:
+- wpf
+- c#
+- tutorial
 ---
 
 ###目录

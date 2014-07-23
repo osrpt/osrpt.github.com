@@ -1,6 +1,9 @@
 ---
 layout: post
 title: 10 步学会 CSS 定位[译]
+tags:
+- css
+- position
 ---
 
 ####1. position:static
