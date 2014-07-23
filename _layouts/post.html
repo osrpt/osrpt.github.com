@@ -15,7 +15,12 @@
         <a href="/">&larr;</a>
     </div>
     <h2 class="title">{{page.title}}</h2>
-    <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
+    <p>
+        <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
+        {% for tag in page.tags %}
+            <span class="tag">{{tag}}</span>
+        {% endfor %}
+    </p>
     <div class="content">
         {{ content }}
     </div>
