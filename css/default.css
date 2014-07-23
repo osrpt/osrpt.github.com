@@ -331,3 +331,8 @@ pre code{
     display: block;
     margin: auto;
 }
+
+.tag{
+    margin-left:10px;
+    text-decoration:underline;
+}
