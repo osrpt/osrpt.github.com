@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Subversion
+title: Subversion 的使用与常见问题
 ---
 
 ###合并主干到分支
@@ -16,6 +16,10 @@ title: Subversion
     $ #handle conflicts.
     $ svn commit -m "Merging changes from the trunk".
 
+###合并分支到主干
+
+与上面相反
+
 ###FAQ
 
 ####1. 解决冲突
@@ -29,3 +33,15 @@ title: Subversion
 ###3. cleanup
 
     svn cleanup
+
+###4. svn list all conflicts files
+
+    svn status | grep - P '^(?=.{0,6}C)'
+
+###5. 提交
+    
+    svn commit -m 'commit message'
+
+也可以只提交某一个文件：
+
+    svn commit -m "a file's commit message" <file>
