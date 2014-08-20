@@ -3,7 +3,7 @@ layout: post
 title: Javascript deep clone
 ---
 
-最近项目需要使用 dropbox ,由于 dropbox oauth2 要求 https 的跳转地址，所以不得不继续使用已经两年没有维护的 node-dbox 。之前已经多次被坑，这次使用沿用了之前的代码，所以迁移较为顺利。由于可能长期需要使用，所以打算修复源代码中的问题。
+最近项目需要使用 dropbox ,由于 dropbox oauth2 要求 https 的跳转地址，所以不得不继续使用已经两年没有维护的 [node-dbox](https://github.com/sintaxi/node-dbox) 。由于之前已经多次被坑，这次使用沿用了之前自己修改过的代码，迁移还算顺利。由于可能长期需要使用，所以打算修复源代码中的问题。
 
 在查看 node-dbox 的 [源代码](https://github.com/sintaxi/node-dbox/blob/master/lib/oauth.js) 的时候发现一行有趣的代码： 
 
@@ -202,7 +202,11 @@ shallow clone 比较简单：
 
 ###结论
 
-深度克隆是一个复杂的任务，要谨慎对待。如果并不是特别注重性能，可以使用 JSON.parse(JSON.stringify(obj)) 完成。如果自己完全知道对象的数据结构，手动克隆将是最快的方式。
+深度克隆是一个复杂的任务，并没有一个完美的解决方案，要根据情况谨慎对待。
+
+如果是简单场景，可以使用 JSON.parse(JSON.stringify(obj)) 完成。
+
+如果自己完全知道对象的数据结构，手动克隆将是最稳妥也是最高效的方式。
 
 ###参考
 
