@@ -45,3 +45,21 @@ title: Subversion 的使用与常见问题
 也可以只提交某一个文件：
 
     svn commit -m "a file's commit message" <file>
+
+###6. 解决合并冲突
+
+解决以下两种冲突
+
+1. local edit,incoming delete upon update
+2. local delete,incoming delete upon update
+
+	$ svn st
+	!  +  C foo
+		  >   local edit, incoming delete upon update
+	!  +  C bar
+		  >   local edit, incoming delete upon update
+	$ touch foo bar
+	$ svn revert foo bar
+	$ rm foo bar
+
+from:<http://stackoverflow.com/questions/4317973/svn-how-to-resolve-local-edit-incoming-delete-upon-update-message>
