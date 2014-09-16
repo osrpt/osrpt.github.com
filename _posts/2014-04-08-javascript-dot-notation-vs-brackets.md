@@ -8,7 +8,7 @@ tags:
 
 今天使用jshint检查代码的时候发现提示建议把所有的`foo['bar']`改成`foo.bar`。不明白这样写有什么好处，难道只是一种风格？于是搜索了一下，找到以下答案：
 
-><http://stackoverflow.com/questions/4968406/javascript-property-access-dot-notation-vs-brackets>
+>[JavaScript property access: dot notation vs. brackets?](http://stackoverflow.com/questions/4968406/javascript-property-access-dot-notation-vs-brackets)
 >
 >使用方括号[允许你使用不能在使用点号表达式时候的字符](http://www.dev-archive.net/articles/js-dot-notation/)：
 >
