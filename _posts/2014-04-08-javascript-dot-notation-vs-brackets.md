@@ -1,12 +1,14 @@
 ---
 layout: post
-title: Javascript中点号和方括号的比较
+title: Javascript 中点号和方括号的比较
 tags:
 - javascript
 - compare
 ---
 
-今天使用jshint检查代码的时候发现提示建议把所有的`foo['bar']`改成`foo.bar`。不明白这样写有什么好处，难道只是一种风格？于是搜索了一下，找到以下答案：
+今天使用 jshint 检查代码的时候发现提示建议把所有的 `foo['bar']` 改成 `foo.bar` 。
+不明白这样写有什么好处，难道只是一种风格？
+于是搜索了一下，找到以下答案：
 
 >[JavaScript property access: dot notation vs. brackets?](http://stackoverflow.com/questions/4968406/javascript-property-access-dot-notation-vs-brackets)
 >
@@ -30,15 +32,15 @@ tags:
 答案下面的评论中有人提到使用点号速度更快，并且提供了[测试](http://jsperf.com/dot-notation-vs-bracket-notation/2)。
 在我的电脑上分别在最新的 Chrome, Safari 和 Firefox 上运行了测试，测试结果如下：
 
-![test on Chrome](/images/jsDotVsBracket/chrome.png)
+![test on Chrome](/images/post/jsDotVsBracket/chrome.png)
 
 *Chrome*
 
-![test on Firefox](/images/jsDotVsBracket/firefox.png)
+![test on Firefox](/images/post/jsDotVsBracket/firefox.png)
 
 *Firefox*
 
-![test on Safari](/images/jsDotVsBracket/safari.png)
+![test on Safari](/images/post/jsDotVsBracket/safari.png)
 
 *Safari*
 
