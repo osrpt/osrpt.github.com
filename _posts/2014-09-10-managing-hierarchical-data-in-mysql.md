@@ -354,3 +354,7 @@ Web 开发者可以循环整棵树，随着深度值的增减来添加 <li></li>
 ###查找节点的
 
 From:<http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/>
+
+###引用
+
+1. <http://stackoverflow.com/questions/5916482/php-mysql-best-tree-structure>
