@@ -259,6 +259,14 @@ pre code{
  .clear {
     clear:both;
 }
+.home .to_homepage{
+	text-decoration:none;
+}
+.home .to_homepage:hover{
+	text-decoration:underline;
+	color:#fff;
+	background:#37a;
+}
 .home .title {
     font-size: 3em;
 }
