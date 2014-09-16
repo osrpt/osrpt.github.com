@@ -286,6 +286,9 @@ pre code{
 .home .pagination {
     margin:2em 0;
 }
+.home .pagination a{
+	padding:0 3px;
+}
 .home .footer {
     position:absolute;
     bottom: 0;
