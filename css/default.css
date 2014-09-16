@@ -262,7 +262,7 @@ pre code{
 .home .to_homepage{
 	text-decoration:none;
 }
-.home .to_homepage:hover{
+.to_homepage:hover,.to_homepage:active{
 	text-decoration:underline;
 	color:#fff;
 	background:#37a;
