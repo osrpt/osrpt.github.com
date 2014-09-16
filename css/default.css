@@ -262,10 +262,9 @@ pre code{
 .home .to_homepage{
 	text-decoration:none;
 }
-.to_homepage:hover,.to_homepage:active{
-	text-decoration:underline;
-	color:#fff;
-	background:#37a;
+.home .to_homepage:hover,.home .to_homepage:active{
+	text-decoration: underline;
+	color:#333;
 }
 .home .title {
     font-size: 3em;
