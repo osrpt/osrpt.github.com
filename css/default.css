@@ -2,7 +2,7 @@ html {
     font-family:"Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    background:#333;
+    background:url("/images/background/subtle_carbon.png");
     width:100%;
     height:94%;
 }
