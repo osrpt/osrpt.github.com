@@ -27,6 +27,22 @@ tags:
 >
 >方括号写法可以使用特殊字符去访问属性，还可以使用变量去获取属性。
 
-答案下面的评论中有人提到使用点号速度更快，并且提供了[测试](http://jsperf.com/dot-notation-vs-bracket-notation/2)。我分别在 chrome 33 和 IE 10 下多次运行了测试用例，发现并没有评论者所说的速度差异，偶尔会有较小的速度差异，但是多运行几次会发现是不稳定的，而且差异非常小，几乎可以忽略。
+答案下面的评论中有人提到使用点号速度更快，并且提供了[测试](http://jsperf.com/dot-notation-vs-bracket-notation/2)。
+在我的电脑上分别在最新的 Chrome, Safari 和 Firefox 上运行了测试，测试结果如下：
 
-所以 stackoverflow 上的结论应该是可靠的。
+![test on Chrome](/images/jsDotVsBracket/chrome.png)
+
+*Chrome*
+
+![test on Firefox](/images/jsDotVsBracket/firefox.png)
+
+*Firefox*
+
+![test on Safari](/images/jsDotVsBracket/safari.png)
+
+*Safari*
+
+
+可以看出：在 Chrome 和 Firefox 上运行时，速度没有明显差异, 在 Safari 上运行时，速度差异非常明显，使用方括号比直接使用点号的速度慢了 40% 多。
+
+看来速度上的确有差异，如果可以的话最好采用点号的方式。
