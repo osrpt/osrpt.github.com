@@ -1,11 +1,15 @@
 ---
 layout: post
-title: Creating A Javascript Function Inside A Loop
+title: 在 Javascript 的循环中创建函数
+tags:
+- javascript
+- closure
+- performance
 ---
 
 在循环中创建函数是一种不好的做法，代码不会报错，但是很可能会产生意想不到的结果。
 
-例子：
+例如：
 
 	for (var i = 0, n = elements.length; i<n; i++) {
 		var el = elements[i];
@@ -14,7 +18,7 @@ title: Creating A Javascript Function Inside A Loop
 		}, false);
 	}
 
-这个问题的原因比较复杂，简单来说，函数只创建了一次（而不是每次循环的时候创建一次）并且这个函数指向了最后一个它使用的变量。
+这个问题的原因(闭包)比较复杂，简单来说，函数只创建了一次（而不是每次循环的时候创建一次）并且这个函数指向了最后一个它使用的变量。
 
 有两种解决办法：
 
@@ -24,7 +28,7 @@ title: Creating A Javascript Function Inside A Loop
 		doSomething(variable);
 	})(value);
 
-上面的例子中应该这样用：
+上面的例子中应该这样改写：
 
 for (var i = 0, n = elements.length; i<n; i++) {
 	var el = elements[i];
@@ -71,7 +75,9 @@ for (var i = 0, n = elements.length; i<n; i++) {
 	var myFunc = makeFunc();
 	myFunc();
 
-上面的代码中，`myFunc· 构成了一个闭包。一个闭包是一种特殊的对象，包含了两个部分：一个函数，一个函数被创建时候所处的环境。环境包含了任何在函数被创建时候的作用域内的局部变量。
+上面的代码中，`myFunc` 构成了一个闭包。
+闭包是一种特殊的对象，包含了两个部分：一个函数，一个函数被创建时候所处的环境。
+环境包含了任何在函数被创建时候的作用域内的局部变量。
 
 ###闭包的用途：
 
@@ -82,8 +88,6 @@ for (var i = 0, n = elements.length; i<n; i++) {
 你可以在任何你通常需要用一个对象+仅仅一个方法的地方使用闭包，典型的就是网页内的事件的回调方法。
 
 ####使用闭包模拟私有方法
-
-
 
 ###参考：
 1. <http://blog.jbrantly.com/2010/04/creating-javascript-function-inside.html>
