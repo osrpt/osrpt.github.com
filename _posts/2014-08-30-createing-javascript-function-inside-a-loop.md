@@ -90,9 +90,9 @@ for (var i = 0, n = elements.length; i<n; i++) {
 ####使用闭包模拟私有方法
 
 ###参考：
-1. <http://blog.jbrantly.com/2010/04/creating-javascript-function-inside.html>
-2. <https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Closures>
-3. <http://jslinterrors.com/dont-make-functions-within-a-loop>
+1. [Creating A Javascript Function Inside A Loop](http://blog.jbrantly.com/2010/04/creating-javascript-function-inside.html)
+2. [Closures](https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Closures)
+3. [Don't make functions within a loop](http://jslinterrors.com/dont-make-functions-within-a-loop)
 4. [Immediately-invoked function expression](http://en.wikipedia.org/wiki/Immediately-invoked_function_expression)
 5. [Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures)
 6. [Details of the object model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model)
