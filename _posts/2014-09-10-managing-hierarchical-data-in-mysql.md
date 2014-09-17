@@ -1,6 +1,10 @@
 ---
 layout: post
 title: 在 Mysql 中处理多级数据[翻译+整理]
+tags:
+- mysql
+- hierrarchical
+- scheme
 ---
 
 ##简介
