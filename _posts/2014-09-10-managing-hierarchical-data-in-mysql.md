@@ -732,25 +732,25 @@ From:<http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/>
 
 如果把 `lft` 和 `rgt` 这两列取出来，然后作为一个 XML 文档的行号，你将得到：
 
-1. <electronics>
-2.    <televisions>
-3.        <tube>
-4.        </tube>
-5.        <lcd>
-6.        </lcd>
-7.        <plasma>  
-8.        </plasma> 
-9.     </televisions>
-10.    <portable electronics>
-11.        <mp3 players>
-12.            <flash>
-13.            </flash>
-14.        </mp3 players>
-15.        <cd players>
-16.        </cd players>
-17.        <2 way radios>
-18.        </2 way radios>
-19.    </portable electronics>
-20. </electronics>
+	1. <electronics>
+	2.    <televisions>
+	3.        <tube>
+	4.        </tube>
+	5.        <lcd>
+	6.        </lcd>
+	7.        <plasma>  
+	8.        </plasma> 
+	9.     </televisions>
+	10.    <portable electronics>
+	11.        <mp3 players>
+	12.            <flash>
+	13.            </flash>
+	14.        </mp3 players>
+	15.        <cd players>
+	16.        </cd players>
+	17.        <2 way radios>
+	18.        </2 way radios>
+	19.    </portable electronics>
+	20. </electronics>
 
 看到了吗，这样就很容易能看出来嵌套集合多级结构了。这里同样可以很清晰地看出来为什么这种方式可以搞笑的选择整个节点而不需要多次查询或者 join 了。
