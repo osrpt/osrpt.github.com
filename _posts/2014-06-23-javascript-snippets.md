@@ -109,3 +109,44 @@ eg:
 	input="Hello {0},I'm {1}"
 	args=["Alice","Bob"]
 	result=formatString(input,args) #result will be:Hello,Alice,I'm bob
+
+###5. double tildle vs Math.floor()
+
+	js>~~"yes"
+	0
+	js>~~3
+	3
+	js>~~"yes"
+	0
+	js>~~false
+	0
+	js>~~""
+	0
+	js>~~true
+	1
+	js>~~"3"
+	3
+	js>~~{}
+	0
+	js>~~{a:2}
+	0
+	js>~~[2]
+	2
+	js>~~[2,3]
+	0
+	js>~~{toString: function() {return 4}}
+	4
+	js>~~NaN
+	0
+	js>~~[4.5]
+	4
+	js>~~5.6
+	5
+	js>~~-5.6
+	-5
+
+###6. tildle in array
+
+	function exist(item){
+		return ~[1,2,3].indexOf(item)
+	}
