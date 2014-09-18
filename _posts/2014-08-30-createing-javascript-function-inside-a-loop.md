@@ -30,14 +30,14 @@ tags:
 
 上面的例子中应该这样改写：
 
-for (var i = 0, n = elements.length; i<n; i++) {
-	var el = elements[i];
-	el.addEventListener('click', (function(i, el) { 
-		return function() {
-			doSomethingWith(i, el);
-		}
-	})(i, el), false);
-}
+	for (var i = 0, n = elements.length; i<n; i++) {
+		var el = elements[i];
+		el.addEventListener('click', (function(i, el) { 
+			return function() {
+				doSomethingWith(i, el);
+			}
+		})(i, el), false);
+	}
 
 这种方式每次都需要单独创建一个函数，可能导致[性能问题](http://jsperf.com/closure-vs-name-function-in-a-loop/2)。
 
