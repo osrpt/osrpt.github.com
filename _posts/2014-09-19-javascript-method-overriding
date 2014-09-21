@@ -1,0 +1,31 @@
+---
+layout: post
+title: Javascript 中方法重载
+tags:
+- javascript
+- function
+- trick
+---
+
+Javascript
+
+###override 原方法
+
+假设已经有一个函数 func, 现在想写一个新的 func, 在调用原来的 func 之前做一些额外的操作。这种就是代理模式。
+
+	var proxied = func;
+	func = function(){
+		//console.log(this, arguments); 或者其他操作
+		return proxied.apply(this, arguments);
+	}
+
+###引用
+
+1. [JavaScript Method Overloading](http://ejohn.org/blog/javascript-method-overloading/)
+2. [Handling optional parameters in javascript](http://stackoverflow.com/questions/1529077/handling-optional-parameters-in-javascript)
+3. [](http://stackoverflow.com/questions/148901/is-there-a-better-way-to-do-optional-function-parameters-in-javascript)
+4. <http://stackoverflow.com/questions/11030022/optional-parameters-in-javascript>
+5. <http://www.markhansen.co.nz/javascript-optional-parameters/>
+6. <http://www.openjs.com/articles/optional_function_arguments.php>
+7. <http://stackoverflow.com/questions/296667/overriding-a-javascript-function-while-referencing-the-original>
+8. <http://api.jquery.com/Types/#Proxy_Pattern>
