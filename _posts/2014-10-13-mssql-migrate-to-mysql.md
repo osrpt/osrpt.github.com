@@ -15,11 +15,11 @@ MSSQL 数据迁移到 MySQL 中有多种方案， MySQL 提供的工具 [MySQL W
 
 ###pymssql
 
-pymssql 用户连接 MSSQL 处理数据。这是一个第三方的 MSSQL 连接库，需要自己下载安装。
+pymssql 用于连接 MSSQL 处理数据导出。这是一个第三方的库，需要自己安装。
 
 ###MySQLdb
 
-主要使用了 MySQLdb 这个库处理数据导入的问题，这个库需要自己下载安装。
+MySQLdb 用于处理数据导入的问题，这个库需要自己下载安装。
 
 CentOs:
 
