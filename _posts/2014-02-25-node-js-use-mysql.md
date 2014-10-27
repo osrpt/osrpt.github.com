@@ -1,6 +1,6 @@
 ---
-layout: post
 title: node.js使用mysql
+layout: post
 - node.js
 - mysql
 ---

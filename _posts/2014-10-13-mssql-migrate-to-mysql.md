@@ -1,6 +1,6 @@
 ---
 layout: post
-title: SQL Server 升级到 MySQL
+title: SQL Server 迁移到 MySQL
 ---
 
 MSSQL 数据迁移到 MySQL 中有多种方案， MySQL 提供的工具 [MySQL Workbench](http://www.mysql.com/products/workbench/) 包含了数据迁移的功能。
@@ -8,6 +8,35 @@ MSSQL 数据迁移到 MySQL 中有多种方案， MySQL 提供的工具 [MySQL W
 
 由于我的迁移中只需要用到部分表的部分数据，有些还需要针对数据进行单独的处理，所以这个工具并不适用。
 整个迁移过程中最麻烦的问题就是中文的乱码问题，需要特别注意。
+
+##表结构
+
+###自增
+
+MSSQL 中自增是 `IDENTITY`，MYSQL 中是 AUTO_INCREMENT
+
+MSSQL 中的：
+
+    CREATE TABLE test(
+        id INT PRIMARY KEY IDENTITY(10000, 1)
+    )
+
+等价于 MYSQL 中的：
+
+    CREATE TABLE test(
+        id INT PRIMARY KEY AUTO_INCREMENT
+    ) AUTO_INCREMENT = 10000
+
+如果建表时忘记修改自增的起始值，也可以执行一下语句：
+
+    ALTER TABLE test AUTO_INCREMENT = 10000
+
+注意：
+
+1. 建议在迁移过程中，把 MYSQL 中的自增起始值设置的比原来的表自增列最大值大一个数量级。这样防止主键被占用。
+2. 如果需要修改自增步长为大于 1 的值，可以在服务器运行 `SET @@auto_increment_increment=2`，但是这样会影响所有表！
+
+###数据类型
 
 ##准备
 
