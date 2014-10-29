@@ -1,9 +1,11 @@
 ---
 layout: post
-title: 修复 U 盘
+title: 修复 U 盘无法读取的问题
 ---
 
-使用 USB 安装方式安装 CentOS 时候把 U 盘改坏了，Mac 下和 Windows 下都无法识别 U 盘。通过以下方式可以解决。
+使用 USB 安装方式安装 CentOS 时候把 U 盘改坏了，Mac 下和 Windows 下都无法识别 U 盘。
+
+通过以下方式得到解决。
 
 在 Windows 命令行中依次运行以下命令：
 
