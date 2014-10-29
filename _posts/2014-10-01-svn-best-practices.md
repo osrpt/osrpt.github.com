@@ -1,19 +1,21 @@
 ---
 layout: post
 title: SVN 最佳实践
+tags:
+-svn
 ---
 
-整理翻译自 [stackoverflow.com: SVN best-practices - working in a team](http://stackoverflow.com/questions/417599/svn-best-practices-working-in-a-team?answertab=votes#tab-top)
+本文整理翻译自 [stackoverflow.com: SVN best-practices - working in a team](http://stackoverflow.com/questions/417599/svn-best-practices-working-in-a-team?answertab=votes#tab-top)
 
 ###问：SVN 在团队协助中的最佳实践
 
-我正在开始使用 SVN. 我已经了解了最基本的命令并且理解基本原则。我希望有人能够给我一些在团队开发中使用 SVN 的最佳实践。
+我刚开始使用 SVN。我已经了解了最基本的命令并且理解基本原则。我希望有人能够给我一些在团队开发中使用 SVN 的最佳实践。
 
-我能明白在提交代码的时候添加有用冗长的消息的好处，但是还有其他需要注意的吗？
+我能明白在提交代码的时候添加有用且冗长的消息的好处，但是还有其他需要注意的吗？
 
 谢谢所有的答案——你们给我很大的帮助。
 
-*-codeinthehole*
+*-by codeinthehole*
 
 ###1. Gordon Wilson
 
@@ -66,4 +68,15 @@ title: SVN 最佳实践
 重复一下：
 
 1. 设置你的仓库结构（你的项目根目录应该包含 trunk, branches, tags 文件夹）
-2. 
+2. 选择你的分支策略（私有分支，每个里程碑/发布/bug分支，等）并且粘贴下来——我推荐多使用分支，但是不要使用私有分支。
+3. 选定你的标签策略——越多越好，但是更重要的是你的标签的命名习俗。
+4. 选定你的提交到主干的策略——尽可能保持主干的干净，它应该随时处于可发布状态。
+
+##总结
+
+还有一些回答的投票数在 10 票以下，这里不再摘录了。根据我的经验结合这些答案，我认为以下是一些非常重要的原则：
+
+1. 建立规范的仓库结构(trunk,branches,tags)；
+2. 尽可能多 commit，每次 commit 尽量只提交一个修改；
+3. 制定一个约定，并且遵守，不要纠结于代码风格；
+4. 利用好分支，如果一次修改较大，请在分支上完成。
