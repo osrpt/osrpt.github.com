@@ -2,7 +2,7 @@
 layout: post
 title: SVN 最佳实践
 tags:
--svn
+- svn
 ---
 
 本文整理翻译自 [stackoverflow.com: SVN best-practices - working in a team](http://stackoverflow.com/questions/417599/svn-best-practices-working-in-a-team?answertab=votes#tab-top)
