@@ -9,7 +9,7 @@ title: VPS 磁盘扩容并升级服务器
 
 ##准备工作
 
-首先当然需要去 VPS 服务商购买一块磁盘。请查看 (Linux 系统挂载数据盘)[http://help.aliyun.com/knowledge_detail.htm?spm=5176.788314852.3.1.SnZDUx&knowledgeId=5974154&categoryId=]大致了解如何挂载。
+首先当然需要去 VPS 服务商购买一块磁盘。请查看 [Linux 系统挂载数据盘](http://help.aliyun.com/knowledge_detail.htm?spm=5176.788314852.3.1.SnZDUx&knowledgeId=5974154&categoryId=) 大致了解如何挂载。
 
 本文将从挂载磁盘讲起。
 
@@ -37,7 +37,7 @@ title: VPS 磁盘扩容并升级服务器
 
     umount /wrongDir
 
-显示磁盘信息 (stackexchange.com)[http://unix.stackexchange.com/questions/157154/how-to-list-disk-in-linux]：
+显示磁盘信息 [stackexchange.com](http://unix.stackexchange.com/questions/157154/how-to-list-disk-in-linux)：
 
     lsblk | head -8 | expand | column -t
 
@@ -107,7 +107,7 @@ nginx 中配置一个临时的站点：upgrading.exacmple.com：
 + --no-compress as there's no lack of bandwidth between local devices
 + --progress so I can see the progress of large files (optional)
 
-From: (stackoverflow.com)[http://serverfault.com/questions/43014/copying-a-large-directory-tree-locally-cp-or-rsync]
+From: [stackoverflow.com](http://serverfault.com/questions/43014/copying-a-large-directory-tree-locally-cp-or-rsync)
 
 ###重命名原目录作为备份
 
