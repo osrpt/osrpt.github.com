@@ -19,7 +19,7 @@ title: VPS 磁盘扩容并升级服务器
 
 首先新建一个目录，把新磁盘挂载到这个目录。
 
-由于并不希望该目录占据整个磁盘空间，所以可以建立一个软链接到新目录的某个子目录。
+由于并不希望该目录占据整个磁盘空间，所以最后我们会建立一个软链接到新目录的某个子目录。
 
 创建目录用于挂载磁盘：
 
@@ -29,6 +29,8 @@ title: VPS 磁盘扩容并升级服务器
 
     mount /dev/xvdc1 /diskc
 
+*如果多次执行 `mount` 命令将磁盘挂载到不同的目录，会导致这几个目录的内容完全一样并且完全同步。*
+
 查看磁盘挂载信息：
 
     df
@@ -37,19 +39,22 @@ title: VPS 磁盘扩容并升级服务器
 
     umount /wrongDir
 
-显示磁盘信息 [stackexchange.com](http://unix.stackexchange.com/questions/157154/how-to-list-disk-in-linux)：
+显示磁盘信息：
 
     lsblk | head -8 | expand | column -t
 
-**多次执行 `mount` 命令将磁盘挂载到不同的目录，会导致这几个目录的内容完全一样并且完全同步。**
+*From: [stackexchange.com](http://unix.stackexchange.com/questions/157154/how-to-list-disk-in-linux)*
+
 
 ##暂停当前服务
 
-###提供提醒页面
+###提供升级提醒页面
 
-本文假设使用了 nginx。
+由于升级维护时间可能较久，所以最好提供一个临时的升级提示页面。
 
-编写一个静态的升级页面，例如：/usr/www/upgrade.html。
+本文假设使用的是 nginx。
+
+编写一个静态的升级页面，放在：/usr/www/upgrade.html。
 
 编辑 nginx 配置文件 `/etc/nginx/nginx.conf`:
 
@@ -107,7 +112,7 @@ nginx 中配置一个临时的站点：upgrading.exacmple.com：
 + --no-compress as there's no lack of bandwidth between local devices
 + --progress so I can see the progress of large files (optional)
 
-From: [stackoverflow.com](http://serverfault.com/questions/43014/copying-a-large-directory-tree-locally-cp-or-rsync)
+*From: [stackoverflow.com](http://serverfault.com/questions/43014/copying-a-large-directory-tree-locally-cp-or-rsync)*
 
 ###重命名原目录作为备份
 
