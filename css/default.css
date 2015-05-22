@@ -260,11 +260,11 @@ pre code{
     clear:both;
 }
 .home .to_homepage{
-	text-decoration:none;
+    text-decoration:none;
 }
 .home .to_homepage:hover,.home .to_homepage:active{
-	text-decoration: underline;
-	color:#333;
+    text-decoration: underline;
+    color:#333;
 }
 .home .title {
     font-size: 3em;
@@ -294,18 +294,20 @@ pre code{
     margin:2em 0;
 }
 .home .pagination a{
-	padding:0 3px;
+    padding:0 3px;
 }
 .home .footer {
     position:absolute;
     bottom: 0;
+    left: 0;
     color:#fff;
     background: #888;
-	padding:5px 0;
+    padding:5px 0;
     text-align: center;
-    border-top: 1px solid #333;
     width: 100%;
-    margin:30px -2em 0;
+}
+.home .footer p {
+    margin: 0;
 }
 .article .nav {
     margin-bottom: 1.5em;
@@ -346,10 +348,10 @@ pre code{
     text-decoration:underline;
 }
 .article .post-nav{
-	font-size:1.4em;
-	border-top:1px dashed #333;
-	padding:10px 0;
+    font-size:1.4em;
+    border-top:1px dashed #333;
+    padding:10px 0;
 }
 .article .post-nav .next{
-	float:right;
+    float:right;
 }
