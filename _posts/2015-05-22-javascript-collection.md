@@ -24,3 +24,9 @@ tags:
 ####动画性能
 
 1. [High Performance Animations](http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/#disqus_thread)
+
+###Online Books
+
+>A long pull of functions, combinators, & decorators, updated to include the latest ES-6 features.
+
+1. [JavaScript Allongé](https://leanpub.com/javascriptallongesix/read)
