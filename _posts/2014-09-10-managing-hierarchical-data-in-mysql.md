@@ -757,4 +757,4 @@ From:<http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/>
 	19.    </portable electronics>
 	20. </electronics>
 
-看到了吗，这样就很容易能看出来嵌套集合多级结构了。这里同样可以很清晰地看出来为什么这种方式可以搞笑的选择整个节点而不需要多次查询或者 join 了。
+看到了吗，这样就很容易能看出来嵌套集合多级结构了。这里同样可以很清晰地看出来为什么这种方式可以高效的选择整个节点而不需要多次查询或者 join 了。
