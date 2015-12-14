@@ -53,3 +53,9 @@ From: <http://www.broexperts.com/2012/06/how-to-backup-files-and-directories-in-
 
 + `-I` 只获取 headers
 + `-s` silent
+
+###批量修改文件后缀名
+
+修改 `*.react.js` 为 `*.jsx`:
+
+    find . -name '*.react.js' -exec sh -c 'mv "$0" "${0%.react.js}.jsx"' {} \;
