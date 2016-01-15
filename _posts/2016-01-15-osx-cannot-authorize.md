@@ -9,7 +9,7 @@ tags:
 
 已经被 OSX 无法授权的问题困扰了很久，具体表现为需要授权的时候，弹出类似如下的窗口：
 
-![auth](/images/osx/auth.png)
+![auth](/images/post/osx/auth.png)
 
 此时只能点击「拒绝」，无法点击「始终允许」和「允许」。
 
