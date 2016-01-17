@@ -3,8 +3,6 @@ layout: post
 title: JavaScript作用域和提升
 ---
 
-From: <http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html>
-
 你知道下面的程序中会 alert 什么值吗？
 
     var foo = 1;
@@ -233,4 +231,17 @@ function foo(a, b, c) {
 我发现在多数情况下直接查看 [ECMA 标准(pdf)](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf) 就能理解这些是怎么工作的了。
 下面就是标准中关于变量声明和作用域的部分（更旧的版本中是 12.2.2 节）:
 
->
+>如果在方法声明中包含变量语句，那么变量是在函数的局部作用域中定义的，如 10.1.3 节描述的那样。
+>否则的话，他们是在全局作用域中定义的(即作为全局对象的成员定义，如 10.1.3 节中描述的那样)属性{不要删除}。
+>变量在进入执行作用域时创建。
+>一个块不会创建一个新的执行作用域。
+>只有程序和函数定义会产生新的作用域。
+>变量创建后被初始化为 undefined.
+>一个包含初始化的变量在 `VariableStatement` 执行的时候被赋值为它的 `AssignmentExpression`, 不是在创建的时候。
+
+我希望这篇文章为 JavaScript 程序员在最常见的困惑上带来一些帮助。
+我已经尽力不再产生更多的困惑。
+如果我犯了什么错误或者有重大疏漏，请告诉我。
+
+
+译自: <http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html>
