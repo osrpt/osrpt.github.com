@@ -354,6 +354,7 @@ pre code{
     height: 1px;
     margin: 0 30px;
     vertical-align: middle;
+    background: #888;
 }
 
 .article .content h2:after, .article .content h3:after {
@@ -363,6 +364,7 @@ pre code{
     height: 1px;
     margin: 0 30px;
     vertical-align: middle;
+    background: #888;
 }
 
 .article .content p {
