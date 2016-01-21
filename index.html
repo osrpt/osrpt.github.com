@@ -5,6 +5,10 @@ title: sibo's blog
 <a class="to_homepage"  href="/"><h2 class="title"><i class="fa fa-smile-o"></i>{{ page.title }}</h2></a>
 <hr/>
 <div class="blog">
+	<div class="nav">
+		<a class="nav-tags" href="/tags">Tags</a>
+		<a class="nav-archive" href="/archive">Archive</a>
+	</div>
 	<div class="posts">
 		{% for post in paginator.posts %}
 			<div class="post">
