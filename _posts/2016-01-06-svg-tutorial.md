@@ -2,10 +2,10 @@
 layout: post
 title: Svg Tutorial
 tags:
--svg
--graphic
--web
--tutorial
+- svg
+- graphic
+- web
+- tutorial
 ---
 
 ##Path
