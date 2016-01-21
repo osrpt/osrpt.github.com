@@ -11,16 +11,22 @@
 </head>
 
 <body class="home">
-	<div class="nav">
-		<a class="nav-tags" href="/tags">Tags</a>
-		<a class="nav-archive" href="/archive">Archive</a>
-	</div>
+    <header>
+        <h2 class="title"><a class="to_homepage" href="/"><i class="fa fa-smile-o"></i>{{ page.title }}</a></h2>
+        <nav>
+            <ul>
+                <li><a class="nav-tags" href="/tags">Tags</a></li>
+                <li><a class="nav-archive" href="/archive">Archive</a></li>
+            </ul>
+        </nav>
+        <hr/>
+    </header>
     {{ content }}
-    <div class="footer">
+    <footer class="footer">
         <p>
             ALL RIGHTS RESERVED. EMAIL: yangsibai@gmail.com
         </p>
-    </div>
+    </footer>
     <script>
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
