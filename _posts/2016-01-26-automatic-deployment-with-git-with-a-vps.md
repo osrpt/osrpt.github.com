@@ -1,5 +1,5 @@
 ---
-layout: title
+layout: post
 title: 在 VPS 上使用 Git 做自动部署
 tags:
 - git
