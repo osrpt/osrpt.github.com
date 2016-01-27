@@ -7,13 +7,11 @@ tags:
 
 在网页中垂直居中对齐是一个比较麻烦的事情，我近来一直采用以下方式：
 
-`
-.vertical-center {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-`
+    .vertical-center {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
 这种方式比较简单，[兼容性也不错](http://caniuse.com/#feat=transforms2d)。
 
@@ -23,10 +21,8 @@ tags:
 
 我使用 `flex` 之后就没有这个问题了，不过这种方式的兼容性并不好：
 
-`
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-`
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
