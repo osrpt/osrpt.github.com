@@ -8,8 +8,6 @@ tags:
 
 ###记录每一个查询语句
 
-FROM: <http://stackoverflow.com/a/7470567/1778658>
-
 先查看文件位置：
 
     mysql> SHOW VARIABLES LIKE "general_log%";
@@ -33,9 +31,9 @@ FROM: <http://stackoverflow.com/a/7470567/1778658>
 
     SET GLOBAL general_log = 'OFF';
 
-### 查看连接信息
+FROM: <http://stackoverflow.com/a/7470567/1778658>
 
-FROM: <http://alvinalexander.com/blog/post/mysql/how-show-open-database-connections-mysql>
+### 查看连接信息
 
     mysql> show status like '%onn%';
     +--------------------------+-------+
@@ -56,6 +54,8 @@ FROM: <http://alvinalexander.com/blog/post/mysql/how-show-open-database-connecti
 >Connections
 >
 >The number of connection attempts (successful or not) to the MySQL server.
+
+FROM: <http://alvinalexander.com/blog/post/mysql/how-show-open-database-connections-mysql>
 
 ### 查看进程信息
 
