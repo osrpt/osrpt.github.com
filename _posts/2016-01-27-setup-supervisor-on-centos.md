@@ -10,89 +10,83 @@ tags:
 
 ### 安装包
 
-`
-sudo yum install python-setuptools
-sudo easy_install pip
-sudo pip install supervisor
-`
+    sudo yum install python-setuptools
+    sudo easy_install pip
+    sudo pip install supervisor
 
 如果使用的时候提示错误 `pkg_resources.DistributionNotFound: meld3>=0.6.5`，手动安装 `meld3` 就好了：
 
-`
-git clone https://github.com/Supervisor/meld3
-cd meld3
-python setup.py install
-`
+    git clone https://github.com/Supervisor/meld3
+    cd meld3
+    python setup.py install
 
 ### service
 
 /etc/init.d/supervisord
 
-`
-#!/bin/bash
-#
-# supervisord   This scripts turns supervisord on
-#
-# Author:       Mike McGrath <mmcgrath@redhat.com> (based off yumupdatesd)
-#
-# chkconfig:    - 95 04
-#
-# description:  supervisor is a process control utility.  It has a web based
-#               xmlrpc interface as well as a few other nifty features.
-# processname:  supervisord
-# config: /etc/supervisord.conf
-# pidfile: /var/run/supervisord.pid
-#
+    #!/bin/bash
+    #
+    # supervisord   This scripts turns supervisord on
+    #
+    # Author:       Mike McGrath <mmcgrath@redhat.com> (based off yumupdatesd)
+    #
+    # chkconfig:    - 95 04
+    #
+    # description:  supervisor is a process control utility.  It has a web based
+    #               xmlrpc interface as well as a few other nifty features.
+    # processname:  supervisord
+    # config: /etc/supervisord.conf
+    # pidfile: /var/run/supervisord.pid
+    #
 
-# source function library
-. /etc/rc.d/init.d/functions
+    # source function library
+    . /etc/rc.d/init.d/functions
 
-RETVAL=0
+    RETVAL=0
 
-start() {
-        echo -n $"Starting supervisord: "
-        daemon supervisord
-        RETVAL=$?
-        echo
-        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/supervisord
-}
+    start() {
+            echo -n $"Starting supervisord: "
+            daemon supervisord
+            RETVAL=$?
+            echo
+            [ $RETVAL -eq 0 ] && touch /var/lock/subsys/supervisord
+    }
 
-stop() {
-        echo -n $"Stopping supervisord: "
-        killproc supervisord
-        echo
-        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/supervisord
-}
+    stop() {
+            echo -n $"Stopping supervisord: "
+            killproc supervisord
+            echo
+            [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/supervisord
+    }
 
-restart() {
-        stop
-        start
-}
+    restart() {
+            stop
+            start
+    }
 
-case "$1" in
-  start)
-        start
-        ;;
-  stop)
-        stop
-        ;;
-  restart|force-reload|reload)
-        restart
-        ;;
-  condrestart)
-        [ -f /var/lock/subsys/supervisord ] && restart
-        ;;
-  status)
-        status supervisord
-        RETVAL=$?
-        ;;
-  *)
-        echo $"Usage: $0 {start|stop|status|restart|reload|force-reload|condrestart}"
-        exit 1
-esac
+    case "$1" in
+      start)
+            start
+            ;;
+      stop)
+            stop
+            ;;
+      restart|force-reload|reload)
+            restart
+            ;;
+      condrestart)
+            [ -f /var/lock/subsys/supervisord ] && restart
+            ;;
+      status)
+            status supervisord
+            RETVAL=$?
+            ;;
+      *)
+            echo $"Usage: $0 {start|stop|status|restart|reload|force-reload|condrestart}"
+            exit 1
+    esac
 
-exit $RETVAL
-`
+    exit $RETVAL
 
 ### 错误处理
 
@@ -105,15 +99,11 @@ exit $RETVAL
 
 查询 supervisord PID:
 
-`
-ps -ef | grep supervisord
-`
+    ps -ef | grep supervisord
 
 停止进程:
 
-`
-kill -s SIGTERM <PID>
-`
+    kill -s SIGTERM <PID>
 
 
 ### Reference
