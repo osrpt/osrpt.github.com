@@ -1,6 +1,7 @@
 ---
-title: node.js使用mysql
 layout: post
+title: node.js 使用 mysql
+tags:
 - node.js
 - mysql
 ---
