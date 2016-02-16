@@ -16,7 +16,7 @@ tags:
 
     ll | wc -l
 
-### Go back to previous directory
+### 返回前一个工作目录
 
     cd -
 
@@ -63,3 +63,7 @@ From: <http://www.broexperts.com/2012/06/how-to-backup-files-and-directories-in-
 ### 批量查找并杀掉进程
 
     ps aux | grep <someinfo> | awk '{ print $2; }' | xargs kill
+
+### 获取发行版信息
+
+    cat /etc/*release
