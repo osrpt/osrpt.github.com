@@ -20,7 +20,7 @@ tags:
     cd meld3
     python setup.py install
 
-### service
+### 添加自动启动服务
 
 /etc/init.d/supervisord
 
@@ -90,7 +90,7 @@ tags:
 
 ### 错误处理
 
-无法启动，提示：
+如果无法启动，提示：
 
 >Error: Another program is already listening on a port that one of our HTTP servers is configured to use.  Shut this program down first before starting supervisord.
 >For help, use /usr/bin/supervisord -h
@@ -105,9 +105,9 @@ tags:
 
     kill -s SIGTERM <PID>
 
+注意：本文仅在 CentOS 6.6 和 CentOS 6.7 上验证过。
 
 ### Reference
 
 1. <https://rayed.com/wordpress/?p=1496>
 2. <https://gist.github.com/elithrar/9539414>
-
