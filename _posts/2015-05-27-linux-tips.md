@@ -3,7 +3,7 @@ layout: post
 title: Linux Tips
 tags:
 - Linux
-- Tips
+- tips
 ---
 
 ### 监控日志文件
@@ -56,7 +56,7 @@ From: <http://www.broexperts.com/2012/06/how-to-backup-files-and-directories-in-
 
 ### 批量修改文件后缀名
 
-修改 `*.react.js` 为 `*.jsx`:
+例如修改 `*.react.js` 为 `*.jsx`:
 
     find . -name '*.react.js' -exec sh -c 'mv "$0" "${0%.react.js}.jsx"' {} \;
 
