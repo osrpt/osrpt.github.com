@@ -1,3 +1,4 @@
+include: ['_pages', '_golang_tutorials']
 markdown: rdiscount
 paginate: 10
 paginate_path: '/page:num'
