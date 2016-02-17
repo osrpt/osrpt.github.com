@@ -386,3 +386,38 @@ pre code{
 .article .post-nav .next{
     float:right;
 }
+
+.golang-tutorial .error {
+    font-family: Verdana, Geneva, sans-serif;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #FFBDBD;
+    background-color: #FFF7F7;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+}
+
+.golang-tutorial .correct {
+    font-family: Verdana, Geneva, sans-serif;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #addfff;
+    background-color: #F2F9FA;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+}
+
+.golang-tutorial .note {
+    font-family: Verdana, Geneva, sans-serif;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #FBEA7B;
+    background-color: #FEFBE8;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+}
+
+.golang-tutorial code {
+    font-family: Verdana, Geneva, sans-serif;
+    color: #616d7e;
+}

@@ -12,8 +12,8 @@ tags:
 
 ### 第一部分：受众，编程，Go 语言哲学，安装和配置
 
-+ 受众
-+ 安装和配置 Go 语言环境
++ [受众](/golang_tutorials/audience-and-content-layout.html)
++ [安装和配置 Go 语言环境](/golang_tutorials/installing-and-configuring-go.html)
 
 ### 第二部分
 
