@@ -1,5 +1,5 @@
 include: ['_pages', '_golang_tutorials']
-markdown: rdiscount
+markdown: kramdown
 paginate: 10
 paginate_path: '/page:num'
 name: sibo's blog
