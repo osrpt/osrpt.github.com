@@ -17,4 +17,9 @@ tags:
 
 ### 第二部分
 
-+ 
++ [一步一步实现 Go 语言的 "Hello World"](/golang_tutorials/very-simole-go-hello-world-line-by-line.html)
++ [刚开始使用 Go 语言编程时可能遇到的典型错误](/golang_tutorials/early-syntax-errors-and-other-minor.html)
+
+### 第四部分 在 Go 中面向对象编程？
+
++ [Go 语言的结构体--一种面向对象编程中类的替代物](/golang_tutorials/structs-in-go-instead-of-classes-in.html)
