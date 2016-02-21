@@ -24,3 +24,4 @@ tags:
 
 + [Go 语言的结构体-- 一种面向对象编程中类的替代物](/golang_tutorials/structs-in-go-instead-of-classes-in.html)
 + [结构中的匿名字段 -- 类似对象组合](/golang_tutorials/anonymous-fields-in-structs-like-object.html)
++ [结构的方法](/golang_tutorials/methods-on-structs.html)
