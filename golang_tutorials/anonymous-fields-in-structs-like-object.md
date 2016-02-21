@@ -35,7 +35,7 @@ Go 语言允许定义一个包含无变量名字段的结构。
 <p class="corrent">
 House h has this many rooms: 3
 House h has this many plates: 10
-The Kitchen contents of this house are: \{10\}
+The Kitchen contents of this house are: &#123; 10 &#125;
 </p>
 
 首先需要注意的是，我们已经定义了 Kitchen 是一个匿名字段，我们可以直接访问它的成员，就像这些成员是包含在类中的一样。
@@ -63,7 +63,7 @@ The Kitchen contents of this house are: \{10\}
 
 第三个需要注意的是，我们是怎样使用类型名来初始化的：`h := House{Kitchen{10}, 3}`。
 在这里你需要协商类型名字，并且通过花括号提供它的值。
-所以 `h := House{{10}, 3}` 和 `h := House{10, 3}` 都会导致编译错误。
+所以 `h := House&#123;&#123;10&#125;, 3&#125;` 和 `h := House{10, 3}` 都会导致编译错误。
 
 ### 匿名字段 -- 如果出现命名冲突
 
