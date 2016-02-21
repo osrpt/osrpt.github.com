@@ -35,7 +35,7 @@ Go 语言允许定义一个包含无变量名字段的结构。
 <p class="corrent">
 House h has this many rooms: 3
 House h has this many plates: 10
-The Kitchen contents of this house are: {10}
+The Kitchen contents of this house are: \{10\}
 </p>
 
 首先需要注意的是，我们已经定义了 Kitchen 是一个匿名字段，我们可以直接访问它的成员，就像这些成员是包含在类中的一样。
