@@ -27,3 +27,4 @@ tags:
 + [结构的方法](/golang_tutorials/methods-on-structs.html)
 + [Go 语言中的继承 -- 或者说是类似实现](/golang_tutorials/inheritance-and-subclassing-in-go-or.html)
 + [Go 语言中的多重继承](/golang_tutorials/multiple-inheritance-in-go.html)
++ [Go 语言中的接口](/golang_tutorials/interfaces-in-go.html)
