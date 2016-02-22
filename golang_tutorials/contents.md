@@ -26,3 +26,4 @@ tags:
 + [结构中的匿名字段 -- 类似对象组合](/golang_tutorials/anonymous-fields-in-structs-like-object.html)
 + [结构的方法](/golang_tutorials/methods-on-structs.html)
 + [Go 语言中的继承 -- 或者说是类似实现](/golang_tutorials/inheritance-and-subclassing-in-go-or.html)
++ [Go 语言中的多重继承](/golang_tutorials/multiple-inheritance-in-go.html)
