@@ -31,3 +31,9 @@ tags:
 + [Go 语言中的接口2 -- 协助设计高适应性和高扩展性](/golang_tutorials/interfaces-in-go-part-2-aiding.html)
 + [Go 语言中的多态性](/golang_tutorials/polymorphism-in-go.html)
 + [Go 语言中面向对象的精华总结 -- 没有痛点](/golang_tutorials/summary-of-object-oriented-programming.html)
+
+### 第五部分 Goroutines, channels: 并行编程和通信
+
++ [Goroutines](/golang_tutorials/goroutines.html)
++ [Go 语言的 Channels](/golang_tutorials/channels-in-go.html)
++ [Go 语言的 Channels -- 范围和选择]()
