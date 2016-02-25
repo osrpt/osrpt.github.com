@@ -36,4 +36,13 @@ tags:
 
 + [Goroutines](/golang_tutorials/goroutines.html)
 + [Go 语言的 Channels](/golang_tutorials/channels-in-go.html)
-+ [Go 语言的 Channels -- 范围和选择]()
++ [Go 语言的 Channels -- 范围和选择](/golang_tutorials/channels-in-go-range-and-select.html)
+
+### 第六部分 网络编程
+
++ [使用 Go 语言进行网络变成 —— 第一个网络的 Hello world](/golang_tutorials/web-programming-with-go-first-web-hello.html)
++ [Go 模板]()
++ [Go 模板2]()
++ [Go 模板3 —— 模板设置]()
++ [在 Go 中使用外部 api —— Google API 的 urlshortener]()
++ [oAuth2：在 Go 中实现 3 步认证]()
