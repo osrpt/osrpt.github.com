@@ -1,6 +1,6 @@
 include: ['_pages', '_golang_tutorials']
 markdown: kramdown
-paginate: 10
+paginate: 20
 paginate_path: '/page:num'
 name: sibo's blog
 description: about web development

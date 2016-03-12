@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body class="article">
-    <div class="nav">
-        <a href="/"><i class="fa fa-home"></i>Back to home</a>
-    </div>
+    <h2 class="nav">
+        <a href="/"><canvas id="logo" class="logo" width="36" height="36"></canvas>Sibo's blog</a>
+    </h2>
     <h1 class="title">{{page.title}}</h1>
     <p class="article-info">
         <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
         {% for tag in page.tags %}
-            <span class="tag"><i class="fa fa-tag"></i>{{tag}}</span>
+            <span class="tag"><i class="icon icon-tag"></i>{{tag}}</span>
         {% endfor %}
     </p>
     <div class="content">
@@ -69,6 +69,9 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <script src="/javascripts/app.js"></script>
+    <script>
+        App.drawLogo(document.getElementById('logo'));
+    </script>
 </body>
-
 </html>

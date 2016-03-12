@@ -12,12 +12,13 @@
 
 <body class="home">
     <header>
-        <h2 class="title"><a class="to_homepage" href="/"><i class="fa fa-smile-o"></i>{{ page.title }}</a></h2>
+        <h2 class="title"><a class="to_homepage" href="/"><canvas id="logo" class="logo" width="36" height="36"></canvas>{{ page.title }}</a></h2>
         <nav>
             <ul>
-                <li><a class="nav-tags" href="/tags">Tags</a></li>
-                <li><a class="nav-archive" href="/archive">Archive</a></li>
-                <li><a class="nav-go-lang" href="/golang_tutorials/contents.html">GoLang Tutorials</a></li>
+                <li><a class="nav-tags" href="/tags.html">Tags</a></li>
+                <li><a class="nav-archive" href="/archive.html">Archive</a></li>
+                <li><a class="nav-go-lang" href="/golang_tutorials/contents.html">Go Lang Tutorials</a></li>
+                <li><a class="nav-search" href="/search.html">Search</a></li>
             </ul>
         </nav>
         <hr/>
@@ -43,6 +44,10 @@
 
     ga('create', 'UA-48397673-1', 'sibo.me');
     ga('send', 'pageview');
+    </script>
+    <script src="/javascripts/app.js"></script>
+    <script>
+        App.drawLogo(document.getElementById('logo'));
     </script>
 </body>
 </html>

@@ -10,7 +10,7 @@ title: sibo's blog
 				<p class="postTime">
 					<span class="date">{{ post.date | date: "%B %d, %Y" }}</span>
                     {% for tag in post.tags %}
-                        <span class="tag"><i class="fa fa-tag"></i>{{tag}}</span>
+                        <span class="tag"><i class="icon icon-tag"></i>{{tag}}</span>
                     {% endfor %}
 				</p>
 				<div class="content">
@@ -28,7 +28,6 @@ title: sibo's blog
 			{% else %}
 				<span>&laquo; Prev</span>
 			{% endif %}
-
 			{% for page in (1..paginator.total_pages) %}
 				{% if page == paginator.page %}
 					<em>{{ page }}</em>
