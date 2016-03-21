@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 早期语法错误和一些小错误
+source: http://golangtutorials.blogspot.jp/2011/05/early-syntax-errors-and-other-minor.html
 ---
 
 有时候我们知道程序是怎么正确工作的，但是我们不知道为什么出现错误。
@@ -189,5 +190,3 @@ prog.go:3: empty top-level declaration
     func main() [] //ERROR - where curly braces are required, only those are allowed.  They are used to contain blocks of code.  func main() {}
 
     func main() { fmt.Println('hello world') } //ERROR - use double quotes for strings: func main() { fmt.Println("hello world") }
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/05/early-syntax-errors-and-other-minor.html>

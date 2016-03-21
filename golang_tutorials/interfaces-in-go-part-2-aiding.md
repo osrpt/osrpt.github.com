@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: Go 语言中的接口2 -- 协助设计高适应性和高扩展性
+source: http://golangtutorials.blogspot.jp/2012/01/interfaces-in-go-part-2-aiding.html
 ---
 
 在[上一篇](/golang_tutorials/interfaces-in-go.html)文章的讨论中，我们从一个来自 OOP 语言中熟悉的示例开始 -- 一个 `Shaper` 接口和一些实现了该接口的形状。
@@ -209,5 +210,3 @@ Note: 这里我们没有在好的，经过深思熟虑的，清晰的设计上�
     func (b Bus) IsCompliantWithLaw() bool {
         return (b.l * b.b * b.h) / (b.rows * b.seatsPerRow) >= 3
     }
-
-查看原文：<http://golangtutorials.blogspot.jp/2012/01/interfaces-in-go-part-2-aiding.html>

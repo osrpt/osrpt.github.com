@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: 受众和内容编排
+source: http://golangtutorials.blogspot.jp/2011/05/audience-and-content-layout.html
 ---
 
 ### Go 语言编程教程系列--受众
@@ -52,5 +53,3 @@ Go 语言非常的简单且只有在基于单独的应用设计时才会触及�
 某些系统命令，文件名，目录路径，或者一些标题会像下面这样：
 
 `filename`, `ln -l`, `/a/path/to/a/directory`
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/05/audience-and-content-layout.html>

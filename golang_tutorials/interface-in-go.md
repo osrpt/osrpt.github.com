@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: Go 语言中的接口
+source: http://golangtutorials.blogspot.jp/2011/06/interfaces-in-go.html
 ---
 
 接口是一种存在于期望的功能实现和它的真实实现之间的约定。
@@ -217,5 +218,3 @@ Area of this shape is: 15
 Shape details: {5}
 Area of this shape is: 25
 </p>
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/06/interfaces-in-go.html>

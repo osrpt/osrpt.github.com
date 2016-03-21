@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: Go 中的多重继承
+source: http://golangtutorials.blogspot.jp/2011/06/multiple-inheritance-in-go.html
 ---
 
 继承是一个类型自动包含父类的行为的能力。
@@ -58,5 +59,3 @@ It can also make calls: Ring Ring
 通过在 `CameraPhone` 中同时包含两个匿名成员的方式，我们可以获得每个类型的行为，就好像是 `CameraPhone` 直接拥有的一样。
 
 你可能已经开始注意到了，Go 语言的范式非常少，但是他们都有值得注意的扩展性，可以得到其他语言的能力。
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/06/multiple-inheritance-in-go.html>

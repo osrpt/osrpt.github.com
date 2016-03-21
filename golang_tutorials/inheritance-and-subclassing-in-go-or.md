@@ -1,12 +1,13 @@
 ---
 layout: golang
 title: Go 语言中的继承 -- 或者说是类似实现
+source: http://golangtutorials.blogspot.jp/2011/06/inheritance-and-subclassing-in-go-or.html
 ---
 
 如果你使用过其他面向对象编程语言，你可能已经知道继承和子类是什么了。
 简单来说，这是一种让一种类型继承另外一种类型的能力。
 `Employee` 包含了所有 `Human` 的所有行为，然后是其他一些自己的行为。
-`Ferari`（一种品牌的汽车）有所有 `Car` 的行为，然后是一些其他的。
+`Ferari` 有所有 `Car` 的行为，然后是一些其他的。
 `Aston Martin` 有所有的 `Car` 的行为，还有一些其他的，但是跟 `Ferrari` 的不一样。
 如果我们能够概括出 `Car` 的行为并定义，这样 `Ferrari` 和 `Aston Martin` 都可以用，而不是每一个都要自己多做一遍。
 一般来说，是从一个高度概括的类型继承。
@@ -23,12 +24,12 @@ title: Go 语言中的继承 -- 或者说是类似实现
 
 `Full code`
 
-package main
+    package main
 
     import "fmt"
 
     type Car struct {
-        wheelCount int 
+        wheelCount int
     }
 
     // define a behavior for Car
@@ -111,5 +112,3 @@ Hi Bond, James Bond!
 
 简单来说，通过使用 Go 的匿名成员概念，我们达到了和子类继承相同的构想。
 起初会觉得和子类相比这种方式是翻转过来了，因为你把父类放在了子类中。
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/06/inheritance-and-subclassing-in-go-or.html>

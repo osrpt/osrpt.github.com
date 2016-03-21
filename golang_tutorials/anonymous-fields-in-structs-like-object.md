@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 结构中的匿名字段 -- 类似对象组合
+source: http://golangtutorials.blogspot.jp/2011/06/anonymous-fields-in-structs-like-object.html
 ---
 
 Go 语言允许定义一个包含无变量名字段的结构。

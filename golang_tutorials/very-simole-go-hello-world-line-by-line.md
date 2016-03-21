@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: 一步一步实现 Go 语言的 "Hello World"
+source: http://golangtutorials.blogspot.jp/2011/05/very-simple-go-hello-world-line-by-line.html
 ---
 
 创建一个名字为 `program1.go` 的文件。现在该文件为空白。按照下面提供的方式尝试编译它。
@@ -123,5 +124,3 @@ Hello, hello!
 在 Go 语言中，我们使用点号，在左边放上包含其他元素的名字，右边放上元素名字。
 来看一下更多例子：`Car.Wheel`, `Mary.Hand`, `Computer.Screen`, `Computer.Keyboard.AKey`, `Computer.Keyboard.AKey.RowNumber`。
 如你所见，这种组合可以嵌套很多层。
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/05/very-simple-go-hello-world-line-by-line.html>

@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: 结构的方法
+source: http://golangtutorials.blogspot.jp/2011/06/methods-on-structs.html
 ---
 
 我们已经了解到了结构可以包含数据。

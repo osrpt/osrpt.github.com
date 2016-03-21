@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: Go 语言中面向对象的精华总结 -- 没有痛点
+source: http://golangtutorials.blogspot.jp/2011/06/summary-of-object-oriented-programming.html
 ---
 
 如果你还没有了解过相关的主题，请现在先去了解。
@@ -40,5 +41,3 @@ Go 语言允许你在不处理它们复杂性的情况下获得这些重要的�
 **多态**：当一个类型在连接到不同的实例时展现不同的行为，这个类型可以说是展现出了多态性。
 
 + Go 语言中的接口可以用来实现多态。一个类型的变量可以赋值给任何它实现了的接口的变量。
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/06/summary-of-object-oriented-programming.html>

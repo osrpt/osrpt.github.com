@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: Go 语言中的多态性
+source: http://golangtutorials.blogspot.jp/2011/06/polymorphism-in-go.html
 ---
 
 有时候我发现使用插图来解释多态性更加容易。
@@ -137,5 +138,3 @@ My hobby? Well, I'm a Man and I'm going fishing.
 My hobby? Well, I'm a Woman and I'm going shopping.
 My hobby? Well, bow bow bow, I'm chasing sticks.
 </p>
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/06/polymorphism-in-go.html>

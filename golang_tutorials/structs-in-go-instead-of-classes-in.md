@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: Go 语言的结构体 -- 一种面向对象编程中类的替代物
+source: http://golangtutorials.blogspot.jp/2011/06/structs-in-go-instead-of-classes-in.html
 ---
 
 [Go 语言是面向对象编程的语言吗？](https://golang.org/doc/faq#Is_Go_an_object-oriented_language)
@@ -147,5 +148,3 @@ Go 语言的做法是如此简单以至于你可能觉得这非常傻瓜化。
 就一种方式，所有的这些不想要的关键词全部排除掉了。
 第二个好处是你只需要看一下变量名就知道它的可访问性了，你不需要滚动到它的定义处去查看可访问性。
 在其他语言中，它们把这种方式作为一种命名约定，但是 Go 强制这样做并且工作得很好。
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/06/structs-in-go-instead-of-classes-in.html>

@@ -1,6 +1,7 @@
 ---
 layout: golang
 title: Goroutine
+source: http://golangtutorials.blogspot.jp/2011/06/goroutines.html
 ---
 
 Goroutine 让你可以并行地执行任务 -- 在计算机中，“并行” 一词有许多含义，因此，让我们先来消化一下它。
@@ -139,5 +140,3 @@ Finished 100m sprit
 这些问题中有的没有简单的办法，Go 语言也不保证它可以处理任何问题 —— 但是它能够解决一些并且针对其他问题它也提供了可以采用的原则上的好指导。
 在其他章节中我们将看一些其他例子和它们的解决方案。
 </p>
-
-查看原文：<http://golangtutorials.blogspot.jp/2011/06/goroutines.html>
