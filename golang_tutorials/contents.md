@@ -6,8 +6,6 @@ tags:
 - tutorials
 ---
 
-原文链接：<http://golangtutorials.blogspot.jp/2011/05/table-of-contents.html>
-
 ## 目录
 
 ### 第一部分：受众，编程，Go 语言哲学，安装和配置
@@ -40,9 +38,11 @@ tags:
 
 ### 第六部分 网络编程
 
-+ [使用 Go 语言进行网络变成 —— 第一个网络的 Hello world](/golang_tutorials/web-programming-with-go-first-web-hello.html)
+<!--+ [使用 Go 语言进行网络变成 —— 第一个网络的 Hello world](/golang_tutorials/web-programming-with-go-first-web-hello.html)-->
 + [Go 模板](/golang_tutorials/go-templates.html)
 + [Go 模板2]()
 + [Go 模板3 —— 模板设置]()
 + [在 Go 中使用外部 api —— Google API 的 urlshortener]()
 + [oAuth2：在 Go 中实现 3 步认证]()
+
+原文地址：<http://golangtutorials.blogspot.jp/2011/05/table-of-contents.html>
