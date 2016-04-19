@@ -107,6 +107,13 @@ tags:
 
 注意：本文仅在 CentOS 6.6 和 CentOS 6.7 上验证过。
 
+### 添加新程序
+
+如果要添加新的程序，运行以下命令：
+
+    supervirsor reread
+    supervirsor reload
+
 ### Reference
 
 1. <https://rayed.com/wordpress/?p=1496>
