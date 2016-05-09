@@ -81,4 +81,7 @@ server {
 
 ### 检查证书
 
-检查 SSL 是否安装正确的工具： <https://www.sslshopper.com/ssl-checker.html>
+以下工具可以检查 SSL 证书情况：
+
+- <https://www.sslshopper.com/ssl-checker.html>
+- <https://www.sslchecker.com/sslchecker>
