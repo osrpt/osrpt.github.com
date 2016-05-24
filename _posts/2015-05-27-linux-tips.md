@@ -67,3 +67,9 @@ From: <http://www.broexperts.com/2012/06/how-to-backup-files-and-directories-in-
 ### 获取发行版信息
 
     cat /etc/*release
+
+### 在文件夹内查找
+
+    grep -rnw '/path/to/somewhere/' -e "pattern"
+
+<http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux>
