@@ -55,3 +55,5 @@ Implement `WebFrameLoadDelegate` for my ViewController:
 
 
 After this, I can call `Cocoa.log` in my JavaScript.
+
+Checkout sample code at <https://github.com/yangsibai/SwiftAndJavaScriptIntegrationSample> .
