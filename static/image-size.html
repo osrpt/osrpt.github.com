@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Image Size</title>
+  </head>
+  <body>
+    <script>
+      var svg = "smile.svg";
+      var png = "smile.png";
+
+      function getImageSize(src, cb) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.onload = function () {
+          cb(null, {
+            width: this.width,
+            height: this.height
+          });
+        };
+      }
+
+      getImageSize(svg, function (err, size) {
+        if (!err) {
+          document.writeln(svg + " width:" + size.width + " height:" + size.height);
+        }
+      });
+
+      getImageSize(png, function (err, size) {
+        if (!err) {
+          document.writeln(png + " width:" + size.width + " height:" + size.height);
+        }
+      });
+    </script>
+  </body>
+</html>
