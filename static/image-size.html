@@ -3,8 +3,69 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Image Size</title>
+    <style>
+      .imgs {
+        display: flex;
+      }
+      .imgs > div {
+        margin: 20px;
+      }
+      .code {
+        display: flex;
+      }
+      .code {
+        margin: 40px;
+      }
+    </style>
   </head>
   <body>
+    <div class="imgs">
+      <div class="">
+        <h3>SVG</h3>
+        <img width="128" src="smile.svg">
+      </div>
+      <div>
+        <h3>PNG</h3>
+        <img width="128" src="smile.png">
+      </div>
+    </div>
+    <div class="code">
+      <div>
+        <h3>getImageSize</h3>
+        <pre>
+          function getImageSize(src, cb) {
+            var img = document.createElement('img');
+            img.src = src;
+            img.onload = function () {
+              cb(null, {
+                width: this.width,
+                height: this.height
+              });
+            };
+          }
+        </pre>
+      </div>
+      <div>
+        <h3>getNaturalSize</h3>
+        <pre>
+          function getNaturalSize(src, cb) {
+            var img = document.createElement('img');
+            img.src = src;
+            img.onload = function () {
+              cb(null, {
+                width: img.naturalWidth,
+                height: img.naturalHeight
+              })
+            }
+          }
+        </pre>
+      </div>
+    </div>
+    <div>
+      <h3>Result</h3>
+      <div id="ua"></div>
+      <div id="message"></div>
+    </div>
     <script>
       var svg = "smile.svg";
       var png = "smile.png";
@@ -14,23 +75,97 @@
         img.src = src;
         img.onload = function () {
           cb(null, {
-            width: this.width,
-            height: this.height
+            width: this.width || img.naturalWidth || img.width,
+            height: this.height || img.naturalHeight || img.height
           });
         };
       }
 
-      getImageSize(svg, function (err, size) {
-        if (!err) {
-          document.writeln(svg + " width:" + size.width + " height:" + size.height);
+      function getNaturalSize(src, cb) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.onload = function () {
+          cb(null, {
+            width: img.naturalWidth,
+            height: img.naturalHeight
+          })
         }
+      }
+
+      function getRealSize(src, cb) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.style.position = 'absolute';
+        img.style.left = '-99999px';
+        img.style.top = '-99999px';
+        document.body.appendChild(img);
+        img.onload = function () {
+          cb(null, {
+            width: this.width || img.naturalWidth || img.width,
+            height: this.height || img.naturalHeight || img.height
+          });
+          document.body.removeChild(img);
+        }
+      }
+
+      function getSize(method, src, cb) {
+        window[method](src, function (err, size) {
+          if (!err) {
+            showMessage(method + " =>" + src + " width:" + size.width + " height:" + size.height);
+          }
+          cb();
+        });
+      }
+
+      function getSizes(pairs, cb) {
+        if (pairs.length <= 0) {
+          return cb();
+        }
+        var pair = pairs.shift();
+        getSize(pair.method, pair.src, function () {
+          getSizes(pairs, cb);
+        });
+      }
+
+      var arr = [
+        {
+          method: "getImageSize",
+          src: "smile.svg"
+        },
+        {
+          method: "getImageSize",
+          src: "smile.png"
+        },
+        {
+          method: "getNaturalSize",
+          src: "smile.svg"
+        },
+        {
+          method: "getImageSize",
+          src: "smile.png"
+        },
+        {
+           method: 'getRealSize',
+           src: 'smile.svg'
+        },
+        {
+           method: 'getRealSize',
+           src: 'smile.png'
+        }
+      ];
+
+      getSizes(arr, function () {
+        console.log('all done!');
       });
 
-      getImageSize(png, function (err, size) {
-        if (!err) {
-          document.writeln(png + " width:" + size.width + " height:" + size.height);
-        }
-      });
+      document.getElementById("ua").innerHTML = window.navigator.userAgent;
+
+      var messageEl = document.getElementById('message');
+      function showMessage(msg) {
+        var p = document.createElement('p');
+        p.innerHTML = msg;
+        messageEl.appendChild(p);
+      }
     </script>
   </body>
 </html>
