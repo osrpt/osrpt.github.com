@@ -72,4 +72,24 @@ From: <http://www.broexperts.com/2012/06/how-to-backup-files-and-directories-in-
 
     grep -rnw '/path/to/somewhere/' -e "pattern"
 
-<http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux>
+### 查看系统信息
+
+1. `cat /etc/*-release`
+
+```
+CentOS release 6.6 (Final)
+CentOS release 6.6 (Final)
+CentOS release 6.6 (Final)
+```
+
+2. `lsb_release -a`
+
+3. `uname -a` or `uname -mrs`
+
+4. `cat /proc/version`
+
+```
+Linux version 4.8.6-x86_64-linode78 (maker@build) (gcc version 4.7.2 (Debian 4.7.2-5) ) #1 SMP Tue Nov 1 14:51:21 EDT 2016
+```
+
+http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux>
