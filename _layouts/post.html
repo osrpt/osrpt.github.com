@@ -10,19 +10,21 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body class="article">
-    <h2 class="nav">
-        <a href="/"><canvas id="logo" class="logo" width="36" height="36"></canvas>Sibo's blog</a>
-    </h2>
-    <h1 class="title">{{page.title}}</h1>
+  <h2 class="nav">
+      <a href="/"><canvas id="logo" class="logo" width="36" height="36"></canvas>Sibo's blog</a>
+  </h2>
+  <div itemscope itemtype="http://schema.org/Article">
+    <h1 itemprop="name" class="title">{{page.title}}</h1>
     <p class="article-info">
-        <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
-        {% for tag in page.tags %}
-            <span class="tag"><i class="icon icon-tag"></i>{{tag}}</span>
-        {% endfor %}
+      <span itemprop="datePublished" content="{{ page.date | date: "%Y-%M-%d" }}" class="date">{{ page.date | date: "%B %d, %Y" }}</span>
+      {% for tag in page.tags %}
+          <span class="tag"><i class="icon icon-tag"></i>{{tag}}</span>
+      {% endfor %}
     </p>
-    <div class="content">
+    <div itemprop="articleBody" class="content">
         {{ content }}
     </div>
+  </div>
 	<div class="post-nav">
 		{% if page.previous.url %} 
 			<a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a> 

@@ -93,3 +93,10 @@ Linux version 4.8.6-x86_64-linode78 (maker@build) (gcc version 4.7.2 (Debian 4.7
 ```
 
 http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux>
+
+### 查看在某端口上监听的进程
+
+```
+netstat -tupln
+```
+
