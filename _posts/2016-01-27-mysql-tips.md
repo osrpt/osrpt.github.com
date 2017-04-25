@@ -85,3 +85,21 @@ FROM: <http://alvinalexander.com/blog/post/mysql/how-show-open-database-connecti
 ### 查看 mysql 变量
 
     $ mysqladmin var
+
+### 查看给某个用户的授权信息
+
+    >show grant [for user];
+
+### Mysql Socket 连接失败
+
+如果在程序中配置使用 `localhost`，这样是通过 socket 进行连接，连接失败时有可能是因为 socket 位置不正确，可以检查 mysql 配置文件（例如 `/etc/my.cnf`）中的 socket 配置。
+
+例如配置为：
+
+```
+[client]
+port›   ›   = 3306
+socket› ›   = /tmp/mysql.sock
+```
+
+可以在程序中使用：`localhost:/tmp/mysql.sock` 作为 host 配置。
