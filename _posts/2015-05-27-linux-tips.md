@@ -100,3 +100,17 @@ http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-
 netstat -tupln
 ```
 
+
+### 找到打开文件最多的进程
+
+[Too many open files - how to find the culprit](https://askubuntu.com/a/181408)
+
+```
+lsof > lsof.log
+cat lsof.log | awk '{ print $2 " " $1; }' | sort -rn | uniq -c | sort -rn | head -20
+vim lsof.log
+```
+
+```
+lsof | awk '{ print $2; }' | uniq -c | sort -rn | head
+```
