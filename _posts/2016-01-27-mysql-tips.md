@@ -103,3 +103,21 @@ socket› ›   = /tmp/mysql.sock
 ```
 
 可以在程序中使用：`localhost:/tmp/mysql.sock` 作为 host 配置。
+
+### Show Index
+
+```
+SHOW INDEX FROM TABLE_A
+```
+
+### Create Index
+
+```
+CREATE INDEX part_of_name ON customer (name(10));
+```
+
+### Drop Index
+
+```
+ALTER TABLE TABLE_A DROP INDEX keywords;
+```
