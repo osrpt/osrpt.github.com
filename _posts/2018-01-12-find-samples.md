@@ -1,6 +1,6 @@
 ---
 layout: post
-title: `find` 的一些示例
+title: find 的一些示例
 tags:
 - linux
 - command
