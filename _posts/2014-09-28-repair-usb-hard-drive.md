@@ -16,7 +16,7 @@ title: 修复 U 盘无法读取的问题
     create partition primary
     format fs=ntfs (如果需要在 Mac 上和 Windows 上都使用的话，ntfs改为fat32)
 
-###参考
+### 参考
 
 1. [How to fix corrupted external hard drive](http://www.tomshardware.com/forum/285552-32-corrupted-external-hard-drive)
 2. [DiskPart Commands](http://technet.microsoft.com/en-us/library/cc770877%28v=ws.10%29.aspx)

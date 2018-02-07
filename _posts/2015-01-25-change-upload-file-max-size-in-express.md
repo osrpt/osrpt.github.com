@@ -5,7 +5,7 @@ title: 修改 node.js 中上传文件大小限制
 
 如果需要上传大文件，express 和 nginx 中都默认做了限制，都需要修改。
 
-###express
+### express
 
     var express = require("express");
     var app = express();
@@ -13,7 +13,7 @@ title: 修改 node.js 中上传文件大小限制
         limit: '10mb'
     });
 
-###修改 nginx 设置
+### 修改 nginx 设置
 
 需要修改 `nginx.conf` 文件，并重启 nginx 服务:
 

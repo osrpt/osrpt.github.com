@@ -7,13 +7,13 @@ title: VPS 磁盘扩容并升级服务器
 
 假设原来站点目录在 `/www/sample` 下，需要把 `/www/sample` 移动到新的磁盘中，并且不修改网站代码。
 
-##准备工作
+## 准备工作
 
 首先当然需要去 VPS 服务商购买一块磁盘。请查看 [Linux 系统挂载数据盘](http://help.aliyun.com/knowledge_detail.htm?spm=5176.788314852.3.1.SnZDUx&knowledgeId=5974154&categoryId=) 大致了解如何挂载。
 
 本文将从挂载磁盘讲起。
 
-###磁盘挂载
+### 磁盘挂载
 
 磁盘挂载主要需要使用 `mount` 命令。
 
@@ -46,9 +46,9 @@ title: VPS 磁盘扩容并升级服务器
 *From: [stackexchange.com](http://unix.stackexchange.com/questions/157154/how-to-list-disk-in-linux)*
 
 
-##暂停当前服务
+## 暂停当前服务
 
-###提供升级提醒页面
+### 提供升级提醒页面
 
 由于升级维护时间可能较久，所以最好提供一个临时的升级提示页面。
 
@@ -85,19 +85,19 @@ nginx 中配置一个临时的站点：upgrading.exacmple.com：
 
 注意不要使用 `service nginx reload`. reload 的时候如果配置文件有错误，将不会提示。
 
-###停止站点服务
+### 停止站点服务
 
 停掉 web 站点服务，防止新的数据产生。
 
-##数据迁移
+## 数据迁移
 
-###创建子目录
+### 创建子目录
 
 创建一个子目录来存放 `/www/sample`：
 
     mkdir /diskc/sample/
 
-###复制文件
+### 复制文件
 
 使用 `rsync` 命令同步文件到新目录下：
 
@@ -114,15 +114,15 @@ nginx 中配置一个临时的站点：upgrading.exacmple.com：
 
 *From: [stackoverflow.com](http://serverfault.com/questions/43014/copying-a-large-directory-tree-locally-cp-or-rsync)*
 
-###重命名原目录作为备份
+### 重命名原目录作为备份
 
     mv /www/sample /www/sample_bak
 
-###创建软链接
+### 创建软链接
 
     ln -s /diskc/sample /www/sample
 
-##恢复服务
+## 恢复服务
 
 启动 web 站点，还原 nginx 配置文件，并重启 nginx 服务
 

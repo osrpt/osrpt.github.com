@@ -47,7 +47,7 @@ MAC 没有 Windows 上的 `Home`, `End`等按键，但是 MAC 默认支持 Emacs
 
 ![emac-commands]</images/osx/emac-commands.png>
 
-###参考
+### 参考
 
 1. <https://support.apple.com/zh-cn/HT201236>
 2. <https://www.cs.colorado.edu/~main/cs1300/lab/emacs.html>

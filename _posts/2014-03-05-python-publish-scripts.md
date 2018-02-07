@@ -9,8 +9,8 @@ tags:
 
 python比bat更加强大，灵活性更高，所以更适合做自动化脚本。
 
-###移除目录中的所有文件
-####method 1
+### 移除目录中的所有文件
+#### method 1
 
     import os
     import shutil
@@ -18,7 +18,7 @@ python比bat更加强大，灵活性更高，所以更适合做自动化脚本�
     allContents=[os.path.join(targetFolder,tmp) for tmp in os.listdir(targetFolder)]
     [shutil.rmtree(tmp) if os.path.isdir(tmp) else os.unlink(tmp) for tmp in allContents]
 
-####method 2
+#### method 2
 
     import os
     import shutil
@@ -29,7 +29,7 @@ python比bat更加强大，灵活性更高，所以更适合做自动化脚本�
         for d in dirs:
             shutil.rmtree(os.path.join(root, d))
 
-####method 3
+#### method 3
 
     import os 
     targetFolder = '/path/to/targetFolder'
@@ -41,7 +41,7 @@ python比bat更加强大，灵活性更高，所以更适合做自动化脚本�
         except Exception, e:
             print e
 
-###zip压缩文件
+### zip压缩文件
 
         def compress(dir,zipPath):
             if path.exists(zipPath):
@@ -51,7 +51,7 @@ python比bat更加强大，灵活性更高，所以更适合做自动化脚本�
                     for f in files:
                         zip.write(path.join(dirpath,f),path.join(dirpath,f).replace(dir,'')) #为了保持原来的目录结构
 
-###文件中替换
+### 文件中替换
 
         import re
 
@@ -65,7 +65,7 @@ python比bat更加强大，灵活性更高，所以更适合做自动化脚本�
             infile.close()
             outfile.close()
 
-###常用的文件操作
+### 常用的文件操作
 
 1. `os.unlink(filePath)` 删除filePath这个文件
 2. `shutil.rmtree(dirPath)` 删除目录

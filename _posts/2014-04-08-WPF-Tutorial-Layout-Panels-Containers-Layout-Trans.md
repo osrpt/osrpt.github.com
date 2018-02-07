@@ -6,7 +6,7 @@ tags:
 - tutorial
 ---
 
-###目录
+### 目录
 * 介绍
 * 窗口
     + 窗口类型
@@ -33,7 +33,7 @@ tags:
 * 总结
 * 历史
 
-###概要
+### 概要
 在上一篇文章中，我讨论了一些WPF应用的基础知识，它们是使用WPF的基本架构和内部结构。在本文中，我将讨论编写你的第一个WPF程序的基本的东西和怎么在你的窗口中布局控件。这是每一个想使用WPF的人应该知道的最基础的知识。我将讨论最常用的一些。
 
 * [WPF Tutorial : Beginning [^]](http://sibo.me/2014/04/02/WPF-Tutorial-Beginning.html)
@@ -44,13 +44,13 @@ tags:
 * [WPF Tutorial - Concept Binding [^]](http://www.codeproject.com/KB/WPF/wpf6.aspx)
 * [WPF Tutorial - Styles, Triggers & Animation [^]](http://www.codeproject.com/KB/WPF/wpf7.aspx)
 
-###窗口
+### 窗口
 当你创建WPF程序的时候，你最先注意到的是一个窗口。窗口是用户交互，产生窗口和弹出窗的生命周期的最主要的类。像普通的windows程序一样，它使用基本的API来产生窗口对象。一个窗口有两个部分：
 
 1. `Non-Client Area`：非客户端区域，它显示窗口的外边界，就像我们在其他普通窗口中看到的那样。其中最主要的部分是图标，系统菜单，标题栏，和边框。
 2. `Client part`：客户端部分，这是WPF控件呈现的最主要的部分。你可以使用WPF来自定义这部分。
 
-####窗口的类型
+#### 窗口的类型
 WPF窗口有三个类型：
 
 1. `Window`：这是一个普通窗口化程序的基本的类型，每个控件都放在同一个窗口中。跟我之前说的那样，窗口就像平常那样显示。客户端区域可以使用XAML完全进行定制。
@@ -76,7 +76,7 @@ WPF窗口有三个类型：
 
 如果想了解更多，你可以查看MSDN的文章：[OverView of Navigation](http://msdn.microsoft.com/en-us/library/ms750478.aspx)
 
-###容器的类型
+### 容器的类型
 
 WPF窗口继承自`ContentControl`。在和控件打交道的时候，你可能遇到很多构成WPF控件基础的控件类型。一个`ContentControl`可以包含任何内容。可以是一个字符串，一个任意类型的对象，甚至可以是一个`UIElement`比如`Button`，`TextBox`等。换句话说，一个`Content`是一个可以被放入容器的任意元素。下面让我们一个一个地过一遍：
 
@@ -97,7 +97,7 @@ WPF窗口继承自`ContentControl`。在和控件打交道的时候，你可能�
 
 XAML转换器将自动把卸载标签里面的内容转换为 `Content` 。
 
-###对齐-外边距-内边距
+### 对齐-外边距-内边距
 
 对齐，外边距和内边距是三个最重要的你通常需要为每个UI元素考虑的属性。在进一步了解容器之前，你应该了解这些。
 
@@ -131,13 +131,13 @@ XAML转换器将自动把卸载标签里面的内容转换为 `Content` 。
         bb.Padding = new Thickness(10, 20, 30, 10);
         this.MyGrid.Children.Add(bb);
 
-###布局容器
+### 布局容器
 
 在WPF中另外一个重要的部分是定义屏幕的布局。WPF引入了多个面板，每个都是继承自抽象类 `Panel` 。如果你想的话，你可以可以通过继承 `Panel` 来自定义面板。我们将在后面讨论你怎么自定义面板。现在我们讨论一下WPF支持的基本面板。
 
 ![Panels.JPG](/images/post/wpf2/Panels.JPG)
 
-####Panel
+#### Panel
 
 Panel是每个面板都要继承的抽象类。所以每个我们将要讨论的面板元素都是继承自Panel并且包含一些在我讨论 `Concrete` 对象前需要说的属性。
 
@@ -145,7 +145,7 @@ Panel是每个面板都要继承的抽象类。所以每个我们将要讨论的
 2. InternalChildren：这是基本的 `UIElementCollection` 元素使用 `Children` 属性暴露出来的基本。当定义自定义的面板时，你可以使用它来获取元素。
 3. Background：这是每个面板都有的，表示面板的背景颜色。
 
-####自定义面板
+#### 自定义面板
 要创建自定义面板，你必须要重写两个方法：
 
 **MeasureOverride**：当一个元素加入到面板时该方法会被调用。它使用
@@ -155,10 +155,10 @@ Panel是每个面板都要继承的抽象类。所以每个我们将要讨论的
 
 你可以通过尝试MSDN的例子来获得创建自定义面板的更详细的知识: <http://go.microsoft.com/fwlink/?LinkID=159979>
 
-####GRID
+#### GRID
 表格是用来呈现整个框架的最基本的布局方式。GRID生成了一个表格，你可以通过行和列来进行定位。你可以通过声明RowDefination和ColumnDefination来指定表格的行和列。你也可以通过RowDefination和ColumnDefination轻松地修改行和列的宽高。
 
-#####行和列的大小
+##### 行和列的大小
 如上文所说，可以使用RowDefination和ColumnDefination来指定每个表格元素的宽高，大小可以有多种指定方式。可以是：
 
 * **Auto**：大小通过放入的元素来决定，这是默认的。
@@ -190,7 +190,7 @@ Panel是每个面板都要继承的抽象类。所以每个我们将要讨论的
 
 上面的代码将把Border元素放入到3x3表格的0,0位置。
 
-####StackPanel
+#### StackPanel
 下面我将开始介绍的一个控件是 `StackPanel` 。`StackPanel` 是一个所有子元素按照栈一样放置的容器，意思就是一个挨着一个，所以不会有一个元素重叠在另外一个的上面。
 
 ![stackpanel.JPG](/images/post/wpf2/stackpanel.JPG)
@@ -205,7 +205,7 @@ Panel是每个面板都要继承的抽象类。所以每个我们将要讨论的
                     <Border Background="Green" Padding="50" />
         </StackPanel>
 
-####WrapPanel
+#### WrapPanel
 
 WrapPanel跟StackPanel相似，但当它排到边缘时它将产生新的一行。所以当空间受限的时候 WrapPanel有更大的灵活性。另外一个重要的不同是：WrapPanel总是根据内容的大小来确定自己的大小，而不是像 StackPanel那样使用 `PositiveInfinity` 。
 
@@ -220,7 +220,7 @@ WrapPanel跟StackPanel相似，但当它排到边缘时它将产生新的一行�
                     <Border Background="Green" Padding="30" />
         </WrapPanel>
 
-####DockPanel
+#### DockPanel
 DockPanel是应用布局中使用的最广泛的布局控件。它使用DockPanel.Dock附加属性来确定元素的位置。如果Dock是Top或者Bottom,元素将显示在顶部或底部，当使用Left或Right，将是左边或右边。
 
 使用DockPanel的时候，如果宽度和高度不定义的话，元素将占用所有可用空间。
@@ -268,7 +268,7 @@ DockPanel是应用布局中使用的最广泛的布局控件。它使用DockPane
 
 如果你想通过编码来实现，你应该使用DockPanel.SetDock。
 
-####VirtualizingStackPanel
+#### VirtualizingStackPanel
 WPF引入了一种特殊的面板，当内容被绑定到元素时，他会**虚拟化**它的内容。**虚拟化**的意思就是内容只会当元素可见时才会创建。者将极大地提升性能。
 
     <ListBox x:Name="lstElements" VirtualizingStackPanel.IsVirtualizing="True" 
@@ -292,7 +292,7 @@ WPF引入了一种特殊的面板，当内容被绑定到元素时，他会**虚
 1. **Standard**： 表示当 `ScrollViewer` 滚动的时候会创建项。
 2. **Recycling**：表示当 `ScrollViewer` 滚动的时候会替换项。
 
-####Canvas
+#### Canvas
 
 Canvas 是一种特殊的布局，使用x和y坐标对元素进行绝对定位。在Canvas中使用的元素不受任何的限制。当位置和其他控件交叉时可能被重叠。每个元素根据声明的顺序来确定位置。你可以使用 `Panel.ZIndex` 来去掉声明的影响。
 
@@ -321,7 +321,7 @@ Canvas 对元素不使用任何限制。所以每个元素的宽度和高度都�
 
 椭圆形按照他们的声明顺序重叠在了一起。
 
-####UniformGrid
+#### UniformGrid
 
 UniformGrid 是一个特殊的控件，他均匀地调整他的元素。如果你想让你的表格中的行和列均匀，你可以使用 UniformGrid 替代普通的 Grid。
 
@@ -338,7 +338,7 @@ UniformGrid 是一个特殊的控件，他均匀地调整他的元素。如果�
 
 上面是一个3x2的网格，所有的元素都按照声明的顺序均匀地放置。
 
-####ScrollViewer
+#### ScrollViewer
 
 我们经常会发现元素跑到了显示区域的外面。在这种情况下，`ScrollViewer` 自动放置一个滚动条，这样我们就可以看到边缘外面的区域。`ScrollViewer` 封装了滚动条（`Scrollbar`），只要需要的时候他将自动显示它。由于 `ScrollViewer` 在滚动区域内实现了 `IScrollInfo` 接口，所以 `ScrollViewer` 可以响应鼠标和键盘事件。
 
@@ -355,7 +355,7 @@ UniformGrid 是一个特殊的控件，他均匀地调整他的元素。如果�
 
 `ScrollViewer` 的属性 `CanContentScroll` 用来确定元素是否可以滚动。`HorizontallScrollBarVisibility` 和 `VerticalScrollBarVisibility` 显示或隐藏相应的滚动条。它们的默认值是 `Auto` ，只有当需要显示的时候才显示。
 
-####GroupBox
+#### GroupBox
 
 GroupBox 允许把一组内容放到一起，并且提供一个自定义的头。这跟windows中的 GroupBox 一样。属性 `Header` 使用文本元素，放到GroupBox的头部。因为 GroupBox 是一个 ContentControl，所以他只能包含一个元素在里面。因此你必须要使用 Panel 来把子元素放进去。
 
@@ -368,7 +368,7 @@ GroupBox 允许把一组内容放到一起，并且提供一个自定义的头�
             </StackPanel>
         </GroupBox>
 
-####Expander
+#### Expander
 
 Expander 和 Groupbox相似，不过它多出来一个可以展开内容的功能。它也是继承自 HeaderedContentControl 所以他只能包含一个子元素。`IsExpanded` 属性用来确定面板是否展开。
 
@@ -385,7 +385,7 @@ ExpandDirection 决定内容展开的行为。他又四个方向：向下（Down
         </Expander>
 
 
-####ViewBox
+#### ViewBox
 
 ViewBox 是WPF中一个特殊的空间，可以用来拉伸或者压缩元素的内容。这样就可以非常方便地控制元素的位置，在 ViewBox中，内容永远不会改变位置，只是整个内容可能拉伸或者缩小。
 
@@ -406,7 +406,7 @@ ViewBox 的 Stretch 属性可以有四个值：
             </Grid>
         </Viewbox>
 
-####弹出窗口（Popup）
+#### 弹出窗口（Popup）
 
 弹出窗口是一个用来在实际窗口上创建浮动窗口的特殊控件。弹出窗口控件总是呈现在窗口的最顶层。Popup 用在不需要改变原来窗口并快速显示元素的情况。
 
@@ -428,7 +428,7 @@ ViewBox 的 Stretch 属性可以有四个值：
 
 以上的代码中，当 `ToggleButton` 的选中的值被绑定到了弹出窗口的 `IsOpen` 属性上。所以当 `IsOpen` 是 `true` 的时候，弹出窗口将显示。
 
-####InkCanvas
+#### InkCanvas
 
 WPF中我们将介绍的另一个强大的控件是 `InkCanvas` 。这个控件允许你在画布上拖动并且最终获得保存的图形。它非常的强大，你可以轻松地获得获得画笔画出来的对象。
 
@@ -446,7 +446,7 @@ WPF中我们将介绍的另一个强大的控件是 `InkCanvas` 。这个控件�
                     Content="Eraser By Stroke" />
         </StackPanel>
 
-####Transformation
+#### Transformation
 
 变换是WPF引入的一种重要的特性。变换允许将一个元素从一个坐标控件映射到另一个坐标控件。变换映射采用变换举证在二维空间进行映射。通过操纵矩阵值，你可以变换元素的：`Rotate(角度)`,`Scale(规模)`,`Skew(倾斜)`,`Translate(位移)`。
 
@@ -474,20 +474,20 @@ WPF中我们将介绍的另一个强大的控件是 `InkCanvas` 。这个控件�
             </TextBlock.RenderTransform>
         </TextBlock>
 
-###总结
+### 总结
 这是整个系列的第二篇文章。我希望你喜欢。不要忘了写下你的反馈。为了不让文章过长，我故意省略了一些东西（例如 `InkCanvas`）的详细介绍。我将在单独的文章中讨论。
 
 感谢阅读。
 
-###历史
+### 历史
 
 * 2010-11-28:初次发表
 
-###版权
+### 版权
 
 这篇文章，包括其中的源代码和文件，受 [CPOL](http://www.codeproject.com/info/cpol10.aspx) 版权保护。
 
-###作者介绍
+### 作者介绍
 
 *译注：和第一篇文章一样，所以省略。*
 

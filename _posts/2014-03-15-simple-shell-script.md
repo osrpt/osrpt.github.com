@@ -5,7 +5,7 @@ tags:
 - shell
 - publish
 ---
-###任务
+### 任务
 编写一个shell脚本，完成站点发布工作。
 
 1. 发布前，清理`/srv/mockup`下面的所有文件
@@ -16,7 +16,7 @@ tags:
 5. 重启nginx服务
 6. 脚本加入命令，以命令的方式运行
 
-###Shell Scripts:
+### Shell Scripts:
 
 		if [ $1 = "-b" ]; then
 			rm -rf /srv/mockup/*

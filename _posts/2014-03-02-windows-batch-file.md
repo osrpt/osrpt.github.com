@@ -5,7 +5,7 @@ tags:
 - windows
 - bat
 ---
-###常用的命令：
+### 常用的命令：
 
 1. `@` 让执行窗口中不显示后面这一行命令本身
 2. `echo`
@@ -55,7 +55,7 @@ tags:
 > 官方文档：
 > <http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/xcopy.mspx?mfr=true>
 
-###示例1：iNote插件发布
+### 示例1：iNote插件发布
 
 	@echo off
 
@@ -96,7 +96,7 @@ tags:
 	del F:\Code\Svn\inoteapp\deploy\chrome\iNote.crx
 	rmdir F:\Code\Svn\inoteapp\deploy\chrome\iNote /s /q
 
-###示例2：iNote桌面程序发布
+### 示例2：iNote桌面程序发布
 	@echo off
 
 	rmdir pcApp /s /q

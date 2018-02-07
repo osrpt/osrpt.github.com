@@ -9,7 +9,7 @@ tags:
 
 Javascript
 
-###override 原方法
+### override 原方法
 
 假设已经有一个函数 func, 现在想写一个新的 func, 在调用原来的 func 之前做一些额外的操作。这种就是代理模式。
 
@@ -19,7 +19,7 @@ Javascript
 		return proxied.apply(this, arguments);
 	}
 
-###引用
+### 引用
 
 1. [JavaScript Method Overloading](http://ejohn.org/blog/javascript-method-overloading/)
 2. [Handling optional parameters in javascript](http://stackoverflow.com/questions/1529077/handling-optional-parameters-in-javascript)

@@ -9,9 +9,9 @@ MSSQL 数据迁移到 MySQL 中有多种方案， MySQL 提供的工具 [MySQL W
 由于我的迁移中只需要用到部分表的部分数据，有些还需要针对数据进行单独的处理，所以这个工具并不适用。
 整个迁移过程中最麻烦的问题就是中文的乱码问题，需要特别注意。
 
-##表结构
+## 表结构
 
-###自增
+### 自增
 
 MSSQL 中自增是 `IDENTITY`，MYSQL 中是 AUTO_INCREMENT
 
@@ -36,17 +36,17 @@ MSSQL 中的：
 1. 建议在迁移过程中，把 MYSQL 中的自增起始值设置的比原来的表自增列最大值大一个数量级。这样防止主键被占用。
 2. 如果需要修改自增步长为大于 1 的值，可以在服务器运行 `SET @@auto_increment_increment=2`，但是这样会影响所有表！
 
-###数据类型
+### 数据类型
 
-##准备
+## 准备
 
 我主要使用 python 来进行处理。
 
-###pymssql
+### pymssql
 
 pymssql 用于连接 MSSQL 处理数据导出。这是一个第三方的库，需要自己安装。
 
-###MySQLdb
+### MySQLdb
 
 MySQLdb 用于处理数据导入的问题，这个库需要自己下载安装。
 
@@ -72,7 +72,7 @@ MySQLdb 这个库安装容易出错，网上有很多关于解决安装中遇到
     cursor.execute('SET CHARACTER SET UTF8;')
     cursor.execute('SET character_set_connection=utf8;')
 
-###导出到 csv 文件, 然后使用 python 导入
+### 导出到 csv 文件, 然后使用 python 导入
 
 SQL Server 导入导出工具可以根据查询导出 csv 文件，也可以直接将查询结果另存为为 csv 文件。
 然后在 python 中使用 csv 模块导入：
@@ -91,7 +91,7 @@ SQL Server 导入导出工具可以根据查询导出 csv 文件，也可以直�
 
 如果数据中包含了 csv 分隔符则可能导致异常情况，可以增加判断或者 try...except... 来捕获失败的行，记录下来单独处理。
 
-###使用 pickle 序列化和反序列化
+### 使用 pickle 序列化和反序列化
 
 导出数据：
 
@@ -136,7 +136,7 @@ SQL Server 导入导出工具可以根据查询导出 csv 文件，也可以直�
         conn.commit()
         conn.close()
 
-###注意
+### 注意
 
 如果导出的数据库中有时间格式的数据，pymssql 将自动转换为 datetime 格式，这时候如果序列化之后直接读取将会报异常，提示找不到 datetime 这个包。
 这是因为反序列化的时候也需要反序列化出 datetime 类型，之前没有 import 过，所以反序列化会出错。
@@ -157,6 +157,6 @@ SQL Server 导入导出工具可以根据查询导出 csv 文件，也可以直�
     ALTER TABLE table_name
     ALTER COLUMN col_name NVARCHAR(100)
 
-###引用
+### 引用
 
 1. [MySQL Workbench](http://www.mysql.com/products/workbench/)

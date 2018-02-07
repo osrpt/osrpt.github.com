@@ -6,7 +6,7 @@ tags:
 - position
 ---
 
-####1. position:static
+#### 1. position:static
 所有元素默认的 position 值为：`position:static` ,意味着元素没有被定位，仅仅只是在文档中按照普通的位置放置。
 
 通常你不需要设置这个值除非你想覆盖之前设置的值。
@@ -17,7 +17,7 @@ tags:
 
 ![static.png](/images/post/position/static.png)
 
-###2. position:relative
+### 2. position:relative
 
 如果你设置了 `position:relative`，你就可以使用 `top` 或者 `bottom` 和 `left` 或者 `right` 来相对移动元素本来应该在文档中的位置。
 
@@ -35,7 +35,7 @@ tags:
 
 这样看起来似乎 `position:relative` 没有什么用处，但是在本文的后面我们将看到它有着非常重要的功能。
 
-###3. position:absolute
+### 3. position:absolute
 
 当你声明了 `position:absolute` ，元素将会从文档中移除掉然后放置到你声明的位置。
 
@@ -60,7 +60,7 @@ tags:
 
 + 在 Windows IE 浏览器中有一个 bug：当你声明了一个相对的宽度（例如："width:50%"）然后宽度将会给予父元素而不是定位的元素。
 
-###4. position:relative + position:absolute
+### 4. position:relative + position:absolute
 
 如果我们给 div-1 设置 `relative`，那么任何在 div-1 中的元素都将相对 div-1 定位。然后如果我们设置 `absolute` 给 div-1a，那样我们就能把它移动到 div-1 的右上角了。
 
@@ -77,7 +77,7 @@ tags:
 
 ![relative_absolute.png](/images/post/position/relative_absolute.png)
 
-###5. 双列绝对定位
+### 5. 双列绝对定位
 
 现在我们可以使用 relative 和 absolute 来制作一个两列的布局：
 
@@ -105,7 +105,7 @@ tags:
 
 但是等一下——其他元素发生了什么？他们将被绝对定位的元素遮挡。我们将怎么处理呢？
 
-###6. 添加高度的双列绝对定位
+### 6. 添加高度的双列绝对定位
 
 一个解决方案是给元素设置一个固定的高度。
 
@@ -130,7 +130,7 @@ tags:
 
 ![two-column-height.png](/images/post/position/two-column-height.png)
 
-###7. float
+### 7. float
 
 对可变的高度的列，绝对定位不能起作用，所以我们来尝试一下其他的方式。
 
@@ -143,7 +143,7 @@ tags:
 
 ![float.png](/images/post/position/float.png)
 
-###8. 多列浮动
+### 8. 多列浮动
 
 如果我们让一列浮动到左边，然后让第二列也浮动到左边，他们将会互相推动。
 
@@ -158,7 +158,7 @@ tags:
 
 ![float-columns.png](/images/post/position/float-columns.png)
 
-###9. 多列浮动的清除
+### 9. 多列浮动的清除
 
 在浮动元素的后面，我们可以`clear`浮动来把剩下的内容推下去。
 
@@ -176,7 +176,7 @@ tags:
 
 ![float-with-clear.png](/images/post/position/float-with-clear.png)
 
-###10. 免责声明和资源
+### 10. 免责声明和资源
 
 这些例子都是非常简单的并且没有触发 Windows IE 浏览器中的 CSS bug（确实有很多 bug )。
 

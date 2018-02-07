@@ -3,7 +3,7 @@ layout: post
 title: Subversion 的使用与常见问题
 ---
 
-###合并主干到分支
+### 合并主干到分支
 
     $ pwd
     /home/user/mybranch
@@ -16,29 +16,29 @@ title: Subversion 的使用与常见问题
     $ #handle conflicts.
     $ svn commit -m "Merging changes from the trunk".
 
-###合并分支到主干
+### 合并分支到主干
 
 与上面相反
 
-###FAQ
+### FAQ
 
-####1. 解决冲突
+#### 1. 解决冲突
 
 	svn resolve --accept working ./conflict.js
 
-###2. 强行添加所有文件到svn
+### 2. 强行添加所有文件到svn
 
 	svn add --force ./* 
 
-###3. cleanup
+### 3. cleanup
 
     svn cleanup
 
-###4. svn list all conflicts files
+### 4. svn list all conflicts files
 
     svn status | grep - P '^(?=.{0,6}C)'
 
-###5. 提交
+### 5. 提交
     
     svn commit -m 'commit message'
 
@@ -46,7 +46,7 @@ title: Subversion 的使用与常见问题
 
     svn commit -m "a file's commit message" <file>
 
-###6. 解决合并冲突
+### 6. 解决合并冲突
 
 解决以下两种冲突
 

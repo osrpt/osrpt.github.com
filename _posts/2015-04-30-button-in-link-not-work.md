@@ -27,6 +27,6 @@ tags:
 *注意：尽量不要使用 JavaScript 来实现，因为这会影响到搜索引擎的 SEO 效果。*
 
 
-###参考
+### 参考
 
 1. <http://stackoverflow.com/questions/802839/button-inside-of-anchor-link-works-in-firefox-but-not-in-internet-explorer>

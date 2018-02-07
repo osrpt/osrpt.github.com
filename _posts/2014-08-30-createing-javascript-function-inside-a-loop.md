@@ -22,7 +22,7 @@ tags:
 
 有两种解决办法：
 
-###一种是每次循环的时候创建一个新的函数:
+### 一种是每次循环的时候创建一个新的函数:
 
 	(function(variable) {
 		doSomething(variable);
@@ -41,7 +41,7 @@ tags:
 
 这种方式每次都需要单独创建一个函数，可能导致[性能问题](http://jsperf.com/closure-vs-name-function-in-a-loop/2)。
 
-###另一种方式是在循环外创建函数：
+### 另一种方式是在循环外创建函数：
 
 上面的例子中应该这样改写：
 
@@ -58,7 +58,7 @@ tags:
 
 下面再来探讨一下这个问题的具体原因，其实就是因为闭包。
 
-###闭包
+### 闭包
 
 用一句话来说，闭包就是函数引用了独立的（自由的）的变量。
 
@@ -79,17 +79,17 @@ tags:
 闭包是一种特殊的对象，包含了两个部分：一个函数，一个函数被创建时候所处的环境。
 环境包含了任何在函数被创建时候的作用域内的局部变量。
 
-###闭包的用途：
+### 闭包的用途：
 
 闭包让你可以把一些数据（环境）和一个操作这些数据的方法联系起来。这是明显的面向对象编程的方式。
 
-####事件回调方法
+#### 事件回调方法
 
 你可以在任何你通常需要用一个对象+仅仅一个方法的地方使用闭包，典型的就是网页内的事件的回调方法。
 
-####使用闭包模拟私有方法
+#### 使用闭包模拟私有方法
 
-###参考：
+### 参考：
 1. [Creating A Javascript Function Inside A Loop](http://blog.jbrantly.com/2010/04/creating-javascript-function-inside.html)
 2. [Closures](https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Closures)
 3. [Don't make functions within a loop](http://jslinterrors.com/dont-make-functions-within-a-loop)

@@ -9,7 +9,7 @@ tags:
 
 node.js 的 express 框架本身非常灵活，可以用来自由实现各种风格的框架，由于我之前一直使用的是 Asp.NET 的MVC框架，所以决定在node.js中实现一套相似的框架。
 
-###项目结构：
+### 项目结构：
 
         |-- app.js
         |-- config.js
@@ -32,7 +32,7 @@ node.js 的 express 框架本身非常灵活，可以用来自由实现各种风
         |   |   |-- mailService.js   
         |   |   |-- redisService.js
 
-###controllers
+### controllers
 
 控制器目录。存放所有的controller js代码，不能放其他代码，否则可能导致异常。
 
@@ -80,13 +80,13 @@ controller的使用有以下几点需要注意的地方：
 * 默认的路由为：`GET /controllerName/actionName' ，HTTP动词可以使用下划线来配置，如果要改变默认配置，可以添加routeConfig进行配置。后文将具体讲解。
 * 默认情况下：home控制器将相应根目录的请求，index方法默认相应对控制器的请求。
 
-###views
+### views
 
 视图目录。为每个控制器建立一个单独的文件夹存放各自的视图。名字必须完全一样，不能改变。
 
 `shared` 是一个特殊的目录，其中只放置公用的视图模板。所以不能创建 `shared` 控制器。
 
-###lib/mvc.js
+### lib/mvc.js
 实现mvc框架的主要代码，参考了 express 中示例程序中的 mvc 实现，进行了改写。支持home作为根目录，index作为默认的action。
 
         var fs = require('fs');
@@ -201,7 +201,7 @@ controller的使用有以下几点需要注意的地方：
 * routeConfig中用来配置特殊的路由，可以同时配置http请求方法
 * authConfig中配置需要进行auth验证的方法
 
-###总结
+### 总结
 
 已经可以基本满足大部分情况，但是目前还有一些有待改进的地方：
 

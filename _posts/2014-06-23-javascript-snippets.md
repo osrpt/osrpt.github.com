@@ -8,7 +8,7 @@ tags:
 
 下面是我收集的一些 js 代码片段：
 
-###1. 取消和恢复右键菜单
+### 1. 取消和恢复右键菜单
 
 1. 使用命名方法
 
@@ -33,7 +33,7 @@ tags:
 					$(document).unbind("contextmenu.namespace")
 				,1
 
-###2. with 'vanilla' ajax call
+### 2. with 'vanilla' ajax call
 
 >from:<http://stackoverflow.com/questions/8567114/how-to-make-an-ajax-call-without-jquery>
 
@@ -82,7 +82,7 @@ tags:
 					query.push "#{encodeURIComponent(key)}=#{encodeURIComponent(value)}"
 				ajax.send url, cb, 'POST', query.join('&'), sync
 
-###3. resolve hostname from url
+### 3. resolve hostname from url
 
 	getHostNameFromUrl=(url)->
 		matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i)
@@ -92,7 +92,7 @@ eg:
 
 	hostName=getHostNameFromUrl("http://medium.com/p/pxeys3a") # host name will be:medium.com
 
-###4. string format
+### 4. string format
 
 	###
 		format string
@@ -110,7 +110,7 @@ eg:
 	args=["Alice","Bob"]
 	result=formatString(input,args) #result will be:Hello,Alice,I'm bob
 
-###5. double tildle vs Math.floor()
+### 5. double tildle vs Math.floor()
 
 	js>~~"yes"
 	0
@@ -145,13 +145,13 @@ eg:
 	js>~~-5.6
 	-5
 
-###6. tildle in array
+### 6. tildle in array
 
 	function exist(item){
 		return ~[1,2,3].indexOf(item)
 	}
 
-###7. immediate invoked function
+### 7. immediate invoked function
 
 		var collection = (function () {
 			var keys = [], values = [];

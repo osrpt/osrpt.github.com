@@ -41,7 +41,7 @@ tags:
         });
     }
 
-###测试
+### 测试
 使用NodeUnit进行测试，测试代码(sqlTest.js):
 
         var sqlHelper = require('../helper/sqlHelper');
@@ -53,7 +53,7 @@ tags:
             })
         }
 
-###获取受影响的行数
+### 获取受影响的行数
 
 select query:
 
@@ -67,7 +67,7 @@ update/insert:
             numRows = result.affectedRows;
         });
 
-###获取insert后的自增ID
+### 获取insert后的自增ID
 
         connection.query(sql,[var1,var2],function(err,result){
             if(!err){
@@ -75,7 +75,7 @@ update/insert:
             }
         });
 
-###简单的事务(transection)
+### 简单的事务(transection)
         connection.beginTransaction(function (err) {
             if (err) {
                 logger.log('begin transaction error', err);

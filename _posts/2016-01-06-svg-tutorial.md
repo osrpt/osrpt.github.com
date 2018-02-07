@@ -8,11 +8,11 @@ tags:
 - tutorial
 ---
 
-##Path
+## Path
 
     <path d="M 10 10, L 90 90, Z">
 
-###Line Commands
+### Line Commands
 
 There are five line commands.
 
@@ -22,10 +22,10 @@ There are five line commands.
 - `V y` (`v dy`) vertical line to point
 - `Z` (`z` is the same) close path
 
-###Curve Commands
+### Curve Commands
 
 There are three different commands to create smooth curves.
 
-####Bezier Curves
+#### Bezier Curves
 
 

@@ -6,7 +6,7 @@ tags:
 - dropbox
 ---
 
-###方法一、直接调用HTTP方法
+### 方法一、直接调用HTTP方法
 
         /**
          * 用户登录
@@ -82,12 +82,12 @@ tags:
             }
         };
 
-###方法二、使用官方的node.js api
+### 方法二、使用官方的node.js api
 [node.js sdk](https://github.com/dropbox/dropbox-js)
 
 使用CoffeeScript写的SDK，应该是从第三方直接移植过来的，支持平台较多，但是较为麻烦，api不清晰。
 
-###方法三、使用第三方的sdk
+### 方法三、使用第三方的sdk
 [node-dbox](https://github.com/sintaxi/node-dbox)
 
 api清晰，调用简单

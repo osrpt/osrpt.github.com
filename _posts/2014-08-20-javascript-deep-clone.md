@@ -13,7 +13,7 @@ title: Javascript deep clone
 
 先来了解一下深度克隆和浅度克隆：
 
-###深度克隆(deep clone) 和 浅度克隆(shallow clone)
+### 深度克隆(deep clone) 和 浅度克隆(shallow clone)
 
 在克隆数组或者对象的时候有两种方式，shallow clone 只克隆数据结构，不会克隆其中的元素，所以浅度克隆会共享每个元素。
 
@@ -38,7 +38,7 @@ shallow clone 比较简单：
 		);
 	};
 
-###性能
+### 性能
 
 找到一个性能测试的对比 <http://jsperf.com/deep-copy-vs-json-stringify-json-parse> ,测试结果 JSON.parse(JSON.stringify(a)) 的性能比 deep copy 慢 80% 。性能差异非常明显 :
 
@@ -59,15 +59,15 @@ shallow clone 比较简单：
 		return copy;
 	}
 
-###多种实现 deep clone 的方法
+### 多种实现 deep clone 的方法
 
-####1.
+#### 1.
 
 	JSON.parse(JSON.stringify(obj));
 
 如果对象中不包含方法，只有变量，可以这样使用。
 
-####2.
+#### 2.
 
 	function deepCopy(o) {
 		var copy = o,k;
@@ -82,7 +82,7 @@ shallow clone 比较简单：
 		return copy;
 	}
 
-####3.
+#### 3.
 
 	//If Object.create isn't already defined, we just do the simple shim, without the second argument,
 	//since that's all we need here
@@ -108,7 +108,7 @@ shallow clone 比较简单：
 	}
 
 
-####4.
+#### 4.
 
 	/**
 	 * Deep copy an object (make copies of all its object properties, sub-properties, etc.)
@@ -200,7 +200,7 @@ shallow clone 比较简单：
 
 这里使用递归完成深度克隆。
 
-###结论
+### 结论
 
 深度克隆是一个复杂的任务，并没有一个完美的解决方案，要根据情况谨慎对待。
 
@@ -208,7 +208,7 @@ shallow clone 比较简单：
 
 如果自己完全知道对象的数据结构，手动克隆将是最稳妥也是最高效的方式。
 
-###参考
+### 参考
 
 1. [http://stackoverflow.com/questions/7914968/cloning-whats-the-fastest-alternative-to-json-parsejson-stringifyx](http://stackoverflow.com/questions/7914968/cloning-whats-the-fastest-alternative-to-json-parsejson-stringifyx)
 2. [What is the difference between a deep copy and a shallow copy?](http://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy)
