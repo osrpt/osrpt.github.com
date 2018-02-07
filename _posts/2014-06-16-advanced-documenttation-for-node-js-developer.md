@@ -43,3 +43,9 @@ And last but not least, i recommend [GitHub][9] as a source of learning. By digg
   [12]: https://github.com/LearnBoost/Socket.IO-node
 
 From: <http://stackoverflow.com/questions/5400533/advanced-documentation-for-node-js-developer/5401560#5401561>
+
+And more resources from Danil Ellard:
+
+- <https://generalassemb.ly/coding/full-stack-web-development> - list of courses including details on learning Javascript
+- <http://wiht.co/javascript-resources> - list of JS resources
+- <http://javascriptsource.com/> - lots of cut and paste examples of JS
