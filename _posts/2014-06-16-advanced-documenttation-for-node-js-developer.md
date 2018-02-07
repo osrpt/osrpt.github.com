@@ -1,22 +1,22 @@
 ---
 layout: post
-title: Advanced documentation for node.js developer[转]
+title: Advanced documentation for node.js developer[REPOST]
 tags:
 - node.js
 - documentation
 ---
 
-###Q:Advanced documentation for node.js developer
+### Q: Advanced documentation for node.js developer
 
 Recently our team is working on a new project with node.js. It is not difficult to start working with node.js. But now we're all just start to use this new technique and have little experience in such event-based development.
 
 So I am wondering if there are any books, blogs or other materials covering the topics of "best practice" of node.js, just like "effective c++", "effective java", etc.
 
-###A:
+### A:
 
 Well, i can just support you with the findings that helped me the most when learning "how to node":
 
- - [DailyJS][1]: JavaScript in general, contains a lot of node.js specific posts/tutorials
+ - <del>[DailyJS][1]: JavaScript in general, contains a lot of node.js specific posts/tutorials [NOT AVAILABLE NOW]</del>
  - [HowToNode][2]: Blog specifically about node.js, highly recommended
  - [Essential JS Design Patterns][3]: REALLY good description of design pattern implementations in JavaScript
  - [JavaScript Garden][4]: great documentation about the most quirky parts of JavaScript
@@ -42,4 +42,4 @@ And last but not least, i recommend [GitHub][9] as a source of learning. By digg
   [11]: https://github.com/LearnBoost/mongoose
   [12]: https://github.com/LearnBoost/Socket.IO-node
 
-from:<http://stackoverflow.com/questions/5400533/advanced-documentation-for-node-js-developer/5401560#5401561>
+From: <http://stackoverflow.com/questions/5400533/advanced-documentation-for-node-js-developer/5401560#5401561>
