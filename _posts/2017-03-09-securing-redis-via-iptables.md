@@ -13,7 +13,7 @@ iptables -A INPUT -p tcp -m tcp --dport 6379 -j DROP
 to block all other ips.
 
 ```
-# !/usr/bin/env bash
+#!/usr/bin/env bash
 
 # redis_secure.sh
 
