@@ -121,3 +121,11 @@ CREATE INDEX part_of_name ON customer (name(10));
 ```
 ALTER TABLE TABLE_A DROP INDEX keywords;
 ```
+
+### INSERT...SELECT
+
+```
+INSERT INTO tbl_temp2 (fld_id)
+  SELECT tbl_temp1.fld_order_id
+  FROM tbl_temp1 WHERE tbl_temp1.fld_order_id > 100;
+```
