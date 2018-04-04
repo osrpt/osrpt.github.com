@@ -100,7 +100,6 @@ http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-
 netstat -tupln
 ```
 
-
 ### 找到打开文件最多的进程
 
 [Too many open files - how to find the culprit](https://askubuntu.com/a/181408)
