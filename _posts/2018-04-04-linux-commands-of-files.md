@@ -15,6 +15,14 @@ tags:
 find . -name "*foo*"
 ```
 
+## 在目录中查询包含了特殊文字的文件
+
+```
+grep -rnw '/path/to/somewhere/' -e 'pattern'
+```
+
+FROM: <https://stackoverflow.com/a/16957078/1778658>
+
 ## 批量修改文件的后缀名
 
 将所有的 `.xml` 文件的后缀名修改为 `.html`
