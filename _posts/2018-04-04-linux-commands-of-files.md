@@ -30,3 +30,9 @@ FROM: <https://stackoverflow.com/a/16957078/1778658>
 ```
 rename "s/xml/html/" *.xml
 ```
+
+## 在临时目录中找出7天以前的文件然后删除
+
+```
+$ find /tmp/* -mtime +7 -exec rm {} \;
+```
