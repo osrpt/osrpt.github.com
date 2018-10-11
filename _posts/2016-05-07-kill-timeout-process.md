@@ -11,6 +11,33 @@ tags:
 这里如果加上超时判断，当发生超时时自动杀死进程就不会出现该问题了。
 
 ```
+// use whois query to detect is domain registered
+func whoisQueryRegistered(domain string) bool {
+	cmd := exec.Command("sleep", "5")
+
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Start()
+
+	done := make(chan error, 1)
+
+	go func() {
+		done <- cmd.Wait()
+	}()
+	select {
+	case <-time.After(time.Duration(config.WhoisQueryTimeout) * time.Second):
+		if err := cmd.Process.Kill(); err != nil {
+			log.Printf("%s failed to kill process %v", domain, err)
+			return false
+		}
+		log.Printf("%s process killed as timeout reached", domain)
+		return false
+	case err := <-done:
+		if err != nil {
+			return false
+		} else {
+			return out.String() != "" && strings.Index(out.String(), "No match for") == -1
+		}
+	}
+}
 ```
-
-
